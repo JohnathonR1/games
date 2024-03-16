@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Kumbh Sans', sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-item {
+    margin-right: 20px;
+}
+
+.navbar-links {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.navbar-links:hover {
+    color: #ddd;
+}
+
+/* Heading styles */
+.h1, .h2 {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Image styles */
+.img {
+    width: 200px;
+    height: auto;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+.game-button {
+    padding: 10px 20px;
+    margin-top: 1%;
+    margin-bottom: 2.5%;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.game-button:hover {
+    background-color: #555;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        padding: 0 20px;
+    }
+
+    .navbar-menu {
+        flex-direction: column;
+    }
+
+    .navbar-item {
+        margin-bottom: 10px;
+    }
+
+    .h1, .h2 {
+        margin-top: 20px;
+    }
+}
+
+#Karlson-game-button {
+    margin-left: 6%;
+}
+
+#SpacePlant-it-game-button {
+    margin-left: 8%;
+}
+
+#FruitNinja-game-button {
+    margin-left: 9%;
+}
+
+#TWOB-game-button {
+    margin-left: 2.5%;
+}
+
+#Minecraft2D-game-button {
+    margin-left: 8%;
+}
+
+#HelixJump-game-button {
+    margin-left: 10%;
+}
+
+#SuperMario-game-button {
+    margin-left: 12%;
+}
+
+#FlappyBird-game-button {
+    margin-left: 10%;
+}
+
+#SecretWorld-game-button {
+    margin-left: 10%;
+}
+
+#Mincraft3d-game-button {
+    margin-left: 8%;
+}
+
+#DontFall-game-button {
+    margin-left: 6%;
+}
+
+#RiddleSchool-game-button {
+    margin-left: 9%;
+}
+
+#PowerPlatformer-game-button {
+    margin-left: 6%;
+}
+
+#HelixJump-img {
+    height: 200px;
+    width: 150px;
+    margin-left: 4%;
+}
+
+.footer {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer h3 {
+    color: #333;
+    font-size: 1.5em;
+}
+
+.footer p {
+    color: #555;
+    margin: 10px 0;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer ul a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer ul a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.footer ul a:not(:last-child):after {
+    content: ", ";
+}
