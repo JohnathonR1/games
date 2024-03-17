@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html>
+<!-- Program exported to HTML using the KA Project Exporter by @MushyAvocado 
+https://www.khanacademy.org/computer-programming/ka-project-exporter/5195486791385088
+-->
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Fruit Ninja</title>
+	<style>
+		
+		
+		/* Change the color as you want */
+		:root {
+			--background-color: #000000;
+		}
+		
+		body {
+		    background-color: var(--background-color);
+		}
+		
+		html, body, #wrapper {
+			width: 100%;
+		    height: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		
+		canvas {
+			width: fit-content;
+			height: fit-content;
+		}
+		
+		canvas:focus {
+			outline: none;
+		}
+		
+		/* Automatically fits to the remaining height and centers the canvas it contains */
+		#wrapper {
+			padding: 0px;
+			margin: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+
+        .back-btn {
+            position: absolute;
+            top: 90%;
+            left: 90%;
+        }
+
+        #FruitNinja-back-btn {
+            text-align: center;
+            color: black;
+            border-radius: 7px;
+            width: 9%;
+            height: 7%;
+            background-color: white;
+            transition: 0.35s;
+        }
+
+        #FruitNinja-back-btn:hover {
+            cursor: pointer;
+            background-color: darkgrey;
+        }
+		
+</style>
+</head>
+<body id="wrapper">
+    
+    <a href="index.html">
+        <button class="back-btn" id="FruitNinja-back-btn" type="button">← Back</button>
+    </a>
+
+    <!-- Canvases with a class of "sketch" are applied to the program in the order importPJS() is called. -->
+    <canvas class="sketch"></canvas>
+	<!-- Load the PJS library -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Khan/processing-js@master/processing.js"></script>
+	<!-- The exporter script must be loaded before the program script -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Mushy-Avocado/KA-exporter@main/exporter.js"></script>
+	<!-- Run Khan Academy program and import PJS -->
+	<script type="application/javascript">
+		
+		
+		function program() {
+		    
+		    title("Fruit Ninja");
+		    size(600, 600);
+		    
+		    // All code goes here
+			// Fruit ninja.
+			
+			// Started 10/30/23
+			
+			// Finished 11/3/23
+			
+			// Team Shattered's entry for provember
+			
+			// All of the fruits and knives where done by DigiFox9
+			
+			// Thanks so much for all of the votes 8! within the first 4 hours
+			
+			// 11/3/23 8th place on the hot list, by far the best of any of my games have done in this amount of time
+			
+			// 6th place on the hot list, 11 votes, 12 hours in
+			
+			// 5th place on HL, 17 votes, almost 24 hours
+			
+			// 4th place on HL, 25 votes, about 32 hours
+			
+			// 3rd place on HL, 26 votes, 35 hours?
+			
+			// 5th place on HL, 34 votes, 48 hours
+			
+			// Got of top 10 HL, 50 votes. Thanks Guys!!!
+			
+			/** Sub?
+			https://www.khanacademy.org/computer-programming/sub/5921749895790592
+			*/
+			
+			/** Credits **/
+			/**
+			* 
+			 By Community Coder
+			 
+			 
+			  ___________                                                            
+			\__    ___/____  _____     _____                                       
+			  |    | _/ __ \ \__  \   /     \                                      
+			  |    | \  ___/  / __ \_|  Y Y  \                                     
+			  |____|  \___  >(____  /|__|_|  /                                     
+			  _________.__\/      \/    __ \/  __                              .___
+			 /   _____/|  |__  _____  _/  |_ _/  |_   ____ _______   ____    __| _/
+			 \_____  \ |  |  \ \__  \ \   __\\   __\_/ __ \\_  __ \_/ __ \  / __ | 
+			 /        \|   Y  \ / __ \_|  |   |  |  \  ___/ |  | \/\  ___/ / /_/ | 
+			/_______  /|___|  /(____  /|__|   |__|   \___  >|__|    \___  >\____ | 
+			        \/      \/      \/                   \/             \/      \/ 
+			
+			*/
+			
+			// Fastest time I've ever made a program in. Think it turned out pretty well
+			
+			
+			// Code {
+			
+			
+			
+			// Variables and functions {
+			
+			// Variables {
+			
+			smooth();
+			
+			var scene = 0;
+			
+			var clicked = false;
+			
+			var keys = [];
+			
+			var frame = 0;
+			
+			var score = 0;
+			
+			var highscore = 0;
+			
+			var y1 = random(50, 550);
+			
+			var x1 = random(50, 550);
+			
+			var b = Math.floor(random(0, 3));
+			
+			var r = Math.floor(random(0, 8));
+			
+			var x2 = Math.floor(random(50, 550));
+			var y2 = Math.floor(random(50, 550));
+			
+			frameRate(60);
+			
+			// }
+			
+			
+			
+			// Functions {
+			
+			// Credit to Digifox9
+			var strawberry = function(x, y) {
+			    //fruit part
+			noStroke();
+			fill(255, 0, 0);
+			
+			   var strawSize = 5.41;
+			
+			    beginShape();
+			
+			    curveVertex(-47/strawSize+x,17/strawSize+y); 
+			    curveVertex(-30/strawSize+x,-100/strawSize+y);
+			    curveVertex(35/strawSize+x,-110/strawSize+y); 
+			    curveVertex(104/strawSize+x,-85/strawSize+y);
+			    curveVertex(106/strawSize+x,25/strawSize+y);
+			    curveVertex(27/strawSize+x,114/strawSize+y); 
+			    curveVertex(-47/strawSize+x,17/strawSize+y); 
+			    curveVertex(-30/strawSize+x,-100/strawSize+y); 
+			    curveVertex(35/strawSize+x,-110/strawSize+y);
+			 
+			    endShape();
+			
+			//seeds
+			var seed = function(seedX,seedY){
+			
+			noStroke();
+			
+			var seedSize = 37.18;
+			
+			fill(239, 245, 128);
+			
+			    beginShape();
+			
+			    curveVertex(-47/seedSize+x+seedX,17/seedSize+y+seedY); 
+			    curveVertex(-30/seedSize+x+seedX,-100/seedSize+y+seedY);
+			    curveVertex(35/seedSize+x+seedX,-110/seedSize+y+seedY); 
+			    curveVertex(104/seedSize+x+seedX,-85/seedSize+y+seedY);
+			    curveVertex(106/seedSize+x+seedX,25/seedSize+y+seedY);
+			    curveVertex(27/seedSize+x+seedX,114/seedSize+y+seedY); 
+			    curveVertex(-47/seedSize+x+seedX,17/seedSize+y+seedY); 
+			    curveVertex(-30/seedSize+x+seedX,-100/seedSize+y+seedY); 
+			    curveVertex(35/seedSize+x+seedX,-110/seedSize+y+seedY);
+			 
+			    endShape();
+			
+			};
+			
+			//stem
+			var stem = function(stemX,stemY){
+			
+			fill(106, 201, 102);
+			
+			var stemSize = 6.93;
+			
+			 beginShape();
+			 
+			    curveVertex(-16/stemSize+x+stemX,43/stemSize+y+stemY);
+			    curveVertex(43/stemSize+x+stemX,30/stemSize+y+stemY);
+			    curveVertex(45/stemSize+x+stemX,52/stemSize+y+stemY); 
+			    curveVertex(4/stemSize+x+stemX,63/stemSize+y+stemY); 
+			    curveVertex(-8/stemSize+x+stemX,91/stemSize+y+stemY);
+			    curveVertex(-1/stemSize+x+stemX,156/stemSize+y+stemY);
+			    curveVertex(-35/stemSize+x+stemX,159/stemSize+y+stemY);
+			    curveVertex(-39/stemSize+x+stemX,91/stemSize+y+stemY); 
+			    curveVertex(-16/stemSize+x+stemX,43/stemSize+y+stemY);
+			    curveVertex(43/stemSize+x+stemX,30/stemSize+y+stemY); 
+			    curveVertex(45/stemSize+x+stemX,52/stemSize+y+stemY); 
+			    
+			    endShape();
+			
+			};
+			
+			
+			//top
+			var topSize;
+			
+			var strawberryTop = function(topX,topY){
+			
+			beginShape();
+			
+			    curveVertex(-3/topSize+x+topX,70/topSize+y+topY);
+			    curveVertex(25/topSize+x+topX,69/topSize+y+topY);
+			    curveVertex(61/topSize+x+topX,79/topSize+y+topY);
+			    curveVertex(81/topSize+x+topX,115/topSize+y+topY);
+			    curveVertex(67/topSize+x+topX,153/topSize+y+topY); 
+			    curveVertex(58/topSize+x+topX,119/topSize+y+topY); 
+			    curveVertex(38/topSize+x+topX,103/topSize+y+topY);
+			    curveVertex(39/topSize+x+topX,134/topSize+y+topY);
+			    curveVertex(27/topSize+x+topX,152/topSize+y+topY); 
+			    curveVertex(17/topSize+x+topX,138/topSize+y+topY); 
+			    curveVertex(3/topSize+x+topX,97/topSize+y+topY);
+			    curveVertex(3/topSize+x+topX,121/topSize+y+topY);
+			    curveVertex(-5/topSize+x+topX,142/topSize+y+topY);
+			    curveVertex(-15/topSize+x+topX,136/topSize+y+topY);
+			    curveVertex(-19/topSize+x+topX,103/topSize+y+topY);
+			    curveVertex(-33/topSize+x+topX,127/topSize+y+topY); 
+			    curveVertex(-51/topSize+x+topX,137/topSize+y+topY);
+			    curveVertex(-28/topSize+x+topX,86/topSize+y+topY);
+			    curveVertex(-3/topSize+x+topX,70/topSize+y+topY);
+			    curveVertex(25/topSize+x+topX,69/topSize+y+topY);
+			    curveVertex(61/topSize+x+topX,79/topSize+y+topY);
+			    
+			    endShape();
+			
+			};
+			var strawberryTop2 = function(topX,topY) {
+			
+			topSize = 3.6;
+			
+			strawberryTop(topX,topY);
+			
+			topSize = 3.9;
+			
+			};
+			
+			//stuff being called
+			seed(-1.8,-7.0);
+			seed(7.1,-0.8);
+			seed(-1.8,6.0);
+			seed(7.1,13.2);
+			seed(15.1,-7.0);
+			seed(6.7,-12.5);
+			
+			fill(14, 105, 26);
+			strawberryTop2(2.2,-46.5);
+			
+			fill(35, 176, 30);
+			strawberryTop(2.0,-46.2);
+			
+			stem(10,-47);
+			
+			
+			};
+			
+			// Credit to Digifox9
+			var blueberry = function(x, y) {
+			    noStroke();
+			
+			    //berry
+			    fill(49, 71, 150);
+			    ellipse(x,y,36,30);
+			    
+			    //small shadow
+			    fill(58, 42, 117);
+			    ellipse(0+x,-6+y,25,15);
+			    
+			    //indent
+			    fill(111, 115, 173);
+			    ellipse(0+x,-7+y,22,12);
+			    
+			    //light
+			    fill(245, 245, 245);
+			    ellipse(-11+x,4+y,6,8);
+			};
+			
+			var fruit = function(x, y, type) {
+			    switch (type) {
+			        
+			        // Strawberry
+			        case 0:
+			            strawberry(x, y);
+			            break;
+			        
+			        // Blueberry
+			        case 1:
+			            blueberry(x, y);
+			            break;
+			            
+			        // Apple
+			        case 2:
+			            
+			            /*
+			            
+			            noStroke();
+			            fill(255, 0, 0);
+			            ellipse(x, y, 50, 50);
+			            fill(90, 50, 50);
+			            rect(x - 5, y - 35, 10, 20);
+			            beginShape();
+			            fill(90, 50, 50);
+			            stroke(90, 50, 50);
+			            vertex(x - 5, y - 35);
+			            vertex(x + 5, y - 45);
+			            vertex(x + 10, y - 40);
+			            vertex(x + 5, y - 35);
+			            vertex(x - 5, y - 35);
+			            endShape();
+			            
+			            */
+			            
+			            
+			            var apple = function() {
+			
+			noStroke();
+			
+			//fruit
+			var fruit = function(fruitX,fruitY){
+			
+			var fruitSize = 4.92;
+			fill(217, 32, 32);
+			
+			 beginShape();
+			 
+			    curveVertex(-82/fruitSize+fruitX+x,21/fruitSize+fruitY+y);
+			    curveVertex(-74/fruitSize+fruitX+x,-76/fruitSize+fruitY+y); 
+			    curveVertex(-25/fruitSize+fruitX+x,-104/fruitSize+fruitY+y);
+			    curveVertex(15/fruitSize+fruitX+x,-86/fruitSize+fruitY+y); 
+			    curveVertex(60/fruitSize+fruitX+x,-102/fruitSize+fruitY+y);
+			    curveVertex(100/fruitSize+fruitX+x,-71/fruitSize+fruitY+y);
+			    curveVertex(105/fruitSize+fruitX+x,29/fruitSize+fruitY+y); 
+			    curveVertex(54/fruitSize+fruitX+x,124/fruitSize+fruitY+y);
+			    curveVertex(17/fruitSize+fruitX+x,112/fruitSize+fruitY+y);
+			    curveVertex(-26/fruitSize+fruitX+x,123/fruitSize+fruitY+y);
+			    curveVertex(-82/fruitSize+fruitX+x,21/fruitSize+fruitY+y); 
+			    curveVertex(-74/fruitSize+fruitX+x,-76/fruitSize+fruitY+y);
+			    curveVertex(-25/fruitSize+fruitX+x,-104/fruitSize+fruitY+y);
+			    
+			    endShape();
+			
+			};
+			var stem = function(stemX,stemY){
+			
+			    fill(99, 59, 19);
+			
+			var stemSize = 6.67;
+			
+			    beginShape();
+			 
+			    curveVertex(-29/stemSize+x+stemX,41/stemSize+y+stemY);
+			    curveVertex(32/stemSize+x+stemX,-7/stemSize+y+stemY); 
+			    curveVertex(39/stemSize+x+stemX,21/stemSize+y+stemY); 
+			    curveVertex(-2/stemSize+x+stemX,50/stemSize+y+stemY);
+			    curveVertex(-8/stemSize+x+stemX,91/stemSize+y+stemY);
+			    curveVertex(-1/stemSize+x+stemX,156/stemSize+y+stemY);
+			    curveVertex(-35/stemSize+x+stemX,159/stemSize+y+stemY);
+			    curveVertex(-39/stemSize+x+stemX,91/stemSize+y+stemY); 
+			    curveVertex(-29/stemSize+x+stemX,41/stemSize+y+stemY); 
+			    curveVertex(32/stemSize+x+stemX,-7/stemSize+y+stemY); 
+			    curveVertex(39/stemSize+x+stemX,21/stemSize+y+stemY); 
+			    
+			    endShape();
+			
+			};
+			var leaf = function(leafX, leafY){
+			
+			var leafSize = 8.1;
+			fill(63, 209, 61);
+			
+			    beginShape();
+			
+			    curveVertex(-30/leafSize+x+leafX,-100/leafSize+y+leafY); 
+			    curveVertex(29/leafSize+x+leafX,-15/leafSize+y+leafY);
+			    curveVertex(30/leafSize+x+leafX,100/leafSize+y+leafY);
+			    curveVertex(-41/leafSize+x+leafX,10/leafSize+y+leafY);
+			    curveVertex(-30/leafSize+x+leafX,-100/leafSize+y+leafY);
+			    curveVertex(29/leafSize+x+leafX,-15/leafSize+y+leafY); 
+			    curveVertex(30/leafSize+x+leafX,100/leafSize+y+leafY);
+			    
+			    endShape();
+			
+			};
+			
+			leaf(-3,-30);
+			stem(6,-39);
+			fruit(0,0);
+			
+			
+			//glare
+			fill(240, 228, 228);
+			ellipse(-9+x,-6+y,5,14);
+			
+			};
+			         
+			         apple();
+			           
+			            
+			            
+			            
+			            
+			            break;
+			            
+			        // Peach
+			        case 3:
+			            
+			            /*
+			            
+			            noStroke();
+			            fill(255, 100, 0);
+			            ellipse(x, y, 50, 50);
+			            fill(90, 50, 50);
+			            rect(x - 5, y - 35, 10, 15);
+			            beginShape();
+			            fill(90, 50, 50);
+			            stroke(90, 50, 50);
+			            vertex(x - 5, y - 35);
+			            vertex(x + 5, y - 45);
+			            vertex(x + 10, y - 40);
+			            vertex(x + 5, y - 35);
+			            vertex(x - 5, y - 35);
+			            endShape();
+			            
+			            */
+			            
+			           var peach = function() {
+			
+			noStroke();
+			
+			var fruit = function(fruitX, fruitY) {
+			
+			fill(237, 203, 118);
+			
+			var peachSize = 4.10;
+			
+			    beginShape();
+			 
+			    curveVertex(-41/peachSize+x+fruitX,70/peachSize+y+fruitY);
+			    curveVertex(-30/peachSize+x+fruitX,-35/peachSize+y+fruitY);
+			    curveVertex(23/peachSize+x+fruitX,-63/peachSize+y+fruitY); 
+			    curveVertex(64/peachSize+x+fruitX,-58/peachSize+y+fruitY);
+			    curveVertex(108/peachSize+x+fruitX,-62/peachSize+y+fruitY);
+			    curveVertex(159/peachSize+x+fruitX,-25/peachSize+y+fruitY);
+			    curveVertex(167/peachSize+x+fruitX,78/peachSize+y+fruitY); 
+			    curveVertex(118/peachSize+x+fruitX,139/peachSize+y+fruitY);
+			    curveVertex(66/peachSize+x+fruitX,151/peachSize+y+fruitY);
+			    curveVertex(9/peachSize+x+fruitX,139/peachSize+y+fruitY); 
+			    curveVertex(-41/peachSize+x+fruitX,70/peachSize+y+fruitY);
+			    curveVertex(-30/peachSize+x+fruitX,-35/peachSize+y+fruitY); 
+			    curveVertex(23/peachSize+x+fruitX,-63/peachSize+y+fruitY); 
+			    
+			    endShape();
+			
+			};
+			var stem = function(stemX,stemY){
+			
+			var stemSize = 3.64;
+			
+			fill(150, 126, 58);
+			
+			
+			beginShape();
+			
+			    vertex(-21/stemSize+x+stemX,98/stemSize+y+stemY);
+			    vertex(0/stemSize+x+stemX,105/stemSize+y+stemY); 
+			    vertex(-8/stemSize+x+stemX,127/stemSize+y+stemY);
+			    vertex(-1/stemSize+x+stemX,156/stemSize+y+stemY);
+			    vertex(-35/stemSize+x+stemX,159/stemSize+y+stemY);
+			    vertex(-33/stemSize+x+stemX,127/stemSize+y+stemY);
+			    vertex(-21/stemSize+x+stemX,98/stemSize+y+stemY); 
+			    vertex(0/stemSize+x+stemX,105/stemSize+y+stemY); 
+			    vertex(-8/stemSize+x+stemX,127/stemSize+y+stemY);
+			    
+			    endShape();
+			    
+			};
+			var leaf = function(leafX,leafY){
+			
+			fill(92, 199, 80);
+			var leafSize = 11.91;
+			
+			beginShape();
+			
+			    curveVertex(-74/leafSize+x+leafX,-55/leafSize+y+leafY);
+			    curveVertex(49/leafSize+x+leafX,-38/leafSize+y+leafY); 
+			    curveVertex(105/leafSize+x+leafX,180/leafSize+y+leafY); 
+			    curveVertex(-21/leafSize+x+leafX,42/leafSize+y+leafY); 
+			    curveVertex(-74/leafSize+x+leafX,-55/leafSize+y+leafY);
+			    curveVertex(49/leafSize+x+leafX,-38/leafSize+y+leafY);
+			    curveVertex(105/leafSize+x+leafX,180/leafSize+y+leafY);
+			    
+			    endShape();
+			
+			
+			
+			};
+			
+			leaf(2,-35);
+			stem(19,-56);
+			fruit(0,0);
+			
+			//line
+			noFill();
+			stroke(250, 225, 182);
+			strokeWeight(2.7);
+			arc(14+x,1+y,20,31,298,381);
+			noStroke();
+			
+			
+			};
+			
+			
+			peach();
+			            
+			            
+			            
+			            
+			            
+			            break;
+			            
+			        // Watermellon
+			        case 4:
+			            
+			            /*
+			            
+			            noStroke();
+			            fill(50, 255, 50);
+			            ellipse(x, y, 50, 50);
+			            fill(18, 97, 64);
+			            rectMode(CENTER);
+			            rect(x - 12.5, y, 5, 45, 5);
+			            rect(x, y, 5, 50, 5);
+			            rect(x + 12.5, y, 5, 45, 5);
+			            rectMode(CORNER);
+			            
+			            */
+			            
+			            
+			           var watermellon = function() {
+			
+			//fruit
+			noStroke();
+			fill(64, 217, 21);
+			ellipse(x, y ,68,46);
+			
+			//stripes
+			var stripe = function(stripeX, stripeY, sizeX, sizeY){
+			
+			fill(47, 102, 43);
+			
+			beginShape();
+			
+			    curveVertex(-57/sizeX+stripeX+x,56/sizeY+stripeY+y);
+			    curveVertex(-15/sizeX+stripeX+x,23/sizeY+stripeY+y); 
+			    curveVertex(45/sizeX+stripeX+x,60/sizeY+stripeY+y);
+			    curveVertex(110/sizeX+stripeX+x,35/sizeY+stripeY+y);
+			    curveVertex(169/sizeX+stripeX+x,65/sizeY+stripeY+y);
+			    curveVertex(235/sizeX+stripeX+x,49/sizeY+stripeY+y);
+			    curveVertex(248/sizeX+stripeX+x,62/sizeY+stripeY+y);
+			    curveVertex(171/sizeX+stripeX+x,87/sizeY+stripeY+y);
+			    curveVertex(110/sizeX+stripeX+x,55/sizeY+stripeY+y);
+			    curveVertex(44/sizeX+stripeX+x,81/sizeY+stripeY+y);
+			    curveVertex(-13/sizeX+stripeX+x,41/sizeY+stripeY+y);
+			    curveVertex(-56/sizeX+stripeX+x,79/sizeY+stripeY+y); 
+			    curveVertex(-108/sizeX+stripeX+x,50/sizeY+stripeY+y); 
+			    curveVertex(-108/sizeX+stripeX+x,23/sizeY+stripeY+y); 
+			    curveVertex(-57/sizeX+stripeX+x,56/sizeY+stripeY+y);
+			    curveVertex(-15/sizeX+stripeX+x,23/sizeY+stripeY+y);
+			    curveVertex(45/sizeX+stripeX+x,60/sizeY+stripeY+y); 
+			    
+			    endShape();
+			
+			
+			
+			};
+			
+			
+			stripe(-11,-17,5.89,3.61);
+			stripe(-11,3,6.67,5.59);
+			stripe(-4,-24,8.64,6.05);
+			
+			};
+			            
+			            watermellon();
+			            
+			            break;
+			            
+			        // Orange
+			        case 5:
+			            
+			            /*
+			            
+			            noStroke();
+			            fill(255, 155, 0);
+			            ellipse(x, y, 50, 50);
+			            
+			            */
+			            
+			            var orange = function() {
+			
+			noStroke();
+			fill(232, 154, 28);
+			
+			//fruit
+			ellipse(x,y,48,48);
+			
+			//stem
+			var stem = function(stemX,stemY, stemSizeX, stemSizeY) {
+			
+			fill(3, 138, 32);
+			
+			
+			beginShape();
+			
+			    vertex(33/stemSizeX+stemX+x,-42/stemSizeY+stemY+y); 
+			    vertex(59/stemSizeX+stemX+x,-33/stemSizeY+stemY+y);
+			    vertex(-8/stemSizeX+stemX+x,86/stemSizeY+stemY+y); 
+			    vertex(-1/stemSizeX+stemX+x,236/stemSizeY+stemY+y);
+			    vertex(-26/stemSizeX+stemX+x,236/stemSizeY+stemY+y);
+			    vertex(-41/stemSizeX+stemX+x,82/stemSizeY+stemY+y); 
+			    vertex(33/stemSizeX+stemX+x,-42/stemSizeY+stemY+y);
+			    vertex(59/stemSizeX+stemX+x,-33/stemSizeY+stemY+y); 
+			    vertex(-8/stemSizeX+stemX+x,86/stemSizeY+stemY+y); 
+			 
+			    endShape();
+			
+			
+			
+			};
+			
+			//leaves
+			var leaf = function(leafX,leafY, leafSize){
+			
+			   fill(33, 207, 54);
+			
+			    beginShape();
+			
+			    curveVertex(-20/leafSize+leafX+x,-22/leafSize+leafY+y); 
+			    curveVertex(55/leafSize+leafX+x,23/leafSize+leafY+y); 
+			    curveVertex(70/leafSize+leafX+x,213/leafSize+leafY+y); 
+			    curveVertex(-19/leafSize+leafX+x,94/leafSize+leafY+y); 
+			    curveVertex(-20/leafSize+leafX+x,-22/leafSize+leafY+y);
+			    curveVertex(55/leafSize+leafX+x,23/leafSize+leafY+y); 
+			    curveVertex(70/leafSize+leafX+x,213/leafSize+leafY+y);
+			    
+			    endShape();
+			
+			
+			
+			
+			};
+			
+			leaf(-8,-63,9.34);
+			stem(5,-49,4.15,7.60);
+			
+			};
+			            
+			            orange();
+			            
+			            
+			            break;
+			            
+			        // Lemon
+			        case 6:
+			            
+			            /*
+			            
+			            noStroke();
+			            fill(255, 255, 0);
+			            ellipse(x, y, 50, 40);
+			            
+			            */
+			            
+			            var lemon = function() {
+			
+			noStroke();
+			
+			var fruit = function(fruitSize){
+			
+			fill(234, 237, 69);
+			
+			beginShape();
+			
+			    curveVertex(-34/fruitSize+x,129/fruitSize+y); 
+			    curveVertex(-73/fruitSize+x,89/fruitSize+y); 
+			    curveVertex(-94/fruitSize+x,68/fruitSize+y); 
+			    curveVertex(-69/fruitSize+x,51/fruitSize+y); 
+			    curveVertex(-39/fruitSize+x,27/fruitSize+y); 
+			    curveVertex(27/fruitSize+x,12/fruitSize+y); 
+			    curveVertex(108/fruitSize+x,27/fruitSize+y); 
+			    curveVertex(136/fruitSize+x,59/fruitSize+y); 
+			    curveVertex(164/fruitSize+x,83/fruitSize+y); 
+			    curveVertex(140/fruitSize+x,103/fruitSize+y);
+			    curveVertex(106/fruitSize+x,136/fruitSize+y); 
+			    curveVertex(35/fruitSize+x,150/fruitSize+y); 
+			    curveVertex(-34/fruitSize+x,129/fruitSize+y);
+			    curveVertex(-73/fruitSize+x,89/fruitSize+y); 
+			    curveVertex(-94/fruitSize+x,68/fruitSize+y);
+			    
+			    endShape();
+			
+			};
+			
+			fruit(5.21);
+			
+			
+			};
+			            
+			            lemon();
+			            
+			            
+			            break;
+			            
+			            
+			            
+			        // Lime
+			        case 7:
+			            
+			            var lime = function() {
+			
+			var fruit = function(fruitSize){
+			
+			noStroke();
+			fill(2, 196, 12);
+			
+			beginShape();
+			
+			    curveVertex(-34/fruitSize+x,129/fruitSize+y); 
+			    curveVertex(-73/fruitSize+x,89/fruitSize+y); 
+			    curveVertex(-94/fruitSize+x,68/fruitSize+y); 
+			    curveVertex(-69/fruitSize+x,51/fruitSize+y); 
+			    curveVertex(-39/fruitSize+x,27/fruitSize+y); 
+			    curveVertex(27/fruitSize+x,12/fruitSize+y); 
+			    curveVertex(108/fruitSize+x,27/fruitSize+y); 
+			    curveVertex(136/fruitSize+x,59/fruitSize+y); 
+			    curveVertex(164/fruitSize+x,83/fruitSize+y); 
+			    curveVertex(140/fruitSize+x,103/fruitSize+y);
+			    curveVertex(106/fruitSize+x,136/fruitSize+y); 
+			    curveVertex(35/fruitSize+x,150/fruitSize+y); 
+			    curveVertex(-34/fruitSize+x,129/fruitSize+y);
+			    curveVertex(-73/fruitSize+x,89/fruitSize+y); 
+			    curveVertex(-94/fruitSize+x,68/fruitSize+y);
+			    
+			    endShape();
+			
+			};
+			
+			fruit(5.21);
+			
+			};
+			            
+			            lime();
+			            
+			            /*
+			            
+			            noStroke();
+			            fill(0, 255, 100);
+			            ellipse(x, y, 50, 40);
+			            
+			            */
+			            
+			            break;
+			    }
+			};
+			
+			var bomb = function(x, y) {
+			    
+			    /*
+			    
+			    noStroke();
+			    fill(0);
+			    ellipse(x, y, 50, 50);
+			    fill(90, 50, 50);
+			    rect(x - 5, y - 35, 10, 20);
+			    beginShape();
+			    fill(90, 50, 50);
+			    stroke(90, 50, 50);
+			    vertex(x - 5, y - 35);
+			    vertex(x + 5, y - 45);
+			    vertex(x + 10, y - 40);
+			    vertex(x + 5, y - 35);
+			    vertex(x - 5, y - 35);
+			    endShape();
+			    
+			    */
+			    
+			    
+			
+			noStroke();
+			
+			//wick
+			var wick = function(wickX,wickY,size){
+			
+			fill(176, 175, 119);
+			
+			 beginShape();
+			 
+			    curveVertex(-49/size+wickX+x,-5/size+wickY+y);
+			    curveVertex(47/size+wickX+x,23/size+wickY+y);
+			    curveVertex(116/size+wickX+x,-13/size+wickY+y); 
+			    curveVertex(131/size+wickX+x,4/size+wickY+y); 
+			    curveVertex(54/size+wickX+x,49/size+wickY+y);
+			    curveVertex(-34/size+wickX+x,20/size+wickY+y);
+			    curveVertex(-44/size+wickX+x,102/size+wickY+y); 
+			    curveVertex(-72/size+wickX+x,98/size+wickY+y);
+			    curveVertex(-49/size+wickX+x,-5/size+wickY+y);
+			    curveVertex(47/size+wickX+x,23/size+wickY+y); 
+			    curveVertex(116/size+wickX+x,-13/size+wickY+y);
+			    
+			    endShape();
+			
+			};
+			
+			
+			wick(12,-52,4.54);
+			
+			//bomb
+			noStroke();
+			fill(3, 3, 3);
+			ellipse(x,y,45,45);
+			
+			//stem
+			rect(x+-8,y+-31,15,21,5);
+			
+			//fire
+			fill(237, 159, 14);
+			ellipse(x+40,y+-54,12,12);
+			fill(254, 0, 0);
+			ellipse(x+40,y+-54,5,5);
+			
+			//glare
+			fill(252, 252, 252);
+			ellipse(x+-10,y+1,10,21);
+			
+			
+			    
+			    
+			    
+			};
+			
+			var knife = function(x, y) {
+			    
+			    /*
+			    
+			    stroke(0);
+			    line(x, y, x + 25, y - 25);
+			    line(x + 25, y - 25, x + 35, y - 15);
+			    line(x + 35, y - 15, x + 7.5, y + 10);
+			    line(x + 7.5, y + 10, x, y);
+			    fill(100, 100, 100);
+			    ellipse(x + 10, y, 10, 10);
+			    ellipse(x + 20, y - 10, 10, 10);
+			    triangle(x + 25, y - 25, x + 60, y - 50, x + 33.5, y - 12);
+			    
+			    */
+			    
+			    
+			
+			
+			
+			var blade = function(bladeX, bladeY, bladeSize) {
+			
+			fill(181, 181, 181);
+			
+			 beginShape();
+			 
+			    vertex(66/bladeSize+bladeX+x,-120/bladeSize+bladeY+y);
+			    vertex(83/bladeSize+bladeX+x,-83/bladeSize+bladeY+y); 
+			    vertex(89/bladeSize+bladeX+x,-40/bladeSize+bladeY+y);
+			    vertex(87/bladeSize+bladeX+x,-5/bladeSize+bladeY+y); 
+			    vertex(78/bladeSize+bladeX+x,31/bladeSize+bladeY+y);
+			    vertex(61/bladeSize+bladeX+x,76/bladeSize+bladeY+y);
+			    vertex(41/bladeSize+bladeX+x,102/bladeSize+bladeY+y);
+			    vertex(28/bladeSize+bladeX+x,130/bladeSize+bladeY+y); 
+			    vertex(17/bladeSize+bladeX+x,168/bladeSize+bladeY+y);
+			    vertex(-28/bladeSize+bladeX+x,161/bladeSize+bladeY+y);
+			    vertex(7/bladeSize+bladeX+x,59/bladeSize+bladeY+y); 
+			    vertex(66/bladeSize+bladeX+x,-120/bladeSize+bladeY+y); 
+			    vertex(83/bladeSize+bladeX+x,-83/bladeSize+bladeY+y); 
+			    vertex(89/bladeSize+bladeX+x,-40/bladeSize+bladeY+y); 
+			    
+			    endShape();
+			
+			};
+			
+			
+			blade(-8,-38,3.502);
+			
+			//hilt
+			fill(125, 88, 20);
+			quad(-31+x,43+y,-15+x,0+y,-1+x,8+y,-18+x,50+y);
+			
+			//bolts
+			fill(150, 147, 147);
+			ellipse(x+-20,y+34,10,10);
+			ellipse(x+-13,y+17,10,10);
+			
+			//glare
+			fill(255, 252, 252);
+			noStroke();
+			ellipse(x+-22,y+33,3,6);
+			ellipse(x+-15,y+16,3,6);
+			
+			
+			
+			
+			    
+			};
+			
+			var logo = function (x, y, s) {
+			    
+			    noStroke();
+			    fill(0, 0, 0);
+			    ellipse(x, y, s, s);
+			    
+			    fill(255, 255, 255);
+			    ellipse(x, y, s - 10, s - 10);
+			    
+			    fill(0, 0, 0);
+			    ellipse(x, y, s - 15, s - 35);
+			    ellipse(x, y, s - 35, s - 15);
+			    
+			    fill(255, 255, 255);
+			    ellipse(x, y, s - 35, s - 35);
+			    
+			    fill(0, 0, 0);
+			    ellipse(x, y, s - 40, s - 40);
+			    
+			};
+			
+			var TeamLogo = function (x, y, s) {
+			    pushMatrix();
+			        translate(x, y);
+			        scale(s);
+			        
+			        noStroke();
+			        fill(38, 255, 0);
+			        rect(150, 150, 100, 100);
+			        
+			        fill(255, 0, 0);
+			        ellipse(200, 200, 70, 50);
+			        ellipse(200, 200, 50, 70);
+			        
+			        fill(217, 0, 255);
+			        ellipse(250, 250, 10, 10);
+			        ellipse(150, 250, 10, 10);
+			        ellipse(250, 150, 10, 10);
+			        ellipse(150, 150, 10, 10);
+			        
+			        fill(0, 26, 255);
+			        ellipse(200, 150, 10, 10);
+			        ellipse(200, 250, 10, 10);
+			        ellipse(250, 200, 10, 10);
+			        ellipse(150, 200, 10, 10);
+			        
+			        logo(200, 200, 45);
+			        
+			    popMatrix();
+			};
+			
+			// Shattered background {
+			
+			randomSeed(100000000000);
+			
+			background(0);
+			
+			for (var i = 0; i < 320; i++) {
+			    pushMatrix();
+			        translate(200, 200);
+			        rotate(i * random(-360, 260));
+			        
+			        pushMatrix();
+			            translate(0, 0);
+			            
+			            fill(0 + (0.8 * i), 200 - (1.3 * i), 200);
+			            stroke(0);
+			            strokeWeight(random(1, 2));
+			            quad(random(-17, 116), random(116, 228), 0, i + random(79, 68), random(15, 30), i + random(30, 50), 0, i);
+			            
+			        popMatrix();
+			        
+			    popMatrix();
+			}
+			
+			var bg = get(0, 0, 400, 400);
+			background(255);
+			
+			// }
+			
+			// }
+			
+			// } End Varibles and Functions
+			
+			
+			
+			// Scenes {
+			var menu = function() {
+			    strokeWeight(2);
+			    
+			    stroke(29, 5, 5);
+			    background(59, 35, 35);
+			    for (var i = 0; i < 600; i+=50) {
+			        noFill();
+			        rect(0, i, 600, 50);
+			    }
+			    
+			    fill(99, 50, 50);
+			    rectMode(CENTER);
+			    rect(300, 375, 150, 50, 10);
+			    rect(300, 525, 150, 50, 10);
+			    rect(300, 450, 150, 50, 10);
+			    textSize(25);
+			    fill(0);
+			    text("P L A Y", 300, 375);
+			    text("H O W", 300, 525);
+			    text("S C O R E S", 300, 450);
+			    fill(255, 255, 255);
+			    text("Highscore: " + highscore, 300, 75);
+			    rectMode(CORNER);
+			    
+			    var cScore = score;
+			    
+			    if (cScore >= highscore) {
+			        highscore = cScore;
+			    }
+			    
+			    if (mouseX > 215 && mouseX < 375 && mouseY > 350 && mouseY < 400 && clicked === true) {
+			        scene = 1;
+			        clicked = false;
+			        
+			        score = 0;
+			        
+			        x1 = Math.floor(random(50, 550));
+			        x2 = Math.floor(random(50, 550));
+			        y1 = Math.floor(random(50, 550));
+			        y2 = Math.floor(random(50, 550));
+			        r = Math.floor(random(0, 8));
+			        b = Math.floor(random(0, 3));
+			        
+			        timer = 0;
+			    }
+			    
+			    if (mouseX > 215 && mouseX < 375 && mouseY > 500 && mouseY < 550 && clicked === true) {
+			        scene = 2;
+			        clicked = false;
+			    }
+			    
+			    if (mouseX > 215 && mouseX < 375 && mouseY > 425 && mouseY < 475 && clicked === true) {
+			        scene = 4;
+			        clicked = false;
+			    }
+			    
+			    pushMatrix();
+			    textAlign(CENTER, CENTER);
+			    textSize(60);
+			    fill(100, 100, 100);
+			    
+			    text("F R U I T   N I N J A", 300, 150);
+			    popMatrix();
+			    
+			    fruit(300, 250, 0);
+			    fruit(225, 250, 1);
+			    fruit(375, 250, 2);
+			    fruit(150, 250, 3);
+			    fruit(450, 250, 4);
+			    fruit(475, 325, 5);
+			    fruit(125, 325, 6);
+			    fruit(300, 325, 7);
+			};
+			
+			var game = function() {
+			    strokeWeight(2);
+			    
+			    stroke(29, 5, 5);
+			    background(59, 35, 35);
+			    for (var i = 0; i < 600; i+=50) {
+			        noFill();
+			        rect(0, i, 600, 50);
+			    }
+			    
+			    fruit(x1, y1, r);
+			        
+			    if (mouseX > x1 - 30 && mouseX < x1 + 30 && mouseY > y1 - 30 && mouseY < y1 + 30) {
+			        score += 1;
+			        
+			        x1 = Math.floor(random(50, 550));
+			        y1 = Math.floor(random(50, 550));
+			        r = Math.floor(random(0, 8));
+			        x2 = Math.floor(random(50, 550));
+			        y2 = Math.floor(random(50, 550));
+			        b = Math.floor(random(0, 3));
+			        
+			        fruit(x1, y1, r);
+			        timer = 0;
+			    }
+			    
+			    if (b === 1) {
+			        bomb(x2, y2);
+			        
+			        if (mouseX > x2 - 30 && mouseX < x2 + 30 && mouseY > y2 - 30 && mouseY < y2 + 30 && timer > 30) {
+			            scene = 3;
+			        }
+			    }
+			    
+			    knife(mouseX, mouseY);
+			    
+			    timer++;
+			};
+			
+			var how = function() {
+			    strokeWeight(2);
+			    stroke(29, 5, 5);
+			    background(59, 35, 35);
+			    for (var i = 0; i < 600; i+=50) {
+			        noFill();
+			        rect(0, i, 600, 50);
+			    }
+			    
+			    textSize(35);
+			    fill(0);
+			    text("Swipe your mouse accross the fruits.\nGet as many fruits as you can.\n If you hit the bomb, it will kill you.\nAlso works for mobile.", 300, 300);
+			    
+			    fill(99, 50, 50);
+			    rectMode(CENTER);
+			    rect(300, 500, 150, 50, 10);
+			    if (mouseX > 215 && mouseX < 375 && mouseY > 475 && mouseY < 525 && clicked === true) {
+			        scene = 0;
+			        clicked = false;
+			    }
+			    rectMode(CORNER);
+			    fill(0);
+			    textSize(25);
+			    text("H O M E", 300, 500);
+			};
+			
+			var gameOver = function() {
+			    strokeWeight(2);
+			    stroke(29, 5, 5);
+			    background(59, 35, 35);
+			    for (var i = 0; i < 600; i+=50) {
+			        noFill();
+			        rect(0, i, 600, 50);
+			    }
+			    
+			    fill(255, 255, 255);
+			    text("Game Over", 300, 300);
+			    
+			    text("Score: " + score, 300, 400);
+			    
+			    fill(99, 50, 50);
+			    rectMode(CENTER);
+			    rect(300, 500, 150, 50, 10);
+			    if (mouseX > 215 && mouseX < 375 && mouseY > 475 && mouseY < 525 && clicked === true) {
+			        scene = 0;
+			        clicked = false;
+			    }
+			    rectMode(CORNER);
+			    fill(0);
+			    textSize(25);
+			    text("H O M E", 300, 500);
+			    
+			    rectMode(CENTER);
+			    fill(99, 50, 50);
+			    rect(300, 560, 150, 50, 10);
+			    if (mouseX > 215 && mouseX < 375 && mouseY > 535 && mouseY < 585 && clicked === true) {
+			        scene = 1;
+			        score = 0;
+			        clicked = false;
+			        
+			        x1 = Math.floor(random(50, 550));
+			        x2 = Math.floor(random(50, 550));
+			        y1 = Math.floor(random(50, 550));
+			        y2 = Math.floor(random(50, 550));
+			        r = Math.floor(random(0, 8));
+			        b = Math.floor(random(0, 3));
+			    }
+			    rectMode(CORNER);
+			    fill(0);
+			    textSize(25);
+			    text("A G A I N", 300, 560);
+			    
+			};
+			
+			var scores = function() {
+			    strokeWeight(2);
+			    stroke(29, 5, 5);
+			    background(59, 35, 35);
+			    for (var i = 0; i < 600; i+=50) {
+			        noFill();
+			        rect(0, i, 600, 50);
+			    }
+			    fill(255, 255, 255);
+			    textSize(50);
+			    text("Scores", 300, 100);
+			    textSize(25);
+			    text("DeGoatMelon: 754", 300, 200);
+			    text("Collinator217: 754", 300, 250);
+			    text("Secret Name: 582", 300, 300);
+			    text("CollinM: 502", 300, 350);
+			    text("TyanU: 478", 300, 400);
+			    text("brainiac: 424", 300, 450);
+			    
+			    fill(99, 50, 50);
+			    rectMode(CENTER);
+			    rect(300, 500, 150, 50, 10);
+			    if (mouseX > 215 && mouseX < 375 && mouseY > 475 && mouseY < 525 && clicked === true) {
+			        scene = 0;
+			        clicked = false;
+			    }
+			    rectMode(CORNER);
+			    fill(0);
+			    textSize(25);
+			    text("H O M E", 300, 500);
+			};
+			
+			// } End Scenes
+			
+			
+			
+			// Draw {
+			draw = function() {
+			    
+			    if (scene === 0) {
+			        menu();
+			    } else if (scene === 1) {
+			        game();
+			        fill(255, 255, 255);
+			        textSize(25);
+			        text("Score: " + score, 75, 50);
+			    } else if (scene === 2) {
+			        how();
+			    } else if (scene === 3) {
+			        gameOver();
+			    } else if (scene === 4) {
+			        scores();
+			    }
+			    
+			    clicked = false;
+			};
+			
+			// } End Draw
+			
+			
+			
+			// Key pressed/released Mouse pressed/released {
+			mousePressed = function() {
+			    clicked = true;
+			};
+			
+			mouseReleased = function() {
+			    clicked = false;
+			};
+			
+			keyPressed = function() {
+			    keys[keyCode] = true;
+			};
+			
+			keyReleased = function() {
+			    keys[keyCode] = false;
+			};
+			// } End this
+			
+			
+			
+			// }
+			
+			
+			// 1300 lines of code, probably better than the world of block
+		}
+		
+		runPJS(program);
+		
+		// Add reload button on KA --> <script>
+		
+	</script>
+</body>
+
+</html>

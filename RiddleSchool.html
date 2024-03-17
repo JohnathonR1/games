@@ -1,0 +1,6158 @@
+<!DOCTYPE html>
+<html>
+<!-- Program exported to HTML using the KA Project Exporter by @MushyAvocado 
+https://www.khanacademy.org/computer-programming/ka-project-exporter/5195486791385088
+-->
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Riddle School</title>
+	<style>
+		
+		
+		/* Change the color as you want */
+		:root {
+			--background-color: #000000;
+		}
+		
+		body {
+		    background-color: var(--background-color);
+		}
+		
+		html, body, #wrapper {
+			width: 100%;
+		    height: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		
+		canvas {
+			width: fit-content;
+			height: fit-content;
+		}
+		
+		canvas:focus {
+			outline: none;
+		}
+		
+		/* Automatically fits to the remaining height and centers the canvas it contains */
+		#wrapper {
+			padding: 0px;
+			margin: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+
+        .back-btn {
+            position: absolute;
+            top: 90%;
+            left: 90%;
+        }
+
+        #Karlson-back-btn {
+            text-align: center;
+            color: black;
+            border-radius: 7px;
+            width: 9%;
+            height: 7%;
+            background-color: white;
+            transition: 0.35s;
+        }
+
+        #Karlson-back-btn:hover {
+            cursor: pointer;
+            background-color: darkgrey;
+        }
+		
+</style>
+</head>
+<body id="wrapper">
+
+    <a href="index.html">
+        <button class="back-btn" id="Karlson-back-btn" type="button">← Back</button>
+    </a>
+
+    <!-- Canvases with a class of "sketch" are applied to the program in the order importPJS() is called. -->
+    <canvas class="sketch"></canvas>
+	<!-- Load the PJS library -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Khan/processing-js@master/processing.js"></script>
+	<!-- The exporter script must be loaded before the program script -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Mushy-Avocado/KA-exporter@main/exporter.js"></script>
+	<!-- Run Khan Academy program and import PJS -->
+	<script type="application/javascript">
+		
+		
+		function program() {
+		    
+		    title("Riddle School");
+		    size(600, 600);
+		    
+		    // All code goes here
+			//IMPORTANT - You must click each word bubble that Phil says after you read it. 
+			
+			//Can you believe I was flagged for "copying gameChief's riddle school? I had a pre- release first so if anything, I could say gameChief copied me! But I won't! :)
+			
+			//Cheat codes BELOW!!! Complete walkthrough of game!
+			/****
+			 * A note from Python - 
+			 * 
+			 * So wow! This game is actually out! I know, it took some time but at last, it is finally here! I hope you enjoy playing this game! Thanks all for the support you give me and for the motivation to code everyday! Please, if you enjoy this game, subscribe for more! Important - There will be a sequel! Yay? Or yay! Anyways, tahnks again, and I proudly present to you, my version of the game, RIDDLE SCHOOL.
+			 * 
+			 * 
+			 * Subscribe to me here: https://www.khanacademy.org/computer-programming/thons-subscription-page/5994067768442880
+			
+			**/
+			var logo = true;//change this to false to skip the logo scene. But I don't see why you would. The #1 Planet Proponent made a very good one for me! ;)
+			
+			//CHEAT CODES BELOW!!! ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+			
+			
+			//CHEAT CODES: Please don't use these! I would be so happy if you don't! Only use if you are stuck! This is a Riddle game which is meant to test how you think and solve puzzles!
+			    
+			    //cheat code - ONLY look if you are stuck. Or impatient. :)
+			        {   //How to get past Sam
+			            {
+			                //Open the locker farthest to the left of the hall. That locker is Phil's and there is a quarter in there. Click it and it will go to your inventory. Now click the red button to go down the hall. Before, Sam would send you right back to the start. Now, if you have the quarter, you can click it in its inventory box and give it to Sam. You have sucessfully bribed Sam! He will go away and you can now roam the hallways freely!
+			            }
+			            
+			            //How to obtain every inventory item
+			            {
+			                //quarter
+			                    {
+			                        //See above on how to get past Sam
+			                    }
+			                //dollar
+			                    {//So go into Ms.Quin's classroom. She will ask you a question in which only one answer is correct. If you remember, the poster in the first hallway said 2+2 = 5. If you clicked on it, Phil would've been able to tell you that this is Ms. Quin's favorite saying so clicking this answer would put Ms. Quin into a good enough mood to give you a dollar! You have successfully obtained the dollar!
+			                
+			                    }
+			                //glasses
+			                    {//This one is pretty easy to find. Walk into Mr. Sum's room and click on it from off his table.
+			                        
+			                    }
+			                //plunger
+			                    {
+			                        //Mr.Sum's trash can. Click on it. ;)
+			                    }
+			                //cookie
+			                    {
+			                        //Click on the vending machine next to Mr. Sum's classroom. When you see Phil say something, instead of closing the word bubble, click on your dollar and it will be exchanged for the cookie!
+			                    }
+			                //note
+			                    {
+			                        //You can get this by giving the plunger to the janitor. But I'll go more into that on how to beat the actual game below!
+			                    }
+			                    //key
+			                    {
+			                        //This is the one thing I wont help you on!
+			                    }
+			                }
+			                
+			            //How to win - step by step. Warning- this is not an explanationon why things happen. Just how! Quick read. The ultimate cheat code.
+			            {
+			                //First off, make sure you remember to click on the word bubble before clicking something else. 
+			                
+			                //Now, so first, open Phil's locker, the farthest one to the right. Click on the quarter. Go to the right of the hallway. Click on the quarter instead of Sam's word bubble. Go into Ms. Quin's classroom and click the fourth answer. You will be given a dollar. Go out of the classroom. Go down the hallway 2 scenes until you see Mr. Sum's classroom. Go in and click on the glasses and the trash bin. Now, go out of the classroom and click on the vending machine. When Phil says something, click on the dollar instead of closing the word bubble. You have obtained a cookie. Now, click on Chad and then on the cookie. Now, go into Ms. Grad's classroom. Click on the glasses first. Then click on the plunger. You have obtained the note. Now go down the hallway to the right one scene. Go into Mr. brown's office and click on the note. When Mr. Brown has left, click on the important document. Then click on the key. Go out of the classroom and click the arrow pointing to the right. You have beaten the game. With cheat codes. Yay?
+			            }
+			        }
+			
+			       
+			    
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//Thanks Planet for the logo!
+			var l = {
+			    name: "Python",
+			    ns: [],
+			    name2: "Presents...",
+			    ns2: [],
+			    t: 0,
+			    ss: ["1010110","101101010","010","110","100101010010010","cool = 5","import randint","imastring = \"abc\"","if i == j:\n    i ++","1010110","101101010","010","110","100101010010010","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1"],
+			    s: [],
+			    m: 0,
+			    ma: 0,
+			    draw: function(){
+			        if(l.t === 0){
+			            for(var i = 0;i < l.name.length;i ++){
+			                l.ns.push({x:-200,y:50,l:i});
+			            }
+			            for(var i = 0;i < l.name2.length;i ++){
+			                l.ns2.push({x:600,y:100,l:i});
+			            }
+			        }
+			        l.t ++;
+			        pushMatrix();
+			        scale(width/400,height/400);
+			        noStroke();
+			        if(l.m < 2){
+			            background(22);
+			            for(var i = 0;i < l.s.length;i ++){
+			                textFont(createFont("monospace"));
+			                fill(0, 255, 9, l.s[i].a/1.5);
+			                textSize(l.s[i].s);
+			                textAlign(CENTER,CENTER);
+			                text(l.ss[l.s[i].t],l.s[i].x,l.s[i].y);
+			                l.s[i].x +=l.s[i].a/40;
+			                if(l.s[i].x > 600){
+			                    l.s[i].x = -400;
+			                }
+			            }
+			            if(l.t%7 === 0 && l.s.length < 60){
+			                l.s.push({x:-200,y:random(0,400),s:30,t:floor(random(0,l.ss.length)),a:random(100,200)});
+			            }
+			            if(l.t > 200){
+			                textFont(createFont("Century Gothic Bold"));
+			                textAlign(CENTER,TOP);
+			                for(var i = 0;i < l.ns.length;i ++){
+			                    fill(89, 219, 24);
+			                    textSize(50);
+			                    text(l.name[l.ns[i].l],l.ns[i].x,l.ns[i].y);
+			                    if(l.t > 200+i*20){
+			                        l.ns[i].x +=((200-(l.name.length/2)*30+i*30)-l.ns[i].x)/20;
+			                    }
+			                }
+			                
+			            }
+			            if(l.t > 350){
+			                textFont(createFont("Century Gothic Bold"));
+			                textAlign(CENTER,TOP);
+			                for(var i = 0;i < l.ns2.length;i ++){
+			                    fill(89, 219, 24);
+			                    textSize(25);
+			                    text(l.name2[l.ns2[i].l],l.ns2[i].x,l.ns2[i].y);
+			                    if(l.t > 350+i*10){
+			                        l.ns2[i].x +=((250-(l.name2.length/2)*15+i*15)-l.ns2[i].x)/20;
+			                    }
+			                }
+			                
+			            }
+			        }
+			        if(l.m >= 1 && l.ma >= 0){
+			            fill(20, 20, 20, l.ma);
+			            rect(0,0,400,400);
+			            if(l.m === 1){
+			                l.ma +=10;
+			                if(l.ma > 255){
+			                    l.m=2;
+			                    
+			                }
+			            }
+			        }
+			        if(l.m === 2){
+			            l.ma -=10;
+			        }
+			        if(l.t > 600 && l.m === 0){
+			            l.m=1;
+			            logo = false;
+			            textAlign(DOWN,RIGHT);
+			        }
+			        popMatrix();
+			    }
+			    
+			};
+			textAlign(DOWN,RIGHT);
+			var isMouseInside = function(btn) {
+			    return (mouseX >= btn.x &&
+			            mouseX <= (btn.x+btn.width) &&
+			            mouseY >= btn.y && 
+			            mouseY <= (btn.y+btn.height));
+			};
+			var input = [];
+			var keyPressed = function () {input[keyCode] = true;};
+			var keyReleased = function () {input[keyCode] = false;};
+			
+			
+			//characters + character variables
+			{
+			var px = 0;
+			var py = 0;
+			var px2 = 0;
+			var py2 = 0;
+			var gx = 0;
+			var gy = 0;
+			var fadescene = 500;
+			var px3 = 0;
+			var py3 = 0;
+			var px0 = 0;
+			var py0 = 0;
+			var px9 = 0;
+			var py9 = 0;
+			var note2 = false;
+			var Phil = function(){
+			
+			//head
+			fill(230, 219, 95);
+			
+			ellipse(px+93,py+12+sin(frameCount * 2) * 1,40,40);
+			//body
+			fill(20, 77, 8);
+			rect(px+74,py+33,38,64,13);
+			
+			
+			
+			//pants and eyes
+			fill(18, 21, 77);
+			rect(px+74,py+79,38,20);
+			fill(0, 0, 0);
+			rect(px+93,py+84,1,15);
+			ellipse(px+98,py+13,7,15);
+			ellipse(px+88,py+13,7,15);
+			noStroke();
+			
+			};
+			var PhilBig2 = function(){
+			
+			
+			//body
+			fill(20, 77, 8);
+			rect(px9+66,py9+44,58,84,13);
+			
+			
+			
+			//pants and eyes
+			fill(18, 21, 77);
+			rect(px9+66,py9+109,58,40);
+			//head
+			fill(230, 219, 95);
+			
+			ellipse(px9+93,py9+14+sin(frameCount * 6) * 0.1,60,60);
+			fill(0, 0, 0);
+			rect(px9+93,py9+115,2,35);
+			ellipse(px9+100,py9+13-sin(frameCount * 6) * 1,10,25);
+			ellipse(px9+86,py9+13-sin(frameCount * 6) * 1,10,25);
+			noStroke();
+			
+			};
+			var PhilBIG = function(x,y,z){
+			scale(z);
+			//head
+			fill(230, 219, 95);
+			
+			ellipse(px0+93,py0+14,40,40);
+			//body
+			fill(20, 77, 8);
+			rect(px0+74,py0+33,38,64,13);
+			
+			
+			
+			//pants and eyes
+			fill(18, 21, 77);
+			rect(px0+74,py0+79,38,20);
+			fill(0, 0, 0);
+			rect(px0+93,py0+84,1,15);
+			ellipse(px0+98,py0+13,7,15);
+			ellipse(px0+88,py0+13,7,15);
+			noStroke();
+			fill(230, 219, 95);
+			rect(px0+79,py0+0,24,9);
+			
+			};
+			var Phil2 = function(){
+			
+			//head
+			fill(230, 219, 95);
+			
+			ellipse(px+93,py+14,40,40);
+			//body
+			fill(20, 77, 8);
+			rect(px+74,py+33,38,64,13);
+			
+			
+			
+			//pants and eyes
+			fill(18, 21, 77);
+			rect(px+74,py+79,38,20);
+			fill(0, 0, 0);
+			rect(px+93,py+84,1,15);
+			ellipse(px+98,py+13,7,15);
+			ellipse(px+88,py+13,7,15);
+			noStroke();
+			fill(230, 219, 95);
+			rect(px+78,py+0,24,9);
+			noStroke();
+			};
+			var Sam = function(){
+			
+			
+			fill(0, 0, 0);
+			ellipse(px2+93,py2+4,44,35);
+			//head
+			fill(215, 227, 125);
+			ellipse(px2+93,py2+14,40,40);
+			//body
+			fill(110, 0, 0);
+			rect(px2+74,py2+33,38,64,13);
+			fill(0, 0, 0);
+			rect(px2+80,py2+-9,27,8);
+			
+			//pants and eyes
+			fill(14, 8, 107);
+			rect(px2+74,py2+79,38,20);
+			fill(0, 0, 0);
+			rect(px2+93,py2+84,1,15);
+			ellipse(px2+98,py2+13,7,15);
+			ellipse(px2+88,py2+13,7,15);
+			noStroke();
+			};
+			noStroke();
+			var px7 = 0;
+			var py7 = 0;
+			
+			var Chad = function(){
+			
+			
+			//body
+			fill(255, 0, 0);
+			ellipse(px7+93,py7+65,79,68);
+			ellipse(px7+93,py7+77,93,68);
+			//head
+			fill(230, 219, 95);
+			ellipse(px7+93,py7+14,40,40);
+			
+			
+			//pants and eyes
+			fill(71, 71, 71);
+			rect(px7+66,py7+102,56,20);
+			fill(0, 0, 0);
+			rect(px7+93,py7+107,1,15);
+			ellipse(px7+98,py7+13,7,15);
+			ellipse(px7+88,py7+13,7,15);
+			fill(230, 219, 95);
+			rect(px7+80,py7+-1,25,10);
+			
+			
+			rotate(8);
+			fill(47, 0, 133);
+			arc(px7+109,py7 +-63,34,34,180,360);
+			rect(px7+75,py7+-65,35,2);
+			rotate(-8);
+			noStroke();
+			};
+			noStroke();
+			var px4 = 0;
+			var py4 = 0;
+			
+			var MrSum = function(){
+			
+			//head
+			fill(230, 219, 95);
+			ellipse(px4+93,py4+14,40,40);
+			fill(102, 102, 102);
+			ellipse(px4 +75,py4 +4,9,13);
+			ellipse(px4 +110,py4 +4,9,13);
+			//body
+			fill(122, 122, 122);
+			rect(px4+74,py4+33,38,55,13);
+			
+			
+			
+			//pants and eyes
+			fill(18, 21, 77);
+			rect(px4+74,py4+79,38,20);
+			fill(0, 0, 0);
+			rect(px4+93,py4+84,1,15);
+			ellipse(px4+98,py4+13,7,1);
+			ellipse(px4+88,py4+13,7,1);
+			noStroke();
+			};
+			
+			var MsQuin1 = function(){
+			
+			//head
+			fill(0, 0, 0);
+			ellipse(px3+92,py3+-15,15,12);
+			
+			fill(128, 18, 18);
+			rect(px3+86,py3+-11,12,12);
+			
+			fill(230, 219, 95);
+			ellipse(px3+93,py3+14,40,40);
+			fill(0, 0, 0);
+			rect(px3+84,py3+-6,3,9);
+			rect(px3+86,py3+-7,12,2);
+			rect(px3+82,py3+-5,20,2);
+			rect(px3+90,py3+-7,2,8);
+			//body
+			fill(83, 87, 83);
+			rect(px3+74,py3+34,38,74,13);
+			
+			
+			
+			//pants and eyes
+			fill(115, 5, 5);
+			rect(px3+74,py3+91,38,48);
+			fill(0, 0, 0);
+			ellipse(px3+98,py3+13,7,15);
+			ellipse(px3+88,py3+13,7,15);
+			noStroke();
+			};
+			var px8 = 0;
+			var py8 = 0;
+			
+			var MsGrad = function(){
+			
+			//head
+			fill(0, 0, 0);
+			arc(px8+93,py8+18,59,67,-180,0);
+			fill(230, 219, 95);
+			ellipse(px8+93,py8+14,41,40);
+			fill(0, 0, 0);
+			arc(px8+93,py8+6,34,32,-180,0);
+			
+			//body
+			fill(255, 110, 110);
+			rect(px8+67,py8+33,53,87,70);
+			
+			
+			
+			//pants and eyes
+			fill(18, 21, 77);
+			rect(px8+68,py8+94,52,55);
+			fill(0, 0, 0);
+			ellipse(px8+98,py8+13,7,15);
+			ellipse(px8+88,py8+13,7,15);
+			noStroke();
+			};
+			var jx = 0;
+			var jy = 0;
+			var janitor = function(){
+			
+			//head
+			fill(156, 107, 34);
+			ellipse(jx+93,jy+14,40,40);
+			
+			//body
+			fill(97, 97, 97);
+			rect(jx+70,jy+34,47,75,10);
+			fill(184, 184, 184);
+			rect(jx+98,jy+45,12,5);
+			
+			
+			
+			//pants and eyes
+			fill(46, 0, 196);
+			rect(jx+70,jy+89,47,45);
+			fill(0, 0, 0);
+			rect(jx+93,jy+95,1,39);
+			ellipse(jx+98,jy+13,7,15);
+			ellipse(jx+88,jy+13,7,15);
+			noStroke();
+			};
+			noStroke();
+			var pxb = 0;
+			var pyb = 0;
+			noStroke();
+			var PBrown = function(){
+			//head
+			fill(102, 27, 0);
+			rect(pxb+73,pyb+-12,40,43,30);
+			fill(230, 219, 95);
+			ellipse(pxb+93,pyb+14,40,47);
+			fill(102, 27, 0);
+			ellipse(pxb+92,pyb+-10,17,6);
+			
+			
+			//body
+			fill(56, 56, 56);
+			rect(pxb+69,pyb+38,48,110,30);
+			
+			
+			
+			//pants and eyes
+			fill(25, 18, 77);
+			rect(pxb+69,pyb+116,48,41);
+			fill(0, 0, 0);
+			rect(pxb+93,pyb+121,1,35);
+			ellipse(pxb+98,pyb+13,8,15);
+			ellipse(pxb+88,pyb+13,8,15);
+			};
+			
+			}
+			//Btns
+			{
+			var btnM = {
+			    x: 16,
+			    y: 427,
+			    width: 186,
+			    height: 80
+			};
+			var btn52 = {
+			    x: 19,
+			    y: 40,
+			    width: 252,
+			    height: 90
+			};
+			var btnM2 = {
+			    x: 16,
+			    y: 427,
+			    width: 186,
+			    height: 80
+			};
+			var btn1 = {
+			    x: 206,
+			    y: 301,
+			    width: 169,
+			    height: 57
+			};
+			//mr.kahm's door clicked
+			var btn2 = {
+			    x: 94,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			var btn3 =  {
+			    x: 162,
+			    y: 248,
+			    width: 284,
+			    height: 90,
+			};
+			//math is rad poster
+			var btn4 =  {
+			    x: 231,
+			    y: 68,
+			    width: 62,
+			    height: 70,
+			};
+			var btn5 =  {
+			    x: 162,
+			    y: 248,
+			    width: 284,
+			    height: 90,
+			};
+			var btn6 =  {
+			    x: 391,
+			    y: 128,
+			    width: 209,
+			    height: 115,
+			};
+			var btn7 =  {
+			    x: 345,
+			    y: 147,
+			    width: 42,
+			    height: 100,
+			};
+			var btn8 =  {
+			    x: 345,
+			    y: 132,
+			    width: 42,
+			    height: 105,
+			};
+			var btn9 =  {
+			    x: 365,
+			    y: 147,
+			    width: 15,
+			    height: 15,
+			};
+			//dpwn hallway button right
+			var btn10 =  {
+			    x: 529,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			var btn11 =  {
+			    x: 529,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			//ms.Quin's door
+			var btn12 = {
+			    x: 172,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			//sam dialogue
+			var btn13 = {
+			    x: 219,
+			    y: 248,
+			    width: 284,
+			    height: 90,
+			};
+			
+			var btn14 =  {
+			    x: 529,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			  var btn15 =  {
+			    x: 17,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			//left or right
+			var btn23 =  {
+			    x: 529,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			  var btn24 =  {
+			    x: 17,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			
+			//word choices for quin's word bubble
+			  //first option
+			  var btn17 =  {
+			    x: 232,
+			    y: 267,
+			    width: 257,
+			    height: 46,
+			};
+			  //second option
+			  var btn18 =  {
+			    x: 232,
+			    y: 317,
+			    width: 257,
+			    height: 46,
+			};
+			  //third option
+			  var btn19 =  {
+			    x: 232,
+			    y: 368,
+			    width: 257,
+			    height: 46,
+			};
+			  //fourth option
+			  var btn20 =  {
+			    x: 232,
+			    y: 420,
+			    width: 257,
+			    height: 46,
+			};        
+			//quin word bubble
+			  var btn16 =  {
+			    x: 11,
+			    y: 19,
+			    width: 284,
+			    height: 90,
+			};
+			
+			
+			//lv4_2
+			var btn21 = {
+			    x: 337,
+			    y: 128,
+			    width: 266,
+			    height: 114,
+			};
+			var btn22 = {
+			    x: -146,
+			    y: 127,
+			    width: 266,
+			    height: 114,
+			};
+			//5
+			//ms. Cophey's door
+			var btn25 = {
+			    x: 156,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			//restrooms
+			//boys
+			var btn26 = {
+			    x: 299,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			//girls
+			var btn27 = {
+			    x: 405,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			
+			//vent
+			var btnvent = {
+			    x: 512,
+			    y: 186,
+			    width: 55,
+			    height: 46,
+			};
+			//lv6
+			
+			//left or right
+			var btn28 =  {
+			    x: 529,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			  var btn29 =  {
+			    x: 17,
+			    y: 311,
+			    width: 55,
+			    height: 55,
+			};
+			//sum door
+			var btn30 = {
+			    x: 52,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			//grad door
+			var btngd = {
+			    x: 422,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			
+			//sumclass
+			var btn31 = {
+			    x: 443,
+			    y: 444,
+			    width: 55,
+			    height: 55,
+			};
+			//wastebasket
+			var btn34 = {
+			    x: 165,
+			    y: 192,
+			    width: 47,
+			    height: 52,
+			};
+			//hidden door
+			var btn32 = {
+			    x: 52,
+			    y: 17,
+			    width: 77,
+			    height: 106,
+			};
+			
+			//grad question
+			var btnq1 = {
+			    x: 11,
+			    y: 19,
+			    width: 284,
+			    height: 90,
+			};
+			
+			
+			var btn33 = {
+			    x: 237,
+			    y: 219,
+			    width: 38,
+			    height: 19,
+			};
+			//vendingmachine
+			var btnvm = {
+			    x: 177,
+			    y: 126,
+			    width: 80,
+			    height: 114,
+			};//rect(177,126,76,114,10);
+			
+			//chad
+			var btnchad = {
+			    x: 422,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			
+			//lv7
+			var btn50 = {
+			    x: 65,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			var btn51 = {
+			    x: 371,
+			    y: 118,
+			    width: 77,
+			    height: 123,
+			};
+			
+			var btn60 = {
+			    x: 343,
+			    y: 182,
+			    width: 36,
+			    height: 46,
+			};
+			var btn61 = {
+			    x: 354,
+			    y: 185,
+			    width: 30,
+			    height: 36,
+			};
+			var btn62 = {
+			    x: 11,
+			    y: 19,
+			    width: 321,
+			    height: 115,
+			};
+			
+			
+			
+			
+			
+			var btn1s= {
+			    x: 302,
+			    y: 263,
+			    width: 186,
+			    height: 40
+			};
+			var btn2s= {
+			    x: 302,
+			    y: 323,
+			    width: 186,
+			    height: 40
+			};
+			var btn3s= {
+			    x: 302,
+			    y: 383,
+			    width: 186,
+			    height: 40
+			};
+			var btn1i= {
+			    x: 432,
+			    y: 533,
+			    width: 136,
+			    height: 40
+			};
+			
+			
+			//inventory buttons
+			{
+			//quarter
+			var btnI1 = {
+			    x: 105,
+			    y: 521,
+			    width: 50,
+			    height: 52,   
+			};
+			
+			var btnI2 = {
+			    x: 160,
+			    y: 521,
+			    width: 50,
+			    height: 52,   
+			};
+			var btnI3 = {
+			    x: 218,
+			    y: 521,
+			    width: 50,
+			    height: 52,   
+			};
+			var btnI4 = {
+			    x: 273,
+			    y: 521,
+			    width: 50,
+			    height: 52,   
+			};
+			var btnI5 = {
+			    x: 328,
+			    y: 521,
+			    width: 50,
+			    height: 52,   
+			};
+			var btnI6 = {
+			    x: 383,
+			    y: 521,
+			    width: 50,
+			    height: 52,   
+			};
+			var btnI7 = {
+			    x: 439,
+			    y: 521,
+			    width: 50,
+			    height: 52,   
+			};
+			}
+			}
+			
+			//variables
+			{
+			var lv2true = false;
+			
+			var fader = 1;
+			
+			var fadergo = true;
+			
+			var game = false;
+			
+			var menu = false;
+			var btn1down = false;
+			var btn1down2 = false;
+			var game = false;
+			var lvtwo = false;
+			var btn8over9 = true;
+			var lvtwo2 = false;
+			
+			var instructions = false;
+			var maptalk = false;
+			var mrkahmclassroom = false;
+			var mathisradposter = false;
+			var lockerdialogue= false;
+			var lockerdialogue2 = false;
+			var phillocker = false;
+			var phillockeropen = false;
+			var phillockerclosed = true;
+			var getquarter = false;
+			var getquarter2 = false;
+			var quarterinventory = false;
+			var quarterin = false;
+			var quarterin2 = false;
+			var lv3true = false;
+			var lv4true = false;
+			var lv4true2 = false;
+			var quarterinventory2 = false;
+			var samdialogue = true;
+			var dontgotolv2 = false;
+			var quinclassroom = false;
+			var quinclassroom2 = false;
+			var msquinclassroomtalk = false;
+			var dollarF = false;
+			
+			var quinquestion = true;
+			var quinresponse = false;
+			var quinresponse2 = false;
+			var quinresponse3 = false;
+			var quinyes = false;
+			var dollar = false;
+			var dollar2 = false;
+			var dollartalk = false;
+			var dollarE = false;
+			var lv4repeat = false;
+			var lv5true = false;
+			var lv6true = false;
+			var lv7true = false;
+			var venttalk = false;
+			var sumclasstrue = false;
+			var sumclassleave = false;
+			var hiddendoor = false;
+			var glasses = true;
+			var glassestalk = false;
+			var trashtalk = false;
+			var plunger = false;
+			var plungertalk = false;
+			var dollarE2 = false;
+			var cookietalk = false;
+			var cookietalk2 = false;
+			var cookieT = false;
+			var dontgotolv4 = false;
+			var chadex = false;
+			var chadex2 = false;
+			
+			var quinblock = false;
+			var boysRtalk = false;
+			var copheytalk = false;
+			var girlsRtalk = false;
+			var vmtalk = false;
+			var stoplv = false;
+			var gradtrue = false;
+			var chadblock = true;
+			var chadtalk = false;
+			var uglyrug = false;
+			var glasses2 = false;
+			var gradtalk = true;
+			var glassesExplanation = false;
+			var gradleave = false;
+			var sumNo = false;
+			var plungerthanks = false;
+			var plungergive = false;
+			var gradNo = false;
+			var gradNoE = false;
+			var note = false;
+			var noteE = false;
+			var lv7No1 = false;
+			
+			var fader = 500;
+			var cafeteriatalk = false;
+			var officetrue = false;
+			var keys = false;
+			var PBrowntalk = true;
+			var browntalk2 = false;
+			var brownleave = false;
+			var philbrown = false;
+			var paperblock = true;
+			var getkey = false;
+			var keytalk = false;
+			var keytalk2 = false;
+			var locked = true;
+			var doortalk = false;
+			
+			var philfreemove = 213;
+			var fader = 0;
+			var finishScene3go = false;
+			var sighget = false;
+			var timer = 0;
+			var fadeout = 0;
+			var fadein = 0;
+			
+			
+			var faderscene = 600;
+			var instructionspage = false;
+			var creditspage = false;
+			var bxm = -500;
+			var bxm2 = -500;
+			var bxm3 = 800;
+			var bxm4 = 1800;
+			var bxm5 = 2800;
+			var bxm6 = -500;
+			var titlepush = false;
+			var menutmr = 0;
+			var menutmrgo = false;
+			var btnmgo = false;
+			var Philfaded = 0;
+			var barfade = 0;
+			var barpush = -700;
+			}
+			var instructions2 = false;
+			var colorred = 0;
+			
+			textAlign(DOWN,RIGHT);
+			
+			var finishScene3 = function(){
+			    background(0, 0, 0);
+			
+			    pushMatrix();
+			    scale(8);
+			
+			    px0 = -59;
+			    py0 = 24;
+			    PhilBIG();
+			    popMatrix();
+			    //prison walls
+			    fill(107, 107, 107);
+			    rect(-1,-1,600,150);
+			    rect(-1,-1,100,600);
+			    rect(501,-1,100,600);
+			    rect(-1,500,600,150);
+			    rect(121,-1,50,600);
+			    rect(281,-1,50,600);
+			    rect(418,-1,50,600);
+			    
+			    if (faderscene < -1000){
+			        textAlign(DOWN,LEFT);
+			        if (sighget === false){
+			            fill(255, 255, 255);
+			    rect(11,19,321,115,10);
+			    
+			     textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("You've got to be kidding me. I refused to go to \nschool. The police came and put me here for \ntruancy. I wasn't really paying attention when \nthe police were talking to me. I don't know how \nlong I'll be here...",21,45);
+			    
+			    if (faderscene < -2000){
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(255, 255, 255);
+			    text("Click word bubble \nwhen finished reading.",351,59);
+			    }
+			        }
+			    textAlign(CENTER,CENTER);
+			    }
+			
+			    if (sighget === true){
+			        fill(255, 255, 255);
+			    rect(11,19,321,115,10);
+			        textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("*sigh* I got to get out of here. *sigh*",160,75);
+			    timer = timer+1;
+			
+			    
+			    if (timer > 300){
+			        fadeout = fadeout +0.6;
+			    }
+			    fill(0, 0, 0,fadeout);
+			    rect(-1,-1,601,601);
+			    
+			    if (timer > 720){
+			        background(0, 0, 0);
+			        textAlign(CENTER,CENTER);
+			        fill(255, 255, 255,fadein);
+			        textSize(50);
+			        text("To Be Continued",300,300);
+			        fadein = fadein + 1;
+			    }
+			    if (fadein > 600){
+			        background(173, 173, 173);
+			        fill(255, 255, 255);
+			        
+			        textSize(30);
+			        text("Thanks for playing! \nI had a lot of fun \nmaking this game and \nI hope you enjoyed playing this!\n\nSubscribe to me \nto see more games by me!\n\n\n-Python Programming",300,300);
+			    }
+			    }
+			    if (isMouseInside(btn62) && mouseIsPressed) {sighget = true;}
+			    mouseClicked = function () {
+			        if (isMouseInside(btn62)){
+			            sighget = true;
+			        }
+			    };
+			    
+			    
+			    
+			 fill(255, 255, 255,faderscene);
+			rect(0,0,600,600);
+			faderscene =     faderscene -3;   
+			};
+			
+			var finishScene2 = function(){
+			    background(0, 0, 0);
+			    textAlign(CENTER,CENTER);
+			    textFont(createFont("monospace"),25);
+			    fill(255, 255, 255,fader);
+			    text("Phil enjoyed a few hours of freedom. \nHe realized he would have to go \nback to school the next day and \nescape again. He pondered the \npointlessness of the situation.\n\n Then, he realized he didn't \nwant to go to school ever again. \nSo, he didn't. The next day, \nhe stayed home. And the next. \nUntil, one day....\n\n\nHit 'spacebar' when finished reading.",300,370);
+			    fader = fader + 1;
+			    if (input[32] && locked === false){
+			        finishScene3go = true;
+			        fadescene = 700;
+			    }
+			    if (finishScene3go === true){
+			        finishScene3();
+			    }
+			    textAlign(DOWN,LEFT);
+			};
+			
+			var finishScene1 = function(){
+			    //sky
+			    background(97, 213, 255);
+			    //grass
+			    fill(60, 181, 0);
+			    rect(-1,120,605,612);
+			    //school building
+			    fill(110, 0, 0);
+			    rect(90,-1,420,300);
+			    //doors
+			    fill(0, 0, 0);
+			    rect(310,200,50,99);
+			    fill(0, 0, 0);
+			    rect(259,200,50,99);
+			    fill(77, 77, 77);
+			    rect(307,200,3,99);
+			    fill(92, 92, 92);
+			    rect(360,200,50,99);
+			    fill(92, 92, 92);
+			    rect(209,200,50,99);
+			    fill(0, 0, 0);
+			    ellipse(223,252,10,10);
+			    ellipse(395,252,10,10);
+			    
+			    px = 250;
+			    py = philfreemove;
+			    philfreemove = philfreemove +1;
+			    
+			    if (philfreemove >610){
+			        finishScene2();
+			    }
+			    
+			    Phil();
+			    
+			    
+			    
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene -1;
+			};
+			
+			var poffice = function(){
+			    background(166, 168, 167);
+			
+			//walls
+			        {fill(107, 70, 42);
+			    rect(0,-118,600,241); 
+			    rect(-2,12,12,600);
+			    rect(590,0,12,600);
+			    rect(0,590,600,12);}        
+			    
+			    //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    textSize(30);
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(187,459,12,12);
+			    strokeWeight(1);}
+			    //inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			
+			
+			if (PBrowntalk === true && brownleave === false){
+			   fill(255, 255, 255);
+			    rect(19,40,252,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Um... Get out?!? I'm very busy \nso please, just leave.",50,83);
+			}
+			
+			if (browntalk2 === true && brownleave === false){
+			   fill(255, 255, 255);
+			    rect(19,40,252,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("That was a note from the janitor? \nIt's just a happy face on a \nsheet of paper! Get out!",50,74);
+			}
+			
+			
+			
+			
+			
+			    fill(36, 36, 36);
+			    rect(280,111,54,102,20);
+			    if (brownleave === false){
+			    pxb = 215;
+			    pyb = 85;
+			    PBrown();
+			    }
+			    
+			            //desk           
+			     fill(138, 4, 4);
+			    rect(219,169,187,73);
+			
+			    px = 33;
+			    py = 281;
+			
+			    Phil();
+			    if (paperblock === true){
+			    if (getkey === false){    
+			    var key = getImage("cute/Key");
+			    image(key,354,185,30,36);
+			    }
+			    pushMatrix();
+			    fill(255, 241, 199);
+			    rect(btn60.x,btn60.y,btn60.width,btn60.height);
+			    popMatrix();
+			    
+			    if (isMouseInside(btn60)){
+			    textAlign(CENTER,CENTER);
+			    textFont(createFont("monospace"));
+			        textSize(20);
+			        fill(255, 255, 255);
+			        text("Important Document",300,34);
+			    textAlign(DOWN,LEFT);
+			}
+			    }
+			    if (paperblock === false){
+			
+			    pushMatrix();
+			    fill(255, 241, 199);
+			    rect(btn60.x-83,btn60.y,btn60.width,btn60.height);
+			    popMatrix();
+			    if (getkey === false){
+			    var key = getImage("cute/Key");
+			    image(key,354,185,30,36);
+			    if (isMouseInside(btn61)){
+			        textAlign(CENTER,CENTER);
+			    textFont(createFont("monospace"));
+			        textSize(20);
+			        fill(255, 255, 255);
+			        text("Key",300,34);
+			    textAlign(DOWN,LEFT);
+			    }
+			    }
+			    
+			    
+			    }
+			            if (getkey === true){
+			           var key = getImage("cute/Key");
+			            image(key,448,525,30,36); 
+			            if (isMouseInside(btnI7)){
+			                textAlign(CENTER,CENTER);
+			    textFont(createFont("monospace"));
+			        textSize(20);
+			        fill(255, 255, 255);
+			        text("Key",300,34);
+			    textAlign(DOWN,LEFT);
+			    
+			            }
+			            if (keytalk2 === true){
+			            fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(15);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("I wonder where this key goes to...",197,296);
+			        }
+			        }
+			    if (note === true){
+			        stroke(0, 0, 0);
+			        fill(255, 219, 166);
+			        rect(396,529,25,33);        
+			        textSize(12);
+			        text("😃",400,552);
+			        noStroke();
+			        fill(0, 0, 0,50);
+			        rect(396,533,25,1);
+			        rect(396,537,25,1);
+			        rect(396,541,25,1);
+			        rect(396,545,25,1);
+			        rect(396,549,25,1);
+			        rect(396,553,25,1);
+			        rect(396,557,25,1);
+			        rect(396,561,25,1);
+			        
+			        if (isMouseInside(btnI6)){
+			            textFont(createFont("monospace"));
+			        textSize(20);
+			        fill(255, 255, 255);
+			        text("Note",266,34);     
+			        }
+			        
+			        if (noteE === true){
+			                        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Its a note from the janitor to the principal \nabout my 'good behavior'. It just has a \nsmiley face on it. I don't think the janitor \ncan read or write. Hopefully, the principal \nunderstands this.",176,266);    
+			        }
+			
+			        
+			    }
+			    if (paperblock === false){
+			        btn60.x = 320;
+			    }
+			    
+			    if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			if (philbrown === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(15);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Principal Brown went and took the note to \ncheck if the janitor actually wrote it. You \nand I know the truth. Unfortunately, for \n*cough* 'unknown reasons', Principal \nBrown doesn't trust me!",172,264);
+			}
+			
+			{fill(143, 0, 0);
+			        ellipse(btn31.x+25,btn31.y+31,btn31.width,btn31.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("↓",461,482);}
+			        
+			        if (isMouseInside(btn31)){
+			            fill(255, 255, 0,100);
+			        ellipse(btn31.x+25,btn31.y+31,btn31.width,btn31.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("↓",461,482);
+			        }
+			        if (keytalk === true){
+			            fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(15);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("I wonder where this key goes to...",197,296);
+			        }
+			        
+			    
+			    mouseClicked = function(){
+			        if (isMouseInside(btn3)) {
+			            keytalk = false;
+			            keytalk2 = false;
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          dollarE = false;
+			          boysRtalk = false;
+			          girlsRtalk = false;
+			          copheytalk = false;
+			          venttalk = false;
+			          glassestalk = false;
+			          plungertalk = false;
+			          vmtalk = false;
+			          cookietalk = false;
+			          cookietalk2 = false;
+			          chadtalk = false;
+			          chadex = false;
+			          sumNo = false;
+			          gradNoE = false;
+			          noteE = false;
+			          cafeteriatalk = false;
+			          philbrown = false;
+			     }
+			    if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }    
+			
+			    if (isMouseInside(btn31)){
+			        officetrue = false;
+			        lv7true = true;
+			        fadescene = 400;
+			    }
+			    if (isMouseInside(btn52)){
+			        officetrue = false;
+			        lv7true = true;
+			        fadescene = 400;
+			    }
+			    if (isMouseInside(btnI6)&& PBrowntalk === true){
+			        PBrowntalk = false;
+			        browntalk2 = true;
+			    }
+			    if (isMouseInside(btnI6)&& browntalk2 === true){
+			        brownleave = true;
+			        philbrown = true;
+			        note = false;
+			    }
+			    if (isMouseInside(btn60) && brownleave === true){
+			        paperblock = false;
+			        
+			    }
+			    if (isMouseInside(btn61) && isMouseInside(btn60)){
+			        getkey = false;
+			        keytalk = false;
+			    }
+			    if (isMouseInside(btn61) && isMouseInside(btn60) === false && getkey ===false && brownleave === true && paperblock === false){
+			        getkey = true;
+			        keytalk = true;
+			    }
+			    if (isMouseInside(btnI7) && getkey === true){
+			        keytalk2 = true;
+			    }
+			    };
+			    
+			fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			};
+			
+			var lv7 = function(){
+			    background(166, 168, 167);
+			
+			        //wall
+			    fill(107, 70, 42);
+			    rect(0,0,600,241);         
+			
+			    //map
+			    {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    textSize(30);
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(171,491,12,12);
+			    strokeWeight(1);}
+			    
+			    //inventory    
+			    {fill(0, 0, 0);
+			rect(91,518,420,57);
+			noStroke();
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			    //down the hallway right
+			    {fill(143, 0, 0);
+			        ellipse(btn28.x+25,btn28.y+25,btn28.width,btn28.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",538,344);}
+			    //down the hallway left
+			    {fill(143, 0, 0);
+			        ellipse(btn29.x+25,btn29.y+25,btn29.width,btn29.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);}
+			        
+			    //Cafeteria door 
+			    {noStroke();
+			    fill(115, 102, 17);
+			    rect(btn50.x,btn50.y,btn50.width,btn50.height);
+			
+			    fill(10, 169, 204);
+			    rect(74,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(125,185,12,12);
+			    textSize(10);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Cafeteria",79,152);}  
+			    //pricipal's room 
+			    {noStroke();
+			    fill(115, 102, 17);
+			    rect(btn51.x,btn51.y,btn51.width,btn51.height);
+			
+			    fill(10, 169, 204);
+			    rect(379,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(436,185,12,12);
+			    textSize(10);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Principal \nBrown",384,147);}  
+			        
+			        
+			    if (isMouseInside(btn50)){
+			        textFont(createFont("monospace"));
+			        textSize(20);
+			        fill(255, 255, 255);
+			        text("Cafeteria",238,34);    
+			    }
+			        if (isMouseInside(btn51)){
+			        textFont(createFont("monospace"));
+			        textSize(20);
+			        fill(255, 255, 255);
+			        text("Principal's Office",196,34);    
+			    }
+			    
+			    if (getkey === true){
+			           var key = getImage("cute/Key");
+			            image(key,448,525,30,36); 
+			            if (isMouseInside(btnI7)){
+			                textAlign(CENTER,CENTER);
+			    textFont(createFont("monospace"));
+			        textSize(20);
+			        fill(255, 255, 255);
+			        text("Key",300,34);
+			    textAlign(DOWN,LEFT);
+			    
+			            }
+			            if (keytalk2 === true){
+			            fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(15);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("I wonder where this key goes to...",197,296);
+			        }
+			        }
+			
+			  //right
+			      if (isMouseInside(btn28)) {
+			         {fill(255, 255, 0,100);
+			        ellipse(btn28.x+25,btn28.y+25,btn28.width,btn28.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",539,344);}
+			    }
+			    //left
+			    if (isMouseInside(btn29)) {
+			         fill(255, 255, 0,100);
+			        
+			        ellipse(btn29.x+25,btn29.y+25,btn29.width,btn29.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);
+			    }
+			    
+			        px = 33;
+			    py = 281;
+			
+			Phil();
+			
+			if (note === true){
+			        stroke(0, 0, 0);
+			        fill(255, 219, 166);
+			        rect(396,529,25,33);        
+			        textSize(12);
+			        text("😃",400,552);
+			        noStroke();
+			        fill(0, 0, 0,50);
+			        rect(396,533,25,1);
+			        rect(396,537,25,1);
+			        rect(396,541,25,1);
+			        rect(396,545,25,1);
+			        rect(396,549,25,1);
+			        rect(396,553,25,1);
+			        rect(396,557,25,1);
+			        rect(396,561,25,1);
+			        
+			        if (noteE === true){
+			                        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Its a note from the janitor to the principal \nabout my 'good behavior'. It just has a \nsmiley face on it. I don't think the janitor \ncan read or write. Hopefully, the principal \nunderstands this.",176,266);    
+			        }
+			    }
+			    
+			    
+			    if (doortalk === true){
+			                        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("That's the door. Its the only way to get \nout. Unfortunately, it's locked.",176,288);    
+			        }
+			    
+			    if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			
+			mouseClicked = function(){
+			            if (isMouseInside(btn3)) {
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          dollarE = false;
+			          boysRtalk = false;
+			          girlsRtalk = false;
+			          copheytalk = false;
+			          venttalk = false;
+			          glassestalk = false;
+			          plungertalk = false;
+			          vmtalk = false;
+			          cookietalk = false;
+			          cookietalk2 = false;
+			          chadtalk = false;
+			          chadex = false;
+			          sumNo = false;
+			          gradNoE = false;
+			          noteE = false;
+			          cafeteriatalk = false;
+			          keytalk2 = false;
+			          doortalk = false;
+			     }
+			    if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			    if (isMouseInside(btnI7) && doortalk === false){
+			        keytalk2 = true;
+			    }
+			    if (isMouseInside(btnI7) && doortalk === true){
+			        locked = false;
+			        fadescene = 500;
+			    }
+			    if (isMouseInside(btn29)){
+			        lv7true = false;
+			        lv6true = true;
+			        lv5true = false;
+			        fadescene = 400;
+			    }
+			    if (isMouseInside(btnI6) && note === true){
+			        noteE = true;
+			    }    
+			    if (isMouseInside(btn50)){
+			        cafeteriatalk = true;
+			    }
+			    if (isMouseInside(btn51)){
+			        officetrue = true;
+			        lv7true = false;
+			        lv6true = false;
+			        lv5true = false;
+			        fadescene = 400;
+			    }
+			    if (isMouseInside(btn28)){
+			        doortalk = true;
+			    }
+			    
+			};
+			
+			if (cafeteriatalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Oh no. No way. You can't make me \ngo in there! No way! Why? None of \nyour buisness. Let's move on. ",180,276);
+			}
+			
+			fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			
+			};
+			
+			var gradclass = function(){
+			    background(166, 168, 167);
+			
+			//walls
+			        {fill(107, 70, 42);
+			    rect(0,-118,600,241); 
+			    rect(-2,12,12,600);
+			    rect(590,0,12,600);
+			    rect(0,590,600,12);}    
+			    
+			        //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    textSize(30);
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(143,459,12,12);
+			    strokeWeight(1);}
+			    //inventory    
+			        {fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			    if (glasses === false){
+			        gx=-75;
+			        
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			                if (isMouseInside(btnI3)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Glasses",303,34);            
+			        }
+			    }
+			        //rug
+			        {fill(255, 191, 0);
+			            ellipse(312,376,220,220);
+			            fill(201, 184, 0);
+			            ellipse(312,376,210,210);
+			            fill(255, 132, 0);
+			            ellipse(312,376,200,200);
+			            fill(219, 131, 0);
+			            ellipse(312,376,180,180);}
+			            
+			            if (gradleave === false){
+			            px8 = 257;
+			py8 = 69;
+			MsGrad();
+			}
+			         fill(56, 56, 56);
+			    rect(280,127,54,73,20);
+			            //desk           
+			     fill(138, 4, 4);
+			    rect(219,184,186,73);
+			    
+			              //down the hallway 
+			    {fill(143, 0, 0);
+			        ellipse(btn31.x+25,btn31.y+31,btn31.width,btn31.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("↓",461,482);}
+			        
+			        if (isMouseInside(btn31)){
+			            fill(255, 255, 0,100);
+			        ellipse(btn31.x+25,btn31.y+31,btn31.width,btn31.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("↓",461,482);
+			        }
+			        
+			        
+			jx = 410;
+			jy = 100;
+			janitor();
+			
+			        px = 33;
+			    py = 281;
+			
+			Phil();
+			
+			    if (plungerthanks === true){
+			        
+			        fill(255, 255, 255);
+			    rect(171,78,284,90,10); 
+			        textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("You found my plunger! Thanks, kid! Here \nlet me write a note to Principal. He'll give \nyou a free homework pass or something. \nNow, I have some work to do, so click the \nred circle with the arrow in it. Bye, now!",181,96);
+			    }
+			
+			    if (gradtalk === true){
+			        
+			        fill(255, 255, 255);
+			    rect(btnq1.x,btnq1.y,btnq1.width,btnq1.height,10);
+			        textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("I am busy right now, please go.",51,63);
+			    
+			        textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("CLICK HERE WHEN \nFINISHED READING:",288,452);    
+			    
+			    }
+			    
+			        if (glassesExplanation === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Mr. Sum was looking for his glasses and I \nfound them. Ms. Grad went to take it back \nto him. Oh hi, Mr. Janitor. You want me to \nget to class now? No? Fine, I'll go... ",168,269);
+			    
+			            textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("CLICK HERE WHEN \nFINISHED READING:",288,452);  
+			
+			}
+			
+			if (note === true){
+			        stroke(0, 0, 0);
+			        fill(255, 219, 166);
+			        rect(396,529,25,33);        
+			        textSize(12);
+			        text("😃",400,552);
+			        noStroke();
+			        fill(0, 0, 0,50);
+			        rect(396,533,25,1);
+			        rect(396,537,25,1);
+			        rect(396,541,25,1);
+			        rect(396,545,25,1);
+			        rect(396,549,25,1);
+			        rect(396,553,25,1);
+			        rect(396,557,25,1);
+			        rect(396,561,25,1);
+			        
+			        if (noteE === true){
+			                        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Its a note from the janitor to the principal \nabout my 'good behavior'. It just has a \nsmiley face on it. I don't think the janitor \ncan read or write. Hopefully, the principal \nunderstands this.",176,266);    
+			        }
+			
+			        
+			    }
+			    
+			    mouseClicked = function(){
+			            if (isMouseInside(btn3)) {
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          dollarE = false;
+			          boysRtalk = false;
+			          girlsRtalk = false;
+			          copheytalk = false;
+			          venttalk = false;
+			          glassestalk = false;
+			          plungertalk = false;
+			          vmtalk = false;
+			          cookietalk = false;
+			          cookietalk2 = false;
+			          chadtalk = false;
+			          chadex = false;
+			     }
+			    if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			    if (plunger === true){
+			        
+			    }
+			    
+			    if (isMouseInside(btn31)){
+			        lv6true = true;
+			        gradtrue = false;
+			        fadescene = 400;
+			    }
+			    
+			    if (plungerthanks === true){
+			            if (isMouseInside(btn31)){
+			        lv6true = true;
+			        gradtrue = false;
+			        gradNo = true;
+			        fadescene = 400;
+			    }
+			    }
+			        if (isMouseInside(btnq1)){
+			        lv6true = true;
+			        gradtrue = false;
+			        fadescene = 400;
+			    }
+			    if (isMouseInside(btnI3) && gradtalk  === true && glasses === false){
+			        gradtalk = false;
+			        glasses = true;
+			        glassesExplanation = true;
+			        gradleave = true;
+			    }
+			    if (glassesExplanation === true && plunger === true){
+			        if (isMouseInside(btnI4)){
+			            glassesExplanation = false;
+			            plunger = false;
+			            plungerthanks = true;
+			            note2 = true;
+			        }
+			    }
+			    
+			    
+			    };
+			    
+			    if (note2 === true){
+			        note = true;
+			    }
+			
+			
+			    
+			        if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			        
+			        if (isMouseInside(btnI4)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Plunger",303,34);   
+			        }
+			    }
+			
+			};
+			
+			var sumLno = false;
+			var sumtalk100 = false;
+			
+			var sumclass = function(){
+			
+			        background(166, 168, 167);
+			
+			//walls
+			        {fill(107, 70, 42);
+			    rect(0,-118,600,241); 
+			    rect(-2,12,12,600);
+			    rect(590,0,12,600);
+			    rect(0,590,600,12);}        
+			    
+			    //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    textSize(30);
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(119,459,12,12);
+			    strokeWeight(1);}
+			    //inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			    //rug
+			            {fill(5, 0, 148);
+			            ellipse(312,376,220,220);
+			            fill(39, 0, 194);
+			            ellipse(312,376,210,210);
+			            fill(0, 13, 161);
+			            ellipse(312,376,200,200);
+			            fill(0, 0, 189);
+			            ellipse(312,376,180,180);}
+			            
+			
+			     
+			         fill(56, 56, 56);
+			    rect(280,127,54,73,20);
+			    px4 = 214;
+			    py4 = 126;
+			    MrSum();
+			               
+			    //desk           
+			     fill(138, 4, 4);
+			    rect(219,184,186,73);
+			    if (glasses === true && gradleave === false){
+			        gx=-62;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			        if (glasses === false && gradleave === false){
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			        
+			        
+			    }
+			                fill(255, 255, 255,1);
+			    rect(btn34.x,btn34.y,btn34.width,btn34.height);
+			    //wastebasket
+			    fill(112, 112, 112);
+			    ellipse(189,197,48,12);
+			    quad(166,199,212,199,205,244,174,244);
+			    fill(0, 0, 0);
+			    ellipse(189,197,40,8);
+			    
+			    if (glassestalk === true && glasses === false && gradleave === false){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Don't worry, I'll return them.",201,293);
+			}
+			    fill(128, 53, 53,100);
+			        rect(btn32.x,btn32.y,btn32.width,btn32.height);
+			            fill(255, 255, 255,1);
+			        rect(btn33.x,btn33.y,btn33.width,btn33.height);
+			
+			          //down the hallway left
+			    {fill(143, 0, 0);
+			        ellipse(btn31.x+25,btn31.y+31,btn31.width,btn31.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("↓",461,482);}
+			        
+			        if (isMouseInside(btn31)){
+			            fill(255, 255, 0,100);
+			        ellipse(btn31.x+25,btn31.y+31,btn31.width,btn31.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("↓",461,482);
+			        }
+			
+			        if (isMouseInside(btn34)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Trash",253,34);            
+			        }
+			        if (glasses === true){
+			        if (isMouseInside(btn33)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Glasses",253,34);            
+			        }
+			        }
+			        if (gradleave === true){
+			            glasses = true ;
+			        }
+			
+			        
+			                if (glasses === false && gradleave === false){
+			        if (isMouseInside(btnI3)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Glasses",253,34);            
+			        }
+			        
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			        
+			
+			
+			if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			textFont(createFont(""),12);
+			fill(0, 0, 0);
+			textSize(20);
+			text("z",340,92);
+			fill(0, 0, 0);
+			textSize(15);
+			text("z",336,107);
+			fill(0, 0, 0);
+			textSize(10);
+			text("z",332,116);
+			
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			
+			mouseClicked = function(){
+			            if (isMouseInside(btn3)) {
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          dollarE = false;
+			          boysRtalk = false;
+			          girlsRtalk = false;
+			          copheytalk = false;
+			          venttalk = false;
+			          glassestalk = false;
+			          trashtalk = false;
+			          plungertalk = false;
+			          cookietalk2 = false;
+			     }
+			    if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			    if (isMouseInside(btnI2)){
+			        dollarE = true;
+			    }
+			    if (isMouseInside(btn31)){
+			        sumclasstrue = false;
+			        sumclassleave = true;
+			    }
+			        if (isMouseInside(btn33) && gradleave === false){
+			        glasses = false;
+			    }
+			    if (glasses === false && gradleave === false){
+			        if (isMouseInside(btnI3)){
+			            glassestalk = true;
+			        }
+			    }
+			    if (isMouseInside(btn34)){
+			        trashtalk = true;
+			        plunger = true;
+			    }
+			    if (plunger === true){
+			        if (isMouseInside(btnI4)){
+			            plungertalk = true;
+			        }
+			    }
+			    if (isMouseInside(btnI5)){
+			        cookietalk2 = true;
+			    }
+			
+			};
+			
+			if (plungertalk === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("What am I to say about a plunger? There's \nnothing special about it... other than that I \nfound it in a trash can. But you know that. ",166,278);    
+			        }
+			
+			    if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			        
+			        if (isMouseInside(btnI4)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Plunger",253,34);   
+			        }
+			    }
+			
+			    if (trashtalk === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("There was a plunger in there...weird! I put it \nin my inventory. If I meet any bullies, I'll \nuse this dangerous weapon to scare them \naway! Who knows where its been! Bwa ha \nha-oops! Don't want to wake Mr. Sum up.",166,264);
+			    }
+			
+			    if (glassestalk === true){
+			                        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Don't worry, I'll return them.",205,295);
+			    }
+			    if (cookieT === false){
+			      if (dollarF === true && chadblock === true){  
+			         if (dollar === true){
+			        fill(24, 133, 7);
+			        rect(168,537,36,18);
+			        fill(194, 194, 194);
+			        ellipse(186,546,15,15);
+			
+			    }
+			
+			        if (dollarE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Nothing that costs only a dollar is not \n  worth having. What did I just say?",182,286);
+			    
+			
+			
+			        
+			
+			    }            
+			    }
+			        if (cookieT === false){
+			if (dollarF === true && chadblock === true){
+			    dollar = true;
+			}
+			if (dollarF === true && chadblock === true){
+			          if (isMouseInside(btnI2)) {
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Dollar",253,34);
+			  }
+			        }
+			    if (dollarF === true){
+			        if (dollarE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Nothing that costs only a dollar is not \n  worth having. What did I just say?",182,286);
+			    }
+			    }
+			    }
+			    }
+			
+			if (cookieT === true){
+			        fill(179, 131, 43);
+			        ellipse(354,550,25,23);
+			        fill(0, 0, 0);
+			        ellipse(354,550,5,3);
+			        fill(0, 0, 0);
+			        ellipse(362,548,5,3);
+			        fill(0, 0, 0);
+			        ellipse(362,554,5,3);
+			        fill(0, 0, 0);
+			        ellipse(349,548,5,3);
+			        fill(0, 0, 0);
+			        ellipse(352,556,5,3);
+			        fill(0, 0, 0);
+			        ellipse(354,544,5,3);
+			        
+			        if (isMouseInside(btnI5)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Cookie",253,34);   
+			        }
+			        if (cookietalk2 === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("I can't believe I spent a dollar on a \ncookie. Worse, I bought a chocolate \nchip cookie! I'm allergic to chocolate!",182,279);
+			    
+			        }
+			    }
+			    
+			
+			
+			};
+			
+			var lv6 = function(){
+			    background(166, 168, 167);
+			
+			        //wall
+			    fill(107, 70, 42);
+			    rect(0,0,600,241);         
+			           fill(255, 255, 255,1);
+			    rect(btnchad.x,btnchad.y,btnchad.width,btnchad.height,10);
+			    //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    textSize(30);
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(124,491,12,12);
+			    strokeWeight(1);}
+			    //inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			//vending machine
+			{fill(0, 0, 0);
+			    rect(btnvm.x,btnvm.y,btnvm.width,btnvm.height,10);
+			    fill(110, 230, 230);
+			    rect(182,131,70,87,12);
+			    fill(148, 148, 148);
+			    rect(182,221,70,15,2);}
+			    
+			
+			    
+			
+			            if (cookieT === false){
+			        if (dollarF === true){
+			          if (isMouseInside(btnI2)) {
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Dollar",253,34);
+			  }
+			        }
+			        }
+			
+			    //Mr. Sum's door 
+			    {noStroke();
+			fill(115, 102, 17);
+			        rect(btn30.x,btn30.y,btn30.width,btn30.height);
+			
+			    fill(10, 169, 204);
+			    rect(62,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(111,185,12,12);
+			    textSize(14);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Mr.Sum",68,153);}  
+			        //Ms. Grad's door 
+			    {noStroke();
+			fill(115, 102, 17);
+			        rect(btngd.x,btngd.y,btngd.width,btngd.height);
+			
+			    fill(10, 169, 204);
+			    rect(429,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(482,185,12,12);
+			    textSize(14);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Ms.Grad",432,153);} 
+			
+			
+			    //down the hallway right
+			    {fill(143, 0, 0);
+			        ellipse(btn28.x+25,btn28.y+25,btn28.width,btn28.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",538,344);}
+			          //down the hallway left
+			    {fill(143, 0, 0);
+			        ellipse(btn29.x+25,btn29.y+25,btn29.width,btn29.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);}
+			        
+			        
+			
+			  //right
+			      if (isMouseInside(btn28)) {
+			         {fill(255, 255, 0,100);
+			        ellipse(btn28.x+25,btn28.y+25,btn28.width,btn28.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",539,344);}
+			    }
+			    //left
+			    if (isMouseInside(btn29)) {
+			         fill(255, 255, 0,100);
+			        
+			        ellipse(btn29.x+25,btn29.y+25,btn29.width,btn29.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);
+			    }
+			    if (isMouseInside(btn30)){
+			                        textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Mr. Sum's Classroom",186,34);
+			    
+			    }
+			    if (chadblock === false){
+			    
+			        if (isMouseInside(btngd)){
+			                        textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Ms. Grad's Classroom",186,34);
+			    }
+			    }
+			
+			        if (isMouseInside(btnvm)){
+			                        textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Vending Machine",209,34);
+			    }
+			    
+			    
+			                if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Glasses",253,34);            
+			        }
+			        
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        strokeWeight(1);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			    
+			
+			
+			if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			    if (plungertalk === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("What am I to say about a plunger? There's \nnothing special about it... other than that I \nfound it in a trash can. But you know that. ",166,278);    
+			        }
+			        
+			        
+			
+			    if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			        
+			        if (isMouseInside(btnI4)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Plunger",253,34);   
+			        }
+			    }
+			    if (vmtalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Um... there are only cookies in there. \nUnwrapped! That's so gross! I don't \nknow how sanitary that is. I wouldn't \nbuy it. It's a dollar. What a rip-off.",180,276);
+			}
+			if (glassestalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Don't worry, I'll return them.",201,293);
+			}
+			
+			
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			if (chadblock === true){
+			
+			px7=371;
+			py7 = 133;
+			Chad();
+			
+			    if (isMouseInside(btnchad)){
+			    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Chad",288,34);
+			    }
+			        
+			         if (chadtalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Chad is blocking the door to \nMs. Grad's room. A little background \non Chad: He loves eating. I know it's \na shocker, right?",165,270);
+			
+			         }
+			}      
+			    if (sumNo === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("I just stole Mr. Sum's glasses and also \nlied to Ms. Grad about it. And they are \nboth in that room. There's no way I'm \ngoing in there.",165,270);
+			
+			    }
+			
+			                if (chadex === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Want this cookie, Chad? Then move out \nof the way. Yep, that's very helpful. \nThanks! I hope that was worth a dollar...",177,279);
+			        }
+			
+			        
+			        if (gradNoE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Think about it. I just stole Mr. Sum's \nglasses and also lied to Ms. Grad about \nit. And that's Ms. Grad's room!. There's \nno way I'm going in there.",177,273);
+			        }
+			        
+			        if (lv7No1 === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Let's try and not miss anything in these \nparts of the school. Before we go over \nthere, we need to get everything from \nhere, you get what I'm saying? Good.",178,273);
+			        }
+			        
+			    if (note === true){
+			        stroke(0, 0, 0);
+			        fill(255, 219, 166);
+			        rect(396,529,25,33);        
+			        textSize(12);
+			        text("😃",400,552);
+			        noStroke();
+			        fill(0, 0, 0,50);
+			        rect(396,533,25,1);
+			        rect(396,537,25,1);
+			        rect(396,541,25,1);
+			        rect(396,545,25,1);
+			        rect(396,549,25,1);
+			        rect(396,553,25,1);
+			        rect(396,557,25,1);
+			        rect(396,561,25,1);
+			        
+			        if (noteE === true){
+			                        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Its a note from the janitor to the principal \nabout my 'good behavior'. It just has a \nsmiley face on it. I don't think the janitor \ncan read or write. Hopefully, the principal \nunderstands this.",176,266);    
+			        }
+			
+			        
+			    }
+			    
+			mouseClicked = function(){
+			            if (isMouseInside(btn3)) {
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          dollarE = false;
+			          boysRtalk = false;
+			          girlsRtalk = false;
+			          copheytalk = false;
+			          venttalk = false;
+			          glassestalk = false;
+			          plungertalk = false;
+			          vmtalk = false;
+			          cookietalk = false;
+			          cookietalk2 = false;
+			          chadtalk = false;
+			          chadex = false;
+			          sumNo = false;
+			          gradNoE = false;
+			          lv7No1 = false;
+			          noteE = false;
+			     }
+			    if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			    if (plunger === true){
+			        if (isMouseInside(btnI4)){
+			            plungertalk = true;
+			        }
+			    }
+			        if (vmtalk === true && isMouseInside(btnI2) && dollarF === true && cookieT === false){
+			            cookietalk = true;
+			            cookieT = true;
+			            dollarF = false;
+			        }
+			
+			    
+			    if (isMouseInside(btn29)){
+			        lv6true = false;
+			        lv5true = true;
+			        fadescene = 400;
+			    }
+			    if (plungerthanks === false){
+			    if (isMouseInside(btn30)){
+			        sumclasstrue = true;
+			        sumclassleave = false;
+			         playSound(getSound("rpg/door-open"));
+			    }
+			    }
+			        if (plungerthanks === true){
+			    if (isMouseInside(btn30)){
+			        sumNo = true;
+			    }
+			    }
+			        if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			            glassestalk = true;
+			        }
+			    }
+			
+			        if (isMouseInside(btnI2)){
+			        dollarE = true;
+			    }        
+			    if (isMouseInside(btnvm)){
+			        vmtalk = true;
+			    }
+			    if (isMouseInside(btnI5)){
+			        cookietalk2 = true;
+			    }
+			    if (chadblock === false && gradNo === false){
+			    
+			    if (isMouseInside(btngd)){
+			        gradtrue = true;
+			        playSound(getSound("rpg/door-open"));
+			    }
+			    }
+			    if (gradNo === true){
+			        if (isMouseInside(btngd)){
+			            gradNoE = true;
+			        }
+			    }
+			    if (chadblock === true){
+			        if (isMouseInside(btnchad)){
+			            chadtalk = true;
+			            playSound(getSound("rpg/giant-yah"));
+			        }
+			        if (chadtalk === true && isMouseInside(btnI5) && cookieT === true){
+			            chadblock = false;
+			            chadex = true;
+			            cookieT = false;
+			            dollarF = false;
+			             playSound(getSound("rpg/giant-yah"));
+			            
+			        }
+			
+			    }     if (plungerthanks === false){
+			    if (isMouseInside(btn28) && lv6true === true){
+			        lv7No1 = true;
+			        
+			    }
+			    }
+			
+			    if (plungerthanks === true){
+			        
+			    if (isMouseInside(btn28) && lv6true === true){
+			        lv6true = false;
+			        lv7true = true;
+			        fadescene = 400;
+			    }
+			    }
+			
+			    if (isMouseInside(btnI6) && note === true){
+			        noteE = true;
+			    }
+			};
+			
+			
+			
+			
+			    if (cookieT === false && chadblock === true){
+			      if (dollarF === true){  
+			         if (dollar === true){
+			        fill(24, 133, 7);
+			        rect(168,537,36,18);
+			        fill(194, 194, 194);
+			        ellipse(186,546,15,15);
+			
+			    }
+			
+			
+			
+			
+			        if (dollarE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Nothing that costs only a dollar is not \n  worth having. What did I just say?",182,286);
+			    
+			
+			
+			        
+			
+			    }            
+			    }
+			        if (cookieT === false){
+			if (dollarF === true && chadblock === true){
+			    dollar = true;
+			
+			}
+			if (dollarF === true && chadblock === true){
+			          if (isMouseInside(btnI2)) {
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Dollar",253,34);
+			  }
+			        }
+			    if (dollarF === true){
+			        if (dollarE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Nothing that costs only a dollar is not \n  worth having. What did I just say?",182,286);
+			    }
+			    }
+			    }
+			    }
+			    if (cookieT === true){
+			        fill(179, 131, 43);
+			        ellipse(354,550,25,23);
+			        fill(0, 0, 0);
+			        ellipse(354,550,5,3);
+			        fill(0, 0, 0);
+			        ellipse(362,548,5,3);
+			        fill(0, 0, 0);
+			        ellipse(362,554,5,3);
+			        fill(0, 0, 0);
+			        ellipse(349,548,5,3);
+			        fill(0, 0, 0);
+			        ellipse(352,556,5,3);
+			        fill(0, 0, 0);
+			        ellipse(354,544,5,3);
+			        
+			        if (isMouseInside(btnI5)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Cookie",253,34);   
+			        }
+			        if (cookietalk2 === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("I can't believe I spent a dollar on a \ncookie. Worse, I bought a chocolate \nchip cookie! I'm allergic to chocolate!",182,279);
+			    
+			        }
+			        
+			
+			    }
+			    
+			if (cookietalk === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("I can't believe I just spent a dollar on a \ncookie. Worse, I bought a chocolate \nchip cookie! I'm allergic to chocolate!",182,279);
+			    
+			        }
+			        
+			            fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			
+			};
+			
+			var lv5 = function(){
+			    background(166, 168, 167);
+			        //wall
+			    fill(107, 70, 42);
+			    rect(0,0,600,241);         
+			    
+			    //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    textSize(30);
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(71,491,12,12);
+			    strokeWeight(1);}
+			    //inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			//lockers left
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(-146,127,266,114);
+			
+			rect(-15,132,38,105);
+			rect(30,132,38,105);
+			rect(75,132,38,105);
+			
+			
+			ellipse(86,190,11,7);
+			ellipse(-8,190,11,7);
+			ellipse(42,190,11,7);
+			
+			
+			rect(-9,140,22,4);
+			rect(-9,146,22,4);
+			rect(-9,152,22,4);
+			
+			rect(37,140,22,4);
+			rect(37,146,22,4);
+			rect(37,152,22,4);
+			
+			rect(83,140,22,4);
+			rect(83,146,22,4);
+			rect(83,152,22,4);
+			
+			
+			noStroke();
+			}
+			
+			stroke(107, 105, 105);
+			strokeWeight(6);
+			fill(0, 0, 0);
+			rect(512,186,55,46);
+			noStroke();
+			fill(255, 255, 255);
+			rect(515,199,34,31,30);
+			
+			fill(138, 133, 133);
+			
+			rect(512,195,55,4);
+			rect(512,187,55,4);
+			rect(512,203,55,4);
+			rect(512,211,55,4);
+			rect(512,219,55,4);
+			rect(512,227,55,4);
+			
+			
+			
+			    {fill(143, 0, 0);
+			        ellipse(btn23.x+25,btn23.y+25,btn23.width,btn23.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",538,344);}
+			          //down the hallway left
+			    {fill(143, 0, 0);
+			        ellipse(btn24.x+25,btn24.y+25,btn24.width,btn24.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);}
+			
+			    if (isMouseInside(btn23)) {
+			         {fill(255, 255, 0,100);
+			        ellipse(btn10.x+25,btn10.y+25,btn10.width,btn10.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",539,344);}
+			    }
+			    if (isMouseInside(btn24)) {
+			         fill(255, 255, 0,100);
+			        
+			        ellipse(btn15.x+25,btn15.y+25,btn15.width,btn15.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);
+			    }
+			    if (isMouseInside(btn22)) {
+			                   textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Lockers",253,34);   
+			  }
+			    if (isMouseInside(btn25)) {
+			                         textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Mr. Cophey's Classroom",168,34);  
+			  }
+			    if (isMouseInside(btn26)) {
+			    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Boys Restroom",219,34);  
+			    }
+			    if (isMouseInside(btn27)) {
+			    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Girls Restroom",219,34);  
+			    }
+			    
+			    if (isMouseInside(btnvent)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Vent",262,34);
+			    }
+			if (cookieT === false){
+			      if (dollarF === true && chadblock === true){  
+			         if (dollar === true){
+			        fill(24, 133, 7);
+			        rect(168,537,36,18);
+			        fill(194, 194, 194);
+			        ellipse(186,546,15,15);
+			
+			    }
+			
+			        if (dollarE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Nothing that costs only a dollar is not \n  worth having. What did I just say?",182,286);
+			    
+			
+			
+			        
+			
+			    }            
+			    }
+			        if (cookieT === false){
+			if (dollarF === true){
+			    dollar = true;
+			
+			}
+			if (dollarF === true && chadblock === true){
+			          if (isMouseInside(btnI2)) {
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Dollar",253,34);
+			  }
+			        }
+			    if (dollarF === true){
+			        if (dollarE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Nothing that costs only a dollar is not \n  worth having. What did I just say?",182,286);
+			    }
+			    }
+			    }
+			    }
+			
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			
+			                if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Glasses",253,34);            
+			        }
+			        
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        strokeWeight(1);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			
+			if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			if (glassestalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Don't worry, I'll return them.",201,293);
+			}
+			    if (plungertalk === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("What am I to say about a plunger? There's \nnothing special about it... other than that I \nfound it in a trash can. But you know that. ",166,278);    
+			        }
+			
+			    if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			        
+			        if (isMouseInside(btnI4)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Plunger",253,34);   
+			        }
+			    }
+			 if (lockerdialogue2 === true) {
+			                 fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Um... not my locker.",224,295);
+			  }
+			
+			  if (copheytalk === true){
+			    fill(255, 255, 255);
+			    rect(162,248,284,90,10);
+			                 
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("The lights are off. Mr. Cophey must be \nsick today. That's a relief. He doesn't like \nme at all. I shot a rubber band at his face \nonce and he dropped his cup of coffee. \nOn his grade sheet. In front of the class. ",173,265);
+			  }
+			  if (boysRtalk === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);
+			                 
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("I don't have to go. You don't want to go in \nthere. Think of a twister in a mud pit. Only \nit's not mud.",170,282);  
+			  }
+			  if (girlsRtalk === true){
+			          fill(255, 255, 255);
+			    rect(162,248,284,90,10);
+			                 
+			    textSize(16);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Seriously? If I went inside there, you \nwould hear a lot of screaming, mostly \nfrom me.",173,281);
+			  }
+			    if (venttalk === true){
+			          fill(255, 255, 255);
+			    rect(162,248,284,90,10);
+			                 
+			    textSize(16);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("There's a roll of toilet paper in there. \nBut it's impossible to get it without \nsomething to take the vent cover off. \nGot a screwdriver? I could use it.",173,270);
+			  }
+			      if (dontgotolv4 === true){
+			          fill(255, 255, 255);
+			    rect(162,248,284,90,10);
+			                 
+			    textSize(16);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("There's nothing there that we need \nanymore. Let's move forward. \nRemember, the only way out of the \nschool is the door farthest to the right.",173,270);
+			  }
+			  
+			  
+			    //Mr. Cophey's door 
+			    {noStroke();
+			    fill(184, 164, 184);
+			        rect(btn25.x,btn25.y,btn25.width,btn25.height);
+			
+			    fill(115, 102, 17);
+			    rect(156,118,77,123);
+			    fill(10, 84, 102);
+			    rect(164,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(218,185,12,12);
+			    textSize(14);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Mr.\nCophey",173,144);}  
+			
+			    
+			    //restroom-boys
+			{        fill(156, 154, 139);
+			    rect(299,118,77,123);
+			    fill(0, 34, 255);
+			    ellipse(336,155,44,44);
+			        fill(0, 0, 0);
+			    ellipse(359,185,12,12);
+			                 
+			                 textSize(15);
+			            textFont(createFont(""));
+			    fill(255, 255, 255);
+			    text("boys",320,160);}
+			    //restroom-girls
+			{        fill(156, 154, 139);
+			    rect(405,118,77,123);
+			
+			        fill(0, 0, 0);
+			    ellipse(469,185,12,12);
+			        fill(0, 34, 255);
+			    ellipse(444,155,44,44);                     
+			    textSize(15);
+			            textFont(createFont(""));
+			    fill(255, 255, 255);
+			    text("girls",429,158);
+			   noStroke();}
+			   
+			   if (note === true){
+			        stroke(0, 0, 0);
+			        strokeWeight(1);
+			        fill(255, 219, 166);
+			        rect(396,529,25,33);        
+			        textSize(12);
+			        text("😃",400,552);
+			        noStroke();
+			        fill(0, 0, 0,50);
+			        rect(396,533,25,1);
+			        rect(396,537,25,1);
+			        rect(396,541,25,1);
+			        rect(396,545,25,1);
+			        rect(396,549,25,1);
+			        rect(396,553,25,1);
+			        rect(396,557,25,1);
+			        rect(396,561,25,1);
+			        
+			        if (noteE === true){
+			                        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Its a note from the janitor to the principal \nabout my 'good behavior'. It just has a \nsmiley face on it. I don't think the janitor \ncan read or write. Hopefully, the principal \nunderstands this.",176,266);    
+			        }
+			
+			        
+			    }
+			   
+			   
+			mouseClicked = function(){
+			    if (isMouseInside(btn24)){
+			        if (dollarF === false && cookieT === false){
+			        lv5true= false;
+			        lv4true = true;
+			        fadescene = 400;
+			        }
+			
+			    }
+			
+			    if (isMouseInside(btnI2)){
+			        dollarE = true;
+			    }
+			        if (isMouseInside(btn3)) {
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          dollarE = false;
+			          boysRtalk = false;
+			          girlsRtalk = false;
+			          copheytalk = false;
+			          venttalk = false;
+			          glassestalk = false;
+			          plungertalk = false;
+			          dontgotolv4 = false;
+			          cookietalk2 = false;
+			          noteE = false;
+			          
+			     }
+			     if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			            glassestalk = true;
+			        }
+			    }
+			    
+			     if (isMouseInside(btnI5)){
+			         cookietalk2 = true;
+			     }
+			     if (isMouseInside(btn25)){
+			         copheytalk = true;
+			     }
+			     if (isMouseInside(btn26)){
+			         boysRtalk = true;
+			     }
+			     if (isMouseInside(btn27)){
+			         girlsRtalk = true;
+			     }
+			     
+			         if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			        if (isMouseInside(btn22)){
+			         lockerdialogue2 = true;
+			     }
+			     if (isMouseInside(btnvent)){
+			         venttalk = true;
+			     }
+			     
+			     if (isMouseInside(btn23)){
+			         lv6true = true;
+			         lv5true = false;
+			         fadescene = 400;
+			     }
+			    
+			     if (isMouseInside(btn24)){
+			         if (dollarF ===true){
+			         dontgotolv4 = true;
+			         
+			     }
+			        if (dollarF === false){
+			            lv4true = true;
+			            fadescene = 400;
+			        }
+			     }
+			     
+			     
+			     if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			            glassestalk = true;
+			        }
+			    }
+			    if (plunger === true){
+			        if (isMouseInside(btnI4)){
+			            plungertalk = true;
+			        }
+			    }
+			    if (isMouseInside(btnI6)){
+			        noteE = true;
+			    }
+			    
+			
+			};
+			
+			if (cookieT === true){
+			        fill(179, 131, 43);
+			        ellipse(354,550,25,23);
+			        fill(0, 0, 0);
+			        ellipse(354,550,5,3);
+			        fill(0, 0, 0);
+			        ellipse(362,548,5,3);
+			        fill(0, 0, 0);
+			        ellipse(362,554,5,3);
+			        fill(0, 0, 0);
+			        ellipse(349,548,5,3);
+			        fill(0, 0, 0);
+			        ellipse(352,556,5,3);
+			        fill(0, 0, 0);
+			        ellipse(354,544,5,3);
+			        
+			        if (isMouseInside(btnI5)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Cookie",253,34);   
+			        }
+			        if (cookietalk2 === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("I can't believe I spent a dollar on a \ncookie. Worse, I bought a chocolate \nchip cookie! I'm allergic to chocolate!",182,279);
+			    
+			        }
+			    }
+			    
+			         
+			        fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;     
+			};
+			
+			var MsQuinRoom2 = function(){
+			    background(166, 168, 167);
+			
+			
+			
+			//walls
+			        {fill(107, 70, 42);
+			    rect(0,-118,600,241); 
+			    rect(-2,12,12,600);
+			    rect(590,0,12,600);
+			    rect(0,590,600,12);}
+			        //inventory    
+			        {fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			        //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(49,452,12,12);
+			    strokeWeight(1);}
+			    //rug
+			            {fill(148, 0, 7);
+			            ellipse(312,376,220,220);
+			            fill(194, 0, 0);
+			            ellipse(312,376,210,210);
+			            fill(161, 0, 0);
+			            ellipse(312,376,200,200);
+			            fill(189, 0, 0);
+			            ellipse(312,376,180,180);}
+			    
+			
+			
+			            
+			            
+			            
+			    
+			    
+			    fill(56, 56, 56);
+			    rect(284,127,54,73,20);
+			    px3 = 219;
+			    py3 = 117;
+			    MsQuin1();
+			    fill(138, 4, 4);
+			    rect(219,184,186,73);
+			    
+			
+			
+			    if (glasses === false){
+			
+			        
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        strokeWeight(1);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			    if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			
+			    }
+			
+			    
+			    mouseClicked = function(){
+			    if(isMouseInside(btn16)){
+			        dollartalk = false;
+			        quinclassroom = false;
+			        lv4true2 = true;
+			    }
+			        
+			    };
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			
+			};
+			
+			var MsQuinRoom = function(){
+			    quarterinventory2 = false;
+			    background(166, 168, 167);
+			
+			
+			
+			//walls
+			        {fill(107, 70, 42);
+			    rect(0,-118,600,241); 
+			    rect(-2,12,12,600);
+			    rect(590,0,12,600);
+			    rect(0,590,600,12);}
+			        //inventory    
+			        {fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			        //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(49,452,12,12);
+			    strokeWeight(1);}
+			    //rug
+			            {fill(148, 0, 7);
+			            ellipse(312,376,220,220);
+			            fill(194, 0, 0);
+			            ellipse(312,376,210,210);
+			            fill(161, 0, 0);
+			            ellipse(312,376,200,200);
+			            fill(189, 0, 0);
+			            ellipse(312,376,180,180);}
+			    
+			    fill(255, 255, 255);
+			    rect(11,19,284,90,10);
+			    if (quinquestion === true){
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Choose \none\nanswer:",161,280);
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("What are you doing in here?!?",50,65);
+			    {fill(255, 255, 255);
+			    rect(232,267,257,46,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Um, what are YOU doing in here?",248,295);
+			                
+			                
+			    fill(255, 255, 255);
+			    rect(232,317,257,46,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Someone set the cafeteria on fire!",255,346);
+			    
+			    
+			    fill(255, 255, 255);
+			    rect(232,368,257,46,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Isn't it class time?",305,393);
+			        
+			    fill(255, 255, 255);
+			    rect(232,420,257,46,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("2 + 2 = 5",331,446);}
+			    }
+			
+			            
+			            
+			            
+			    
+			    
+			    fill(56, 56, 56);
+			    rect(284,127,54,73,20);
+			    px3 = 219;
+			    py3 = 117;
+			    MsQuin1();
+			    fill(138, 4, 4);
+			    rect(219,184,186,73);
+			
+			
+			    if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			        
+			    }
+			if (glasses === false){
+			
+			        
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        strokeWeight(1);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			    
+			    mouseClicked = function(){
+			
+			        if (isMouseInside(btn16)) {
+			            lv4true = true;
+			            quinclassroom = false;
+			            quinquestion = true;
+			            quinresponse = false;
+			            quinresponse2 = false;
+			            quinresponse3 = false;
+			            fadescene = 400;
+			            
+			        }
+			        
+			        
+			        if (isMouseInside(btn17)){
+			            quinquestion = false;
+			            quinresponse = true;
+			        }
+			        if (isMouseInside(btn18)){
+			            quinquestion = false;
+			            quinresponse2 = true;
+			        }
+			        if (isMouseInside(btn19)){
+			            quinquestion = false;
+			            quinresponse3 = true;
+			        }
+			        if (isMouseInside(btn20)){
+			            quinquestion = false;
+			            quinyes = true;
+			            dollartalk = true;
+			            dollarF = true;
+			             playSound(getSound("rpg/coin-jingle"));
+			        }
+			        
+			    };
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			
+			};
+			
+			var lv4_2 = function(){
+			    quarterinventory = false;
+			    quinresponse = false;
+			    if (dollarF === true){
+			    dollar = true;
+			    }
+			    background(166, 168, 167);
+			        //wall
+			    fill(107, 70, 42);
+			    rect(0,0,600,241); 
+			    //inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			//lockers left
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(-146,127,266,114);
+			
+			rect(-15,132,38,105);
+			rect(30,132,38,105);
+			rect(75,132,38,105);
+			
+			
+			ellipse(86,190,11,7);
+			ellipse(-8,190,11,7);
+			ellipse(42,190,11,7);
+			
+			
+			rect(-9,140,22,4);
+			rect(-9,146,22,4);
+			rect(-9,152,22,4);
+			
+			rect(37,140,22,4);
+			rect(37,146,22,4);
+			rect(37,152,22,4);
+			
+			rect(83,140,22,4);
+			rect(83,146,22,4);
+			rect(83,152,22,4);
+			
+			
+			noStroke();
+			}
+			//lockers right
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(337,127,266,114);
+			
+			rect(345,132,38,105);
+			rect(390,132,38,105);
+			rect(436,132,38,105);
+			rect(482,132,38,105);
+			rect(530,132,38,105);
+			rect(578,132,38,105);
+			
+			ellipse(375,190,11,7);
+			ellipse(419,190,11,7);
+			ellipse(466,190,11,7);
+			ellipse(512,190,11,7);
+			ellipse(560,190,11,7);
+			
+			rect(353,140,22,4);
+			rect(353,146,22,4);
+			rect(353,152,22,4);
+			
+			rect(399,140,22,4);
+			rect(399,146,22,4);
+			rect(399,152,22,4);
+			
+			rect(445,140,22,4);
+			rect(445,146,22,4);
+			rect(445,152,22,4);
+			
+			rect(491,140,22,4);
+			rect(491,146,22,4);
+			rect(491,152,22,4);
+			
+			rect(538,140,22,4);
+			rect(538,146,22,4);
+			rect(538,152,22,4);
+			
+			rect(585,140,22,4);
+			rect(585,146,22,4);
+			rect(585,152,22,4);
+			noStroke();
+			}
+			
+			         //Ms. Quin's door 
+			    {noStroke();
+			    fill(184, 164, 184);
+			        rect(btn12.x,btn12.y,btn12.width,btn12.height);
+			
+			    fill(115, 102, 17);
+			    rect(172,118,77,123);
+			    fill(86, 184, 209);
+			    rect(179,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(237,185,12,12);
+			    textSize(15);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Ms. \nQuin",190,144);}
+			
+			  if (isMouseInside(btn12)) {
+			          textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Mr. Quin's Classroom",180,34);
+			
+			
+			  }
+			  if (dollarF === true){
+			  if (isMouseInside(btnI2)) {
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Dollar",253,34);
+			  }
+			  }
+			  if (isMouseInside(btn21)){
+			                   textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Lockers",253,34);   
+			  }
+			    if (isMouseInside(btn22)){
+			                   textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Lockers",253,34);   
+			  }
+			  if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Glasses",253,34);            
+			        }
+			  }
+			  
+			  if (plungertalk === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("What am I to say about a plunger? There's \nnothing special about it... other than that I \nfound it in a trash can. But you know that. ",166,278);    
+			        }
+			
+			    if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			        
+			        if (isMouseInside(btnI4)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Plunger",253,34);   
+			        }
+			    }
+			  
+			if (glasses === false){
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			
+			  
+			          //down the hallway right
+			    {fill(143, 0, 0);
+			        ellipse(btn14.x+25,btn14.y+25,btn14.width,btn14.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",538,344);}
+			          //down the hallway left
+			    {fill(143, 0, 0);
+			        ellipse(btn15.x+25,btn15.y+25,btn15.width,btn15.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);}
+			
+			
+			    if (isMouseInside(btn14)) {
+			         {fill(255, 255, 0,100);
+			        ellipse(btn10.x+25,btn10.y+25,btn10.width,btn10.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",539,344);}
+			    }
+			    if (isMouseInside(btn15)) {
+			         fill(255, 255, 0,100);
+			        
+			        ellipse(btn15.x+25,btn15.y+25,btn15.width,btn15.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);
+			    }
+			    //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(49,491,12,12);
+			    strokeWeight(1);}
+			
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			
+			if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			
+			if (dontgotolv2 === true){
+			            fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Let's think about moving forward, not \nbackwards. There has to be something \nhere that can help us escape... The only \nway into the school is the door the farthest \nto the right of the school. But its locked.",168,262);
+			}
+			
+			 if (lockerdialogue2 === true) {
+			                 fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Um... not my locker.",224,295);
+			  }
+			mouseClicked = function(){
+			    if (isMouseInside(btn3)) {
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          dollarE = false;
+			          glassestalk = false;
+			          plungertalk = false;
+			          
+			     }
+			     if (isMouseInside(btn14)){
+			         lv5true = true;
+			         fadescene = 400;
+			     }
+			    if (isMouseInside(btn15)){
+			        dontgotolv2 = true;
+			
+			     }
+			    if (isMouseInside(btn12)){
+			    quinblock = true;
+			    }
+			    if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			    if (isMouseInside(btnI2)){
+			        dollarE = true;
+			    }
+			    if (isMouseInside(btn21)){
+			         lockerdialogue2 = true;
+			     }
+			         if (isMouseInside(btn22)){
+			         lockerdialogue2 = true;
+			     }
+			     if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			            glassestalk = true;
+			        }
+			    }
+			    if (plunger === true){
+			        if (isMouseInside(btnI4)){
+			            plungertalk = true;
+			        }
+			    }
+			};
+			
+			if (quinblock === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Um, I escaped Ms. Quin's wrath once, I'm \nnot risking my life again. You might not \nhave known this before, but Ms. Quin is \nkinda crazy. So, let's not go in there again.",168,270);
+			
+			}
+			
+			if (glassestalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Don't worry, I'll return them.",201,293);
+			}
+			
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			
+			};
+			
+			var lv4 = function(){
+			    quarterinventory = false;
+			    quinresponse = false;
+			    
+			    background(166, 168, 167);
+			        //wall
+			    fill(107, 70, 42);
+			    rect(0,0,600,241); 
+			    //inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			//lockers left
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(-146,127,266,114);
+			
+			rect(-15,132,38,105);
+			rect(30,132,38,105);
+			rect(75,132,38,105);
+			
+			
+			ellipse(86,190,11,7);
+			ellipse(-8,190,11,7);
+			ellipse(42,190,11,7);
+			
+			
+			rect(-9,140,22,4);
+			rect(-9,146,22,4);
+			rect(-9,152,22,4);
+			
+			rect(37,140,22,4);
+			rect(37,146,22,4);
+			rect(37,152,22,4);
+			
+			rect(83,140,22,4);
+			rect(83,146,22,4);
+			rect(83,152,22,4);
+			
+			
+			noStroke();
+			}
+			//lockers right
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(338,127,266,114);
+			
+			rect(345,132,38,105);
+			rect(390,132,38,105);
+			rect(436,132,38,105);
+			rect(482,132,38,105);
+			rect(530,132,38,105);
+			rect(578,132,38,105);
+			
+			ellipse(375,190,11,7);
+			ellipse(419,190,11,7);
+			ellipse(466,190,11,7);
+			ellipse(512,190,11,7);
+			ellipse(560,190,11,7);
+			
+			rect(353,140,22,4);
+			rect(353,146,22,4);
+			rect(353,152,22,4);
+			
+			rect(399,140,22,4);
+			rect(399,146,22,4);
+			rect(399,152,22,4);
+			
+			rect(445,140,22,4);
+			rect(445,146,22,4);
+			rect(445,152,22,4);
+			
+			rect(491,140,22,4);
+			rect(491,146,22,4);
+			rect(491,152,22,4);
+			
+			rect(538,140,22,4);
+			rect(538,146,22,4);
+			rect(538,152,22,4);
+			
+			rect(585,140,22,4);
+			rect(585,146,22,4);
+			rect(585,152,22,4);
+			noStroke();
+			}
+			
+			         //Ms. Quin's door 
+			    {noStroke();
+			    fill(184, 164, 184);
+			        rect(btn12.x,btn12.y,btn12.width,btn12.height);
+			
+			    fill(115, 102, 17);
+			    rect(172,118,77,123);
+			    fill(86, 184, 209);
+			    rect(179,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(237,185,12,12);
+			    textSize(15);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Ms. \nQuin",190,144);}
+			
+			  if (isMouseInside(btn12)) {
+			          textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Mr. Quin's Classroom",180,34);
+			
+			
+			  }
+			
+			  if (quarterin === true) {
+			        fill(148, 148, 148);
+			    ellipse(130,547,19,18);
+			    textSize(12);
+			        fill(0, 0, 0);
+			    text("25",123,551);
+			    }
+			  if (quarterinventory === true) {
+			    fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Yes, that's a quarter. I'm sure I said that \nbefore. I don't think right now is the right \ntime to use it. I mean, what can I do with \nit? Flip it and call heads? But for the \nrecord, I always choose heads.",168,262);
+			
+			  }
+			  
+			  if (glasses === false){
+			        if (isMouseInside(btnI3)){
+			                textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Glasses",253,34);            
+			        }
+			        
+			        gx=-74;
+			        gy = 317;
+			        fill(0, 0, 0);
+			        rect(gx+300,gy+229,37,2);
+			        stroke(0, 0, 0);
+			        strokeWeight(1);
+			        noFill();
+			        rect(gx+302,gy+231,15,5);
+			        rect(gx+320,gy+231,15,5);
+			        rect(gx+335,gy+219,1,10);
+			        rect(gx+300,gy+219,1,10);
+			        
+			        noStroke();
+			    }
+			    if (glassestalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Don't worry, I'll return them.",201,293);
+			}
+			  
+			          //down the hallway right
+			    {fill(143, 0, 0);
+			        ellipse(btn14.x+25,btn14.y+25,btn14.width,btn14.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",538,344);}
+			          //down the hallway left
+			    {fill(143, 0, 0);
+			        ellipse(btn15.x+25,btn15.y+25,btn15.width,btn15.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);}
+			
+			
+			    if (isMouseInside(btn14)) {
+			         {fill(255, 255, 0,100);
+			        ellipse(btn10.x+25,btn10.y+25,btn10.width,btn10.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",539,344);}
+			    }
+			    if (isMouseInside(btn15)) {
+			         fill(255, 255, 0,100);
+			        
+			        ellipse(btn15.x+25,btn15.y+25,btn15.width,btn15.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("←",29,344);
+			    }
+			    //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(btnM2.x,btnM2.y,btnM2.width,btnM2.height);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(49,491,12,12);
+			    strokeWeight(1);}
+			
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			
+			if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			
+			if (dontgotolv2 === true){
+			            fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Let's think about moving forward, not \nbackwards. There has to be something \nhere that can help us escape... The only \nway into the school is the door the farthest \nto the right of the school. But its locked.",168,262);
+			}
+			 if (lockerdialogue2 === true) {
+			                 fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Um... not my locker.",224,295);
+			  }
+			  
+			  if (plungertalk === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("What am I to say about a plunger? There's \nnothing special about it... other than that I \nfound it in a trash can. But you know that. ",166,278);    
+			        }
+			
+			    if (plunger === true){
+			        fill(145, 0, 0);
+			        rect(297,524,5,33);
+			        fill(138, 124, 124);
+			        arc(300,567,22,31,-177,2);
+			        
+			        if (isMouseInside(btnI4)){
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Plunger",253,34);   
+			        }
+			    }
+			
+			mouseClicked = function(){
+			          if (isMouseInside(btn3)) {
+			          instructions = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue2 = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			          plungertalk = false;
+			          glassestalk = false;
+			     }
+			    if (isMouseInside(btn3)){
+			        quarterinventory2 = false;
+			    }
+			    if (isMouseInside(btn12)){
+			        quinclassroom = true;
+			        lv4true = false;
+			        lv3true = false;
+			        playSound(getSound("rpg/door-open"));
+			        fadescene = 400;
+			    }
+			    if (isMouseInside(btn14)){
+			        fadescene = 400;
+			        lv5true = true;
+			        
+			    }
+			                  if (isMouseInside(btn15)){
+			        dontgotolv2 = true;
+			
+			     }
+			             if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			    if (isMouseInside(btn21)){
+			        lockerdialogue2 = true;
+			    }
+			        if (isMouseInside(btn22)){
+			        lockerdialogue2 = true;
+			    }
+			    if (plunger === true){
+			        if (isMouseInside(btnI4)){
+			            plungertalk = true;
+			        }
+			    }
+			    if (glasses === false){
+			    if (isMouseInside(btnI3)){
+			        glassestalk = true;
+			    }
+			    }
+			        fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			};
+			
+			};
+			
+			var lv3 = function(){
+			    background(166, 168, 167);
+			        //wall
+			    fill(107, 70, 42);
+			    rect(0,0,600,241); 
+			    //inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			//lockers left
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(-146,127,266,114);
+			
+			rect(-15,132,38,105);
+			rect(30,132,38,105);
+			rect(75,132,38,105);
+			
+			
+			ellipse(86,190,11,7);
+			ellipse(-8,190,11,7);
+			ellipse(42,190,11,7);
+			
+			
+			rect(-9,140,22,4);
+			rect(-9,146,22,4);
+			rect(-9,152,22,4);
+			
+			rect(37,140,22,4);
+			rect(37,146,22,4);
+			rect(37,152,22,4);
+			
+			rect(83,140,22,4);
+			rect(83,146,22,4);
+			rect(83,152,22,4);
+			
+			
+			noStroke();
+			}
+			//lockers right
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(338,127,266,114);
+			
+			rect(345,132,38,105);
+			rect(390,132,38,105);
+			rect(436,132,38,105);
+			rect(482,132,38,105);
+			rect(530,132,38,105);
+			rect(578,132,38,105);
+			
+			ellipse(375,190,11,7);
+			ellipse(419,190,11,7);
+			ellipse(466,190,11,7);
+			ellipse(512,190,11,7);
+			ellipse(560,190,11,7);
+			
+			rect(353,140,22,4);
+			rect(353,146,22,4);
+			rect(353,152,22,4);
+			
+			rect(399,140,22,4);
+			rect(399,146,22,4);
+			rect(399,152,22,4);
+			
+			rect(445,140,22,4);
+			rect(445,146,22,4);
+			rect(445,152,22,4);
+			
+			rect(491,140,22,4);
+			rect(491,146,22,4);
+			rect(491,152,22,4);
+			
+			rect(538,140,22,4);
+			rect(538,146,22,4);
+			rect(538,152,22,4);
+			
+			rect(585,140,22,4);
+			rect(585,146,22,4);
+			rect(585,152,22,4);
+			noStroke();
+			}
+			         //Ms. Quin's door 
+			    {noStroke();
+			
+			
+			    fill(115, 102, 17);
+			    rect(172,118,77,123);
+			    fill(86, 184, 209);
+			    rect(179,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(237,185,12,12);
+			    textSize(15);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Ms. \nQuin",190,144);}
+			
+			
+			
+			
+			
+			  if (quarterin === true) {
+			        fill(148, 148, 148);
+			    ellipse(130,547,19,18);
+			    textSize(12);
+			        fill(0, 0, 0);
+			    text("25",123,551);
+			    }
+			
+			
+			        fill(255, 255, 255);
+			        rect(btn13.x,btn13.y,btn13.width,btn13.height,10);     
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Hey, you can't come here without a Hall \nPass! As the Hall Monitor, I must abide by \nall school rules! No exceptions! Go back! \nNothing you can do will change my mind! \nI have an iron will! I won't be shaken!",230,262);
+			
+			    
+			  
+			px2 = 443;
+			    py2 = 281;
+			    Sam();
+			    px = 33;
+			    py = 281;
+			
+			Phil();
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			
+			};
+			
+			var lv2 = function(){
+			{    
+			    background(166, 168, 167);
+			    px = 62;
+			    py = 288;
+			    
+			
+			    
+			    //wall
+			    fill(107, 70, 42);
+			    rect(0,0,600,241); 
+			    
+			    //map
+			        {stroke(255, 255, 255);
+			        strokeWeight(2);
+			    fill(0, 0, 0);
+			    rect(16,427,186,80);
+			    noStroke();
+			
+			        
+			    fill(255, 255, 255);
+			    rect(37,426,2,48);
+			    rect(59,426,2,48);
+			    rect(82,426,2,48);
+			    rect(95,427,2,48);
+			    rect(108,427,2,48);
+			    rect(15,473,186,2);
+			    rect(132,427,2,48);
+			    rect(154,427,2,48);
+			    rect(176,427,2,48);
+			        fill(0, 0, 0);
+			    rect(25,469,8,8);
+			    rect(49,469,8,8);
+			    rect(85,469,8,8);
+			    rect(99,469,8,8);
+			            fill(0, 0, 0);
+			    rect(68,469,8,8);
+			        fill(0, 0, 0);
+			    rect(116,469,8,8);
+			    rect(162,469,8,8);
+			            fill(0, 0, 0);
+			    rect(134,469,8,8);
+			            fill(0, 0, 0);
+			    rect(186,469,8,8);
+			            fill(0, 0, 0);
+			    rect(195,486,8,8);
+			    textFont(createFont("monospace"));
+			    text("Map:",25,417);
+			    fill(255, 0, 0);
+			    ellipse(28,490,12,12);
+			    strokeWeight(1);}
+			
+			       //Mr. Kahm's door 
+			    {noStroke();
+			    fill(184, 164, 184);
+			        rect(btn2.x,btn2.y,btn2.width,btn2.height);
+			
+			    fill(115, 102, 17);
+			    rect(94,118,77,123);
+			    fill(86, 184, 209);
+			    rect(102,126,60,44);
+			    fill(0, 0, 0);
+			    ellipse(155,185,12,12);
+			    textSize(15);
+			    textFont(createFont("monospace"));
+			    fill(0, 0, 0);
+			    text("Mr. \nKahm",113,144);}
+			    
+			//math is rad poster    
+			{fill(4, 1, 92);
+			    rect(229,66,67,74);
+			    fill(130, 136, 255);
+			        rect(btn4.x,btn4.y,btn4.width,btn4.height);
+			                         textSize(10);
+			            textFont(createFont(""));
+			    fill(255, 255, 255);
+			    text("MATH \n   is\n RAD!\n2+2=5",249,87);
+			        fill(255, 255, 255);
+			    text("MATH \n   is\n RAD!\n2+2=5",247,87);
+			        fill(255, 255, 255);
+			    text("MATH \n   is\n RAD!\n2+2=5",248,86);
+			        fill(255, 255, 255);
+			    text("MATH \n   is\n RAD!\n2+2=5",248,88);
+			        fill(0, 0, 0);
+			    text("MATH \n   is\n RAD!\n2+2=5",248,87);}
+			
+			//lockers 
+			{
+			stroke(0, 0, 0);
+			fill(22, 87, 65);
+			rect(338,127,266,114);
+			
+			rect(345,132,38,105);
+			rect(390,132,38,105);
+			rect(436,132,38,105);
+			rect(482,132,38,105);
+			rect(530,132,38,105);
+			rect(578,132,38,105);
+			
+			ellipse(375,190,11,7);
+			ellipse(419,190,11,7);
+			ellipse(466,190,11,7);
+			ellipse(512,190,11,7);
+			ellipse(560,190,11,7);
+			
+			rect(353,140,22,4);
+			rect(353,146,22,4);
+			rect(353,152,22,4);
+			
+			rect(399,140,22,4);
+			rect(399,146,22,4);
+			rect(399,152,22,4);
+			
+			rect(445,140,22,4);
+			rect(445,146,22,4);
+			rect(445,152,22,4);
+			
+			rect(491,140,22,4);
+			rect(491,146,22,4);
+			rect(491,152,22,4);
+			
+			rect(538,140,22,4);
+			rect(538,146,22,4);
+			rect(538,152,22,4);
+			
+			rect(585,140,22,4);
+			rect(585,146,22,4);
+			rect(585,152,22,4);
+			noStroke();
+			}
+			    
+			    
+			    
+			//inventory    
+			{fill(0, 0, 0);
+			rect(91,518,420,57);
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(0, 0, 0);
+			    text("Inventory:",240,508);
+			        fill(255, 255, 255);
+			    rect(btnI1.x,btnI1.y,btnI1.width,btnI1.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI2.x,btnI2.y,btnI2.width,btnI2.height,10);
+			
+			        fill(255, 255, 255);
+			    rect(btnI3.x,btnI3.y,btnI3.width,btnI3.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI4.x,btnI4.y,btnI4.width,btnI4.height,10);
+			        fill(255, 255, 255);
+			    rect(btnI5.x,btnI5.y,btnI5.width,btnI5.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI6.x,btnI6.y,btnI6.width,btnI6.height,10);
+			            fill(255, 255, 255);
+			    rect(btnI7.x,btnI7.y,btnI7.width,btnI7.height,10);
+			
+			}
+			
+			//down the hallway
+			    {fill(143, 0, 0);
+			        ellipse(btn10.x+25,btn10.y+25,btn10.width,btn10.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",539,344);}
+			
+			
+			
+			    
+			    px = 33;
+			    py = 281;
+			Phil();
+			    
+			    
+			
+			    if (isMouseInside(btn2)) {
+			
+			
+			
+			    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Mr. Kahm's Classroom",180,34);
+			
+			
+			    }
+			    if (isMouseInside(btn4)) {
+			            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("School Poster",232,34);
+			    }
+			    if (isMouseInside(btn6)) {
+			                    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Lockers",232,34);
+			
+			    }
+			    
+			    
+			    if (btn8over9 === true){
+			    if (isMouseInside(btn7)) {
+			                    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Lockers",232,34);
+			    
+			    }
+			    }
+			    if (quarterin === true){
+			            if (isMouseInside(btn7)) {
+			                    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Lockers",232,34);
+			    
+			    }
+			    }
+			    
+			    if (quarterin === false) {
+			    if (phillockeropen === true){
+			    if (isMouseInside(btn9)) {
+			                            
+			    btn8over9 = false;
+			                            textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Quarter",232,34);
+			    
+			    
+			    }
+			    }
+			    }
+			    if (isMouseInside(btn10)) {
+			         {fill(255, 255, 0,100);
+			        ellipse(btn10.x+25,btn10.y+25,btn10.width,btn10.height);
+			        textFont(createFont(""),30);
+			        fill(255, 255, 255);
+			        text("→",539,344);}
+			    }
+			    if(quarterin === true && quarterin2 === true){
+			    if (isMouseInside(btnI1)){
+			                                    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Quarter",232,34);
+			    }
+			    }
+			
+			
+			
+			if (maptalk === true){
+			    fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's the map of the whole school. \nI know it's a small school, but we only \nhave 6 students. The red dot shows \nwhere we are. How amazing.",174,271);
+			}
+			
+			 if (mrkahmclassroom === true){
+			                 fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's Mr. Kahm's classroom. Once, \nin fifth grade, I poured maple syrup \non his chair. He doesn't really like me. \nI would like to stay out of that room.",174,271);
+			 }
+			 if (mathisradposter === true){
+			                 fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Oh yeah, that's Ms.Quin's all time \nfavorite poster. It was meant to be a \nfunny poster, but she actually believed \nit and now that's her favorite saying. \nShe's my math teacher.",169,265);
+			 }
+			 
+			  if (lockerdialogue === true) {
+			                 fill(255, 255, 255);
+			                 rect(162,248,284,90,10);
+			                 
+			                 textSize(16);
+			            textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Um... not my locker.",224,295);
+			  }
+			  
+			  if (phillocker === true) {
+			    fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(16);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("That's my locker. It might have some \nstuff that can help us escape. Me and \nthat locker go way back...Oh were you \nexpecting a story? Well sorry, I'm not in \nthe mood. Let's just focus on escaping.",168,263);
+			  }
+			  
+			  if (phillockeropen === true) {
+			      fill(0, 0, 0);
+			      rect(345,132,38,105);
+			      stroke(0, 0, 0);
+			      fill(22, 87, 65);
+			      rect(306,132,38,105);
+			      rect(313,140,22,4);
+			rect(313,146,22,4);
+			rect(313,152,22,4);
+			rect(344,164,39,5);
+			       if(quarterin === false){ 
+			        fill(148, 148, 148);
+			    ellipse(btn9.x+10,btn9.y+10,btn9.width,btn9.height);
+			    
+			    fill(0, 0, 0);
+			    textSize(8);
+			    text("25",371,160);
+			}
+			      noStroke();
+			  }
+			  
+			  if (getquarter === true) {
+			      phillocker = false;
+			          fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(13);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("A QUARTER?!? Yeah, I knew that was there, \nbut I don't think it'll help much. Unless we need \nto bribe someone. Haha, why would we need to \ndo that? I'll keep this quarter in my inventory. \nIf you want to access it, click the inventory box\n that it's in.",168,262);    
+			    
+			  }
+			  if (quarterin === true) {
+			        fill(148, 148, 148);
+			    ellipse(130,547,19,18);
+			    textSize(12);
+			        fill(0, 0, 0);
+			    text("25",123,551);
+			    
+			    }
+			      if (quarterin2 === true) {
+			        fill(148, 148, 148);
+			    ellipse(130,547,19,18);
+			    textSize(12);
+			        fill(0, 0, 0);
+			    text("25",123,551);
+			    }
+			  
+			  if (quarterinventory === true) {
+			    fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Yes, that's a quarter. I'm sure I said that \nbefore. I don't think right now is the right \ntime to use it. I mean, what can I do with \nit? Flip it and call heads? But for the \nrecord, I always choose heads.",168,262);
+			    
+			
+			    
+			  }
+			if (instructions === true && instructions2 === false) {
+			    fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Whenever you click something, I will say \nsomething in a word bubble like this one. \nWhen you finish reading it, CLICK THE \nWORD BUBBLE TO CLOSE IT! YOU \nMUST DO THAT! This is our school.",173,264);
+			    
+			}
+			if (instructions2 === true && instructions === true) {
+			    fill(255, 255, 255);
+			    rect(162,248,284,90,10);
+			    textAlign(CENTER,CENTER);
+			    textFont(createFont("monospace"));
+			    textSize(20);
+			        fill(255, 255, 255);
+			    text("Click word bubble when finished reading!",300,34);   
+			    textAlign(DOWN,RIGHT);
+			    textSize(15);
+			    textFont(createFont(""));
+			    
+			    fill(0, 0, 0);
+			    text("Whenever you click something, I will say \nsomething in a word bubble like this one. \nWhen you finish reading it, CLICK THE \nWORD BUBBLE TO CLOSE IT! YOU \nMUST DO THAT! This is our school.",173,264);
+			}
+			
+			
+			}
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			};
+			var lv1true = false;
+			var lv1 = function(){
+			    background(0, 0, 0);
+			    
+			textAlign(CENTER,CENTER);
+			            textSize(25);
+			            textFont(createFont(""));
+			    fill(255, 255, 255);
+			    text("Hi. I'm Phil. You just made a big mistake. \nNo one in their right mind would want to \nenroll into our school. That's what you did when \nyou clicked 'Start Game'. Nice going.\n\nAnyways, now that you're here, \nyou can help me escape. Thanks! I appreciate it. \nSo when we go in, click around \nand gather clues on how to escape. \nOh yeah, because you're new here, \nyou MUST listen to what I say. \nIt is very important you listen to this rule. \nOkay, with that out of the way, have fun!\n\n\nClick 'spacebar' to enter school.",300,300);
+			    textAlign(DOWN,RIGHT);
+			        
+			    if (input[32]){
+			        lvtwo = true;
+			        lvtwo2 = true;
+			        fadescene = 300;
+			        lv1true = false;
+			        instructions = true;
+			    }
+			    if (lvtwo === true){
+			        lv2();
+			        instructions = true;
+			    }
+			    if (lvtwo2 === true){
+			        lv2();
+			    }
+			    if (lvtwo2 === true){
+			        lvtwo = false;
+			    }
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			};
+			
+			var instructionsScene = function(){
+			     background(0, 0, 0);
+			    //Shading
+			    {
+			    fill(7,7,7);
+			    ellipse(300,300,800,800);
+			    fill(8,8,8);
+			    ellipse(300,300,750,750);
+			    fill(10,10,10);
+			    ellipse(300,300,700,700);
+			    
+			    fill(15,15,15);
+			    ellipse(300,300,650,650);
+			    fill(20,20,20);
+			    ellipse(300,300,600,600);
+			    fill(25,25,25);
+			    ellipse(300,300,550,550);
+			    fill(30,30,30);
+			    ellipse(300,300,500,500);
+			    fill(35,35,35);
+			    ellipse(300,300,450,450);
+			    fill(40,40,40);
+			    ellipse(300,300,400,400);
+			    }
+			    textAlign(CENTER,CENTER);
+			    fill(255, 255, 255);
+			    textSize(50);
+			    text("Instructions",300,100);
+			    
+			    fill(255, 255, 255);
+			    textSize(20);
+			    text("On How to Play Game",300,150);
+			    
+			    fill(255, 255, 255);
+			    textSize(20);
+			    text("First, click the Back button \nat the bottom of the screen.\n\nThen click the Start Game button.\n\n\n\n\n\nXD",300,400);
+			    
+			    fill(59, 59, 59);
+			    rect(btn1i.x,btn1i.y,btn1i.width,btn1i.height);
+			    fill(255, 255, 255);
+			    textSize(20);
+			    text("Back",500,550);
+			    if (isMouseInside(btn1i)){
+			        fill(117, 117, 117);
+			    rect(btn1i.x,btn1i.y,btn1i.width,btn1i.height);    
+			    fill(255, 255, 255);
+			    textSize(20);
+			    text("Back",500,550);
+			    }
+			    
+			    textAlign(DOWN,RIGHT);
+			    
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			};
+			
+			var creditsScene = function(){
+			    background(0, 0, 0);
+			    //Shading
+			    {
+			    fill(7,7,7);
+			    ellipse(300,300,800,800);
+			    fill(8,8,8);
+			    ellipse(300,300,750,750);
+			    fill(10,10,10);
+			    ellipse(300,300,700,700);
+			    
+			    fill(15,15,15);
+			    ellipse(300,300,650,650);
+			    fill(20,20,20);
+			    ellipse(300,300,600,600);
+			    fill(25,25,25);
+			    ellipse(300,300,550,550);
+			    fill(30,30,30);
+			    ellipse(300,300,500,500);
+			    fill(35,35,35);
+			    ellipse(300,300,450,450);
+			    fill(40,40,40);
+			    ellipse(300,300,400,400);
+			    }
+			    textAlign(CENTER,CENTER);
+			    
+			    fill(255, 255, 255);
+			    textSize(50);
+			    text("CREDITS",300,50);
+			    
+			    fill(255, 255, 255);
+			    textSize(20);
+			    text("Let's all clap our hands to Python Programming \nfor making every line of code in this program! \n\n\nJust kidding! You don't have to do that.\n\n\nI want to thank my brother, Knight, for helping me \nwhen I got stuck at some parts. \nWe would put our heads together \nand figure out a way to fix the problems.\n\n\nAlso, I would like to thank JonBro, the original\n coders who made the original Riddle School games!\nThanks for the inspiration, JonBro! ",300,300);
+			    
+			    fill(59, 59, 59);
+			    rect(btn1i.x,btn1i.y,btn1i.width,btn1i.height);
+			    fill(255, 255, 255);
+			    textSize(20);
+			    text("Back",500,550);
+			    if (isMouseInside(btn1i)){
+			        fill(117, 117, 117);
+			    rect(btn1i.x,btn1i.y,btn1i.width,btn1i.height);    
+			    fill(255, 255, 255);
+			    textSize(20);
+			    text("Back",500,550);
+			    }
+			    
+			    
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			    textAlign(DOWN,RIGHT);
+			};
+			
+			var menuScene = function(){
+			    background(0, 0, 0);
+			    //Shading
+			    {
+			    fill(7,7,7);
+			    ellipse(300,300,800,800);
+			    fill(8,8,8);
+			    ellipse(300,300,750,750);
+			    fill(10,10,10);
+			    ellipse(300,300,700,700);
+			    
+			    fill(15,15,15);
+			    ellipse(300,300,650,650);
+			    fill(20,20,20);
+			    ellipse(300,300,600,600);
+			    fill(25,25,25);
+			    ellipse(300,300,550,550);
+			    fill(30,30,30);
+			    ellipse(300,300,500,500);
+			    fill(35,35,35);
+			    ellipse(300,300,450,450);
+			    fill(40,40,40);
+			    ellipse(300,300,400,400);
+			    }
+			    textAlign(CENTER,CENTER);
+			    textFont(createFont("Copperplate Gothic Bold"),107);
+			    fill(255, 255, 255);
+			    text("iddl",303,bxm+64);
+			    textSize(155);
+			    fill(255, 255, 255);
+			    text("R      E",300,bxm+93);
+			    textSize(57);
+			    fill(255, 255, 255);
+			    text("School",300,bxm+120);
+			    //transitions
+			    {
+			    if (fadescene > 400){
+			    menutmrgo = true;
+			    }
+			    if (menutmrgo === true){
+			        menutmr = menutmr +1;
+			    }
+			    if (menutmr > 110){
+			        titlepush = true;
+			    }
+			    if (menutmr > 180){
+			        bxm2/= 1.1;
+			    }
+			    if (menutmr > 260){
+			        bxm3 /= 1.1;
+			        bxm4 /=1.1;
+			        bxm5 /= 1.1;
+			    }
+			    if (titlepush === true){
+			        bxm /= 1.1;
+			        
+			    }
+			    if (bxm5 < 1){
+			        Philfaded = Philfaded +3;
+			    }
+			    if (Philfaded > 300){
+			        bxm6 /= 1.1;
+			    }
+			    if (bxm6 > -1){
+			        barpush /= 1.1;
+			        barfade = barfade +3;
+			    }
+			    }
+			    
+			    textFont(createFont("monospace"));
+			    textSize(27);
+			    fill(255, 255, 255);
+			    text("By Python Programming",300,bxm2+170);
+			    
+			    fill(112, 112, 112,Philfaded);
+			    stroke(0, 0, 0,Philfaded);
+			    strokeWeight(5);
+			    ellipse(166,335,200,200);
+			    noStroke();
+			    px9 = bxm6+70;
+			    py9 = 277;
+			    PhilBig2();
+			    
+			    //btns for menu
+			{
+			    if (bxm3 < 1){
+			    if (isMouseInside(btn1s)){
+			        textFont(createFont("monospace"));
+			    fill(59, 59, 59);
+			    rect(btn1s.x,btn1s.y,btn1s.width,btn1s.height);
+			    fill(255, 255, 255);
+			    textSize(30);
+			    text("Start Game",btn1s.x+90,btn1s.y+20);
+			    }
+			    if (isMouseInside(btn2s)){
+			        textFont(createFont("monospace"));
+			    fill(59, 59, 59);
+			    rect(btn2s.x,btn2s.y,btn2s.width,btn2s.height);
+			    fill(255, 255, 255);
+			    textSize(25);
+			    text("Instructions",btn1s.x+91,btn1s.y+78);
+			    }
+			    if (isMouseInside(btn3s)){
+			        textFont(createFont("monospace"));
+			    fill(59, 59, 59);
+			    rect(btn3s.x,btn3s.y,btn3s.width,btn3s.height);
+			    fill(255, 255, 255);
+			    textSize(30);
+			    text("Credits",btn1s.x+88,btn1s.y+138);
+			    }
+			    }
+			    textFont(createFont("monospace"));
+			    fill(255, 255, 255);
+			    if (isMouseInside(btn1s) === false){
+			    
+			        
+			    textSize(20);
+			    text("Start Game",bxm3+btn1s.x+90,btn1s.y+20);
+			    }
+			    textFont(createFont("monospace"));
+			    fill(255, 255, 255);
+			    if (isMouseInside(btn2s) === false){
+			        
+			    textSize(20);
+			    text("Instructions",bxm4+btn1s.x+91,btn1s.y+78);
+			    }
+			    textFont(createFont("monospace"));
+			    fill(255, 255, 255);
+			    if (isMouseInside(btn3s) === false){
+			        
+			    textSize(20);
+			    text("Credits",bxm5+btn1s.x+88,btn1s.y+139);
+			    }
+			}
+			
+			//bottom screen
+			{
+			fill(255, 255, 255,barfade);
+			rect(1,550,20,100,5);
+			rect(23,550,20,100,5);
+			rect(45,550,20,100,5);
+			rect(67,550,20,100,5);
+			rect(89,550,20,100,5);
+			rect(111,550,20,100,5);
+			rect(133,550,20,100,5);
+			rect(155,550,20,100,5);
+			rect(177,550,20,100,5);
+			rect(199,550,20,100,5);
+			rect(221,550,20,100,5);
+			rect(243,550,20,100,5);
+			rect(265,550,20,100,5);
+			rect(287,550,20,100,5);
+			rect(309,550,20,100,5);
+			rect(331,550,20,100,5);
+			rect(353,550,20,100,5);
+			rect(375,550,20,100,5);
+			rect(397,550,20,100,5);
+			rect(419,550,20,100,5);
+			rect(441,550,20,100,5);
+			rect(463,550,20,100,5);
+			rect(485,550,20,100,5);
+			rect(507,550,20,100,5);
+			rect(529,550,20,100,5);
+			rect(551,550,20,100,5);
+			rect(573,550,20,100,5);
+			rect(595,550,20,100,5);
+			}
+			fill(255, 0, 0);
+			rect(barpush+3,545,594,3);
+			    
+			    textAlign(DOWN,RIGHT);
+			    
+			
+			    
+			    fill(255, 255, 255,fadescene);
+			rect(0,0,600,600);
+			fadescene = fadescene - 10;
+			};
+			
+			draw = function() {
+			        if (logo === true && menu === false){
+			        game = false;
+			
+			        l.draw();
+			    }
+			    if (logo === false){
+			        menu = true;
+			    }
+			
+			if (menu === true){    
+			menuScene();
+			}
+			
+			 if (game === true){
+			        lv1true = true;
+			        
+			}
+			if (lv1true === true){
+			    lv1();
+			}
+			
+			
+			mouseClicked = function () {
+			    if (instructions === true && isMouseInside(btn3)){
+			    instructions = false;
+			}
+			if (instructions === true && isMouseInside(btn3) === false){
+			    instructions2 = true;
+			}
+			    if (instructions === false){
+			    if(isMouseInside(btnM)){
+			        maptalk = true;
+			    }
+			        if(isMouseInside(btnM2)){
+			        maptalk = true;
+			    }
+			    if (isMouseInside(btn1i) && instructionspage === true){
+			        instructionspage = false;
+			        menu = true;
+			        fadescene = 600;
+			        barfade = -100;
+			        barpush = -1000;
+			    }
+			    if (isMouseInside(btn1i) && creditspage === true){
+			        creditspage = false;
+			        menu = true;
+			        fadescene = 600;
+			        barfade = -100;
+			        barpush = -1000;
+			    }
+			    
+			
+			
+			    if (isMouseInside(btn2)) {
+			    mrkahmclassroom = true;
+			
+			    }
+			
+			      if (isMouseInside(btn3)) {
+			          instructions = false;
+			          dollarE = false;
+			         maptalk = false;
+			          mrkahmclassroom = false;
+			          mathisradposter = false;
+			          lockerdialogue = false;
+			          phillocker = false;
+			          getquarter = false;
+			          quarterinventory = false;
+			          quarterinventory2 = false;
+			          dontgotolv2 = false;
+			          quinblock = false;
+			     }
+			     if (isMouseInside(btn1s) && game === false){
+			            menu = false;
+			            game = true;
+			            
+			            fadescene = 600;
+			        }
+			        if (isMouseInside(btn2s) && game === false){
+			            menu = false;
+			            instructionspage = true;
+			            fadescene = 600;
+			        }
+			        if (isMouseInside(btn3s) && game === false){
+			            menu = false;
+			            creditspage = true;
+			            fadescene = 600;
+			        }
+			     
+			     if (isMouseInside(btn4)) {
+			         mathisradposter = true;
+			     }
+			     
+			     if (isMouseInside(btn6)) {
+			         lockerdialogue = true;
+			     }
+			     if (isMouseInside(btn7)) {
+			         phillocker = true;
+			         
+			     }
+			     if (isMouseInside(btn8)) {
+			         phillockeropen = true;
+			         phillockerclosed = true;
+			     }
+			     
+			     if (isMouseInside(btn9)) {
+			         getquarter = true;
+			         getquarter2 = true;
+			         quarterin = true;
+			         quarterin2 = true;
+			         playSound(getSound("rpg/metal-clink"));
+			     }
+			     if (getquarter2 === true) {
+			     if (isMouseInside(btnI1)) {
+			         quarterinventory = true;
+			         
+			     }
+			     }
+			 
+			     if (isMouseInside(btn10) && lv3true === false) {
+			         lv3true = true;
+			         fadescene = 400;
+			     }
+			         if (lv3true === true && isMouseInside(btnI1) && quarterinventory === true) {
+			         lv3true = false;
+			         lv4true = true;
+			         samdialogue = false;
+			         quarterinventory = false;
+			         quarterinventory2 = true;
+			         playSound(getSound("rpg/metal-clink"));
+			         fadescene = 400;
+			     }
+			     if (lv4true === true){
+			     if (isMouseInside(btn12)) {
+			         quinclassroom = true;
+			         quinclassroom2 = true;
+			        fadescene = 400;
+			     }
+			     }
+			     if (lv3true === true){
+			     if (isMouseInside(btn13)) {
+			         samdialogue = false;
+			         lv3true = false;
+			         lv2();
+			         fadescene = 400;
+			     }
+			     }
+			
+			
+			     
+			}
+			}; 
+			
+			
+			
+			if (instructionspage === true){
+			    instructionsScene();
+			}
+			if (creditspage === true){
+			    creditsScene();
+			}
+			
+			
+			if (lv3true === true) {
+			    lv3();
+			    
+			}
+			if(lv4true === true) {
+			    lv4();
+			    lv3true = false;
+			}
+			if (quinclassroom === true){
+			    MsQuinRoom();
+			    
+			}
+			if (quarterinventory2 === true){
+			        fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Here Sam. Take this quarter. Now get out \nof here. Typical Sam. Easy to be bribed. \nSo let's see what is here. Cheat codes are \nin the code if you are having trouble beat \nthe game. But come on, at least try!",168,262);
+			    quarterin = false;
+			}
+			
+			        if (quinresponse === true){    
+			        textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Excuse me?!? Get out!",69,65);
+			    fill(230, 219, 95);
+			    rect(299,121,12,5);
+			                textSize(12);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("(Click word bubble when finished reading.)",34,97);
+			    fill(230, 219, 95);
+			    rect(299,121,12,5);
+			    
+			    }
+			    if (quinresponse2 === true){    
+			        textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Okay. Tell someone who cares.",49,65);
+			    fill(230, 219, 95);
+			    rect(299,121,12,5);
+			        fill(230, 219, 95);
+			    rect(312,121,12,5);
+			            textSize(12);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("(Click word bubble when finished reading.)",34,97);
+			    fill(230, 219, 95);
+			    rect(299,121,12,5);
+			    
+			    }
+			    if (quinresponse3 === true){    
+			        textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Seriously? Class is in 2 hours. Get out.",31,65);
+			    fill(230, 219, 95);
+			    rect(299,121,12,5);
+			                textSize(12);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("(Click word bubble when finished reading.)",34,97);
+			    fill(230, 219, 95);
+			    rect(299,121,12,5);
+			
+			    }
+			if (quinyes === true){    
+			    MsQuinRoom2();
+			    dollar = true;
+			    dollarF = true;
+			    }
+			 if (dollartalk === true){     
+			    fill(255, 255, 255);
+			    rect(11,19,284,90,10);
+			     textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("Correct!  Here, take this dollar as a \nreward. Now please go, I have to prepare \nfor my next class.",21,50);
+			    fill(230, 219, 95);
+			    rect(299,136,31,5);
+			        textSize(12);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    text("(Click word bubble when finished reading.)",34,97);
+			
+			}
+			if (lv4true2 === true){
+			    lv4_2();
+			
+			}
+			    if (dollar === true){
+			        fill(24, 133, 7);
+			        rect(168,537,36,18);
+			        fill(194, 194, 194);
+			        ellipse(186,546,15,15);
+			    }
+			        if (dollarE === true){
+			                fill(255, 255, 255);
+			    rect(162,248,284,90,10);      
+			    textSize(15);
+			    textFont(createFont(""));
+			    fill(0, 0, 0);
+			    
+			    text("Nothing that costs only a dollar is not \n  worth having. What did I just say?",182,286);
+			    }
+			    
+			    if (lv5true === true){
+			        lv6true = false;
+			        lv5();
+			        sumclassleave = false;
+			    }
+			    if (lv6true === true){
+			        lv5true = false;
+			        lv6();
+			
+			    }
+			    if (sumclasstrue === true){
+			        sumclass();
+			        
+			    }
+			    if (sumclassleave === true){
+			        lv6();
+			    }
+			    if (gradtrue === true){
+			        gradclass();
+			    }
+			    if (lv7true === true){
+			        lv7();
+			    }
+			    if (officetrue === true){
+			        poffice();
+			    }
+			    if (locked === false){
+			        lv7true = false;
+			        gradtrue = false;
+			        officetrue = false;
+			        sumclasstrue = false;
+			        lv6true = false;
+			        lv5true = false;
+			        lv4true2 = false;
+			        lv4true = false;
+			        lv3true = false;
+			        lv2true = false;
+			        quinclassroom = false;
+			        
+			        finishScene1();
+			    }
+			
+			    fill(0, 0, 0);
+			    ellipse(mouseX,mouseY,8,8);
+			fill(255, 255, 255);
+			ellipse(mouseX,mouseY,3,3);
+			cursor("none");
+			
+			
+			};
+			
+			
+			
+			
+		}
+		
+		runPJS(program);
+		
+		// Add reload button on KA --> <script>
+		
+	</script>
+</body>
+
+</html>
