@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html>
+<!-- Program exported to HTML using the KA Project Exporter by @MushyAvocado 
+https://www.khanacademy.org/computer-programming/ka-project-exporter/5195486791385088
+-->
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Power Platformer</title>
+	<style>
+		
+		
+		/* Change the color as you want */
+		:root {
+			--background-color: #000000;
+		}
+		
+		body {
+		    background-color: var(--background-color);
+		}
+		
+		html, body, #wrapper {
+			width: 100%;
+		    height: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		
+		canvas {
+			width: fit-content;
+			height: fit-content;
+		}
+		
+		canvas:focus {
+			outline: none;
+		}
+		
+		/* Automatically fits to the remaining height and centers the canvas it contains */
+		#wrapper {
+			padding: 0px;
+			margin: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+		
+</style>
+</head>
+<body id="wrapper">
+    <!-- Canvases with a class of "sketch" are applied to the program in the order importPJS() is called. -->
+    <canvas class="sketch"></canvas>
+	<!-- Load the PJS library -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Khan/processing-js@master/processing.js"></script>
+	<!-- The exporter script must be loaded before the program script -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Mushy-Avocado/KA-exporter@main/exporter.js"></script>
+	<!-- Run Khan Academy program and import PJS -->
+	<script type="application/javascript">
+		
+		
+		function program() {
+		    
+		    title("Power Platformer");
+		    size(600, 600);
+		    
+		    // All code goes here
+			// Power Platformer - A game by DigiFox9 and Community Coder
+			
+			// Almost none of this was done before provember.
+			
+			// Just the basic rectRect function from Liam K.s Platformer Engine.
+			
+			// The rest is ours
+			
+			/** HOW TO USE THE LEVEL CREATOR **/
+			// {
+			    // First, go to the comment that says this: LEVELS
+			    // Then, copy the code from the first level in this array.
+			    // Paste it in after the last level, or wherever you want.
+			    // Replace all symbols that aren't the perimeter with a '.'
+			    // Then, replace '.' with any symbol of your choice.
+			    // This is what each symbol does.
+			    
+			    // '.' : Nothing
+			    // 'z' : Base Block
+			    // 'x' : Base Block
+			    // 'c' : Base Block
+			    // 'v' : Base Block
+			    // 'b' : Base Block
+			    // 'n' : Base Block
+			    // 'm' : Base Block
+			    // ',' : Base Block
+			    
+			    // 'j' : Coin
+			    // 'P' : Player
+			    // 'E' : Enemy
+			    // 'p' : Poison
+			    // 'l' : Lava
+			    // 't' : Trampoline
+			    // 's' : Spike
+			    // '@' : Portal
+			    
+			    // This is case sensitive
+			    // The different types of base blocks are different gradients
+			    // If you look at the perimeter you can figure out which is which
+			// }
+			
+			/** LEVELS **/
+			// {
+			var levels = [
+			    [
+			        'n,,,,,,,,,,,,,,,,,,,,,,,,,,,,m',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x...P........................c',
+			        'x............j.j.j.....E..@..c',
+			        'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzv',
+			    ],
+			    [
+			        'n,,,,,,,,,,,,,,,,,,,,,,,,,,,,m',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x......j...j.................c',
+			        'x...P..,lll,.................c',
+			        'x.....,,lll,,...j....j...E..@c',
+			        'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzv',
+			        
+			    ],
+			    [
+			        'n,,,,,,,,,,,,,pppppppppppppppm',
+			        'xP..jjj......................c',
+			        'x,,,,,,,,,,m.................c',
+			        'x@.........c.................c',
+			        'x..........c.................c',
+			        'x,,,.......c.................c',
+			        'x..........c..........j......c',
+			        'x...,......m,,tttt,ttt,tttt..c',
+			        'x.....,......................c',
+			        'x............................c',
+			        'x............................c',
+			        'x.....,......................c',
+			        'x............................c',
+			        'x............................c',
+			        'x.....,......................c',
+			        'x............................c',
+			        'x............................c',
+			        'x.....,......................c',
+			        'x............................c',
+			        'x............................c',
+			        'x.....,......................c',
+			        'x..............p........p....c',
+			        'x..............p........p....c',
+			        'x.....,........p........p....c',
+			        'x..............p........p....c',
+			        'x..............p........p....c',
+			        'x.....,........p...j....p...jc',
+			        'x.....E........p...t....p...tc',
+			        'xppppppppppp,,pppppppppppppppc',
+			        'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzv',
+			        
+			    ],
+			    [
+			        'n,,,lll...........,,,,,,,,,,,m',
+			        'xP...l.......................c',
+			        'x,,..l.......................c',
+			        'x.l..l.......................c',
+			        'x.l..l.......................c',
+			        'x.l..l.......................c',
+			        'x.l..l.......................c',
+			        'x.l..l..tt,..................c',
+			        'x.l..l..l..s.................c',
+			        'x.l..lt.l..,.................c',
+			        'x.l..l..l...j................c',
+			        'x.l..l..l...,................c',
+			        'x.l..l..l....s...............c',
+			        'x.l..l..l....,...............c',
+			        'x.l..l..l....................c',
+			        'x.l..l..l.....,..............c',
+			        'x.l..l..l......s.............c',
+			        'x.l..l..l......,.............c',
+			        'x.l..l.tl....................c',
+			        'x.l..l..l.......,............c',
+			        'x.l..l..l........s...........c',
+			        'x.l..l..l........,...........c',
+			        'x.l..l..l....................c',
+			        'x.l..l..l.........,..........c',
+			        'x.l..l..l..........s.........c',
+			        'x.l..l..l..........,.........c',
+			        'x.l..lt.l....................c',
+			        'x...................,........c',
+			        'x..E.................s....j..@c',
+			        'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzv',
+			        
+			    ],
+			    [
+			        'n,,,,,,,,,,,,,,,,,,,,,,,,,,,,m',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x..P......j........j.....E...c',
+			        'x,,,,ll,ll,ll,ll,ll,ll,ll,l..c',
+			        'x.@..........................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x....j.......................c',
+			        'x....t.......................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'xj...........................c',
+			        'xt...........................c',
+			        'x............................c',
+			        'x....j.......................c',
+			        'x....t.......................c',
+			        'x.............j..............c',
+			        'x.............t..............c',
+			        'x......................j.....c',
+			        'x......................t.....c',
+			        'x...........................tc',
+			        'x............................c',
+			        'xppppppppppppppppppppppppppppc',
+			        'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzv',
+			    ],
+			    [
+			        'n,,,,,,,,,,,,,,,,,,,,,,,,,,,,m',
+			        'x...........................@c',
+			        'x,,,,,,,,,,,,,,,,,,,,,,,,,,..c',
+			        'x............................c',
+			        'x..........................jjc',
+			        'x..,,,,,,,,,,,,,,,,,,,,,,,,,,c',
+			        'x............................c',
+			        'xjj..........................c',
+			        'x,,,,,,,,,,,,,,,,,,,,,,,,,,..c',
+			        'x............................c',
+			        'x....................E......jc',
+			        'x..,,,,,,,,,,,,,,,,,,,,,,,,,,c',
+			        'x............................c',
+			        'xjj..........................c',
+			        'x,,,,,,,,,,,,,,,,,,,,,,,,,,..c',
+			        'x............................c',
+			        'x..........................jjc',
+			        'x..,,,,,,,,,,,,,,,,,,,,,,,,,,c',
+			        'x............................c',
+			        'xjj..........................c',
+			        'x,,,,,,,,,,,,,,,,,,,,,,,,,,..c',
+			        'x............................c',
+			        'x..........................jjc',
+			        'x..,,,,,,,,,,,,,,,,,,,,,,,,,,c',
+			        'x............................c',
+			        'xjj..........................c',
+			        'x,,,,,,,,,,,,,,,,,,,,,,,,,,..c',
+			        'x............................c',
+			        'xP.........................jjc',
+			        'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzv',
+			    ],
+			    [
+			        'n,,,,,,,,,,,,,,,,,,,,,,,,,,,,m',
+			        'x...........................@c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x...........................tc',
+			        'x......j..,..,..,..,..,..,.,,c',
+			        'x..,...,.....................c',
+			        'x..lllll.....................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'xtjj....j...j................c',
+			        'x,,,....,...,....,,,sss,,....c',
+			        'x..................,,,,,.....c',
+			        'x............................c',
+			        'x..........................Ejc',
+			        'x.........................jjtc',
+			        'x.......................j.,,,',
+			        'x.....................j.,....c',
+			        'x...................j.,......c',
+			        'x.................j.,........c',
+			        'x.........s...s...,..........c',
+			        'x...,ppp,ppp,ppp,............c',
+			        'xP.,lllllllllllllllllllllllllc',
+			        'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzv',
+			    ],
+			    [
+			        'n,,,,,,,,,,,,,,,,,,,,,,,,,,,,m',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x............................c',
+			        'x.............E..............c',
+			        'x.............xl..lc.........c',
+			        'x............sxl..lc.........c',
+			        'x............xll..lc.........c',
+			        'x...........xlll..lc.........c',
+			        'x..........xllln..llc........c',
+			        'x..........xllll..lll........c',
+			        'x.........sxllll..llcl.......c',
+			        'x........xllllll..lnlcl......c',
+			        'x......j.xllnlll..lnllc......c',
+			        'x.....sxllllllll..llllc.l....c',
+			        'x.....xlllnnllll..llllcs.....c',
+			        'x....xllllllllll..lllllcml...c',
+			        'x...jxlllnllllll..llnlllcl...c',
+			        'x...xlllllllllll..llnnlllc...c',
+			        'xP.xllllllllllll.@llllllllcslc',
+			        'bzzllnllllllllnzzzlllllllllzzv',
+			    ],
+			];
+			// }
+			
+			/** Setup **/
+			// {
+			smooth();
+			textAlign(CENTER, CENTER);
+			noStroke();
+			// }
+			
+			/** Variables **/
+			// {
+			
+			var hy = 900;
+			
+			var storyM = "STORY\n\nTonight, there was a robbery at your\n father's store, The Djinn's magic and \nscorcery shope. The evil gang who call \nthemselves 'The Hidden' stole the \nShadow Onyx in the store's vault. \nThe story goes that if it's shone in\n the light of a lunar eclipse, it will summon\n a weapon with world destroying abilities.\n Your father is away on a business trip, \nso only you can stop them. After you ... \n'borrow' a\n couple artifacts from your father's store,\n you set out to stop them.\n But you must hurry.\n The eclipse is tonight, \nin just a few hours!";
+			
+			var howMessage = "WASD or Arrow keys to move.\nLava, Poison, and Spikes will kill you.\nIf you get to close to the red enemy,\nyou will lose 1 health every second.\nTrampolines will boost your jump.\nIf you have the jump abilty, you will\nautomatically jump higher.\nIf you have the speed upgrade,\nYou can use the arrow/WASD keys while\npressing 'shift' to move faster.\nIf you have invisibility, press 'Q'";
+			
+			// Portal color array base colors
+			var lavender = color(233, 184, 242);
+			var pink = color(240, 161, 231);
+			var magenta = color(201, 26, 149);
+			var white = color(252, 249, 249);
+			
+			var portColors = [
+			    
+			    lerpColor(magenta,pink,0.22),
+			    lerpColor(magenta,pink,0.44),
+			    lerpColor(magenta,pink,0.66),
+			    lerpColor(magenta,pink,0.88),
+			   
+			    lerpColor(pink,lavender,0.11),
+			    lerpColor(pink,lavender,0.33),
+			    lerpColor(pink,lavender,0.55),
+			    lerpColor(pink,lavender,0.77),
+			    lerpColor(pink,lavender,0.99),
+			
+			    lerpColor(lavender,white,0.22),
+			    lerpColor(lavender,white,0.44),
+			    lerpColor(lavender,white,0.66),
+			    lerpColor(lavender,white,0.88),
+			   
+			];
+			
+			// Standard block color array base colors
+			var darkGray = color(84, 83, 83);
+			var midGray = color(120, 116, 116);
+			var lightGray = color(171, 168, 168);
+			var pale = color(252, 252, 252);
+			    
+			//standard block colors    
+			var standardBlockColors = [
+			    
+			    lerpColor(darkGray,midGray,0.11),
+			    lerpColor(darkGray,midGray,0.33),
+			    lerpColor(darkGray,midGray,0.55),
+			    lerpColor(darkGray,midGray,0.77),
+			    lerpColor(darkGray,midGray,0.99),
+			    
+			    lerpColor(midGray,lightGray,0.22),
+			    lerpColor(midGray,lightGray,0.44),
+			    lerpColor(midGray,lightGray,0.66),
+			    lerpColor(midGray,lightGray,0.88),
+			    lerpColor(midGray,lightGray,1.00),
+			    
+			    lerpColor(lightGray,pale,0.22),
+			    lerpColor(lightGray,pale,0.44),
+			    lerpColor(lightGray,pale,0.66),
+			    lerpColor(lightGray,pale,0.88),
+			    
+			];
+			
+			//base colors for enemy color array
+			var darkRed = color(135, 2, 2);
+			var crimson = color(227, 25, 25);
+			
+			//enemy color array
+			var enemyColors = [
+			    
+			    lerpColor(crimson,darkRed,0.11),
+			    lerpColor(crimson,darkRed,0.22),
+			    lerpColor(crimson,darkRed,0.33),
+			    lerpColor(crimson,darkRed,0.44),
+			    lerpColor(crimson,darkRed,0.55),
+			    lerpColor(crimson,darkRed,0.66),
+			    lerpColor(crimson,darkRed,0.77),
+			    lerpColor(crimson,darkRed,0.88),
+			    lerpColor(crimson,darkRed,0.99),
+			    
+			];
+			
+			// Health bar length
+			var hLength = 100;
+			
+			// Health bar multiplier
+			var hm = 1.5;
+			
+			// What page of the 'how' your on
+			var page = 0;
+			
+			// Timer for intro
+			var timer = 0;
+			
+			// Timer for fade in
+			var timer1 = 0;
+			
+			// Coins
+			var coins = 0;
+			
+			// Deaths
+			var deathCount = 0;
+			
+			// Amount of deaths on current level
+			var deathsLevel = 0;
+			
+			// How to in game
+			var levelText = [
+			    "Collect the coins and go to the purple circle\nto get to the next level\nPress space to damage enemies\nwhen you are close enough to them",
+			    "The orange stuff is lava\nAvoid it",
+			    "Purple stuff is poison. Pink blocks are trampolines.",
+			    "Lava, lava, lava, and... spikes???",
+			    "Tricky",
+			    "My Legs...",
+			    "Almost there...",
+			    "A leap of faith",
+			];
+			
+			// Keys object
+			var keys = {};
+			
+			// Block array
+			var blocks = [];
+			
+			// Scene
+			var scene = "transition";
+			
+			// Clicked
+			var click = false;
+			
+			// Coins collected on the current level
+			var coinsCollectedLevel = 0;
+			
+			// Current Level your on, for displaying text
+			var levelOn = 0;
+			
+			// Current Level
+			var level = 0;
+			
+			// Rectange Collision
+			var rectRect = function(x1, y1, w1, h1, x2, y2, w2, h2) {
+			    return (x1 + w1 > x2 && y1 + h1 > y2 && x1 < x2 + w2 && y1 < y2 + h2);
+			};
+			
+			// Whether or not the power is owned
+			var owned = [true, false, false, false];
+			
+			// Whether or not the power is being used
+			var used = [true, false, false, false];
+			
+			// Power
+			var powers = [true, false, false, false];
+			
+			// Speed, Jump boost, Invisibility
+			var sTimer = 0;
+			var jTimer = 0;
+			var iTimer = 0;
+			
+			// Speed amt
+			var speed = 7.5;
+			
+			// Coins collected in the current game
+			var coinsCollectedGame = 0;
+			
+			// Colors
+			var colors = [
+			    color(255, 0, 0),
+			    color(255, 255, 255),
+			    color(255, 255, 255, 0)
+			];
+			
+			// Variables for anim {
+			var x1 = 300;
+			var y1 = 0;
+			// }
+			
+			// Player
+			var health = 3;
+			
+			var healthTimer = 0;
+			
+			// Enemy
+			var eDamage = 1;
+			
+			var eHealth = 3;
+			
+			var eMoving = true;
+			
+			var eCanDamage = true;
+			
+			var eHealthTimer = 0;
+			
+			var eCanTakeDamage = true;
+			
+			// Timer for invisibility
+			var iTimer = 0;
+			
+			// }
+			
+			/** Constructors **/
+			// {
+			
+			// Block constructor
+			var Block = function(x, y, type) {
+			    this.x = x;
+			    this.y = y;
+			    this.w = 20;
+			    this.h = 20;
+			    
+			    this.type = type;
+			};
+			
+			// Checks for collision with blocks
+			Block.prototype.checkColl = function(obj){
+			    return(rectRect(this.x,this.y,this.w,this.h,obj.x,obj.y,obj.w,obj.h));
+			};
+			
+			// Displays the block
+			Block.prototype.display = function() {
+			    switch (this.type) {
+			        case 'block1':
+			            // Top white, bottom dark
+			            for(var i in standardBlockColors){
+			                fill(standardBlockColors[i]);
+			                rect(this.x, this.y, this.w, this.h-i*1.5);
+			            }
+			            break;
+			        case 'block2':
+			            // right dark
+			            for(var i in standardBlockColors){
+			                noStroke();
+			                fill(standardBlockColors[i]);
+			                rect(this.x+i*1.4,this.y,this.w-i*1.4,this.h);
+			            }
+			            break;
+			        case 'block3':
+			            // Left light, right dark
+			            for (var i in standardBlockColors){
+			                noStroke();
+			                fill(standardBlockColors[i]);
+			                rect(this.x,this.y,this.w-i*1.5,this.h);
+			            }
+			            break;
+			        case 'block4':
+			            // Corner block 1
+			            for(var i in standardBlockColors){
+			                noStroke();
+			                fill(standardBlockColors[i]);
+			                rect(this.x,this.y,this.w-i*1.4,this.h-i*1.4);
+			            }
+			            break;
+			        case 'block5':
+			            // Corner block 2
+			            for(var i in standardBlockColors){
+			                noStroke();
+			                fill(standardBlockColors[i]);
+			                rect(this.x+i*1.4,this.y,this.w-i*1.4,this.h-i*1.4);
+			            }
+			            break;
+			        case 'block6':
+			            // Corner block 3
+			            for(var i in standardBlockColors){
+			                noStroke();
+			                fill(standardBlockColors[i]);
+			                rect(this.x+i*1.4,this.y+i*1.4,this.w-i*1.4,this.h-i*1.4);
+			            }
+			            break;
+			        case 'block7':
+			            // Corner block 4  
+			            for(var i in standardBlockColors){
+			    
+			                noStroke();
+			                fill(standardBlockColors[i]);
+			                rect(this.x,this.y+i*1.4,this.w-i*1.4,this.h-i*1.4);
+			                
+			            }
+			            break;
+			        case 'block8':
+			            //bottom light
+			            for(var i in standardBlockColors){
+			                noStroke();
+			                fill(standardBlockColors[i]);
+			                rect(this.x,this.y+i*1.4,this.w,this.h-i*1.4);
+			            }
+			            break;
+			        case 'portal':
+			            for(var i = 0; i < portColors.length; i++) {
+			                noStroke();
+			                fill(portColors[i]);
+			                ellipse(this.x+10,this.y+10,this.w-i*1,this.h-i*1);
+			            }
+			            
+			            break;
+			        case 'coin':
+			            strokeWeight(0.15);
+			            stroke(5, 5, 5);
+			            fill(237, 237, 35);
+			            ellipse(this.x +10, this.y+10, this.w, this.h);
+			            fill(227, 212, 4);
+			            ellipse(this.x +10, this.y +10, this.w - 5, this.h -5);
+			            fill(184, 154, 33);
+			            rect(this.x+8.1,this.y+5.3, this.w-16, this.h-10);
+			            
+			            break;
+			        case 'lava':
+			            //lava
+			            noStroke();
+			            fill(250, 58, 5);
+			            rect(this.x,this.y,this.w,this.h);
+			            var lavaBubbles = function(X,Y){
+			                var randomWidth = random(1,5);
+			                var randomHeight = random(1,5);
+			                   
+			                fill(250, 165, 8);
+			                ellipse(X,Y,randomWidth,randomHeight);
+			            };
+			                
+			            lavaBubbles(this.x+10,this.y+14);
+			            lavaBubbles(this.x+16,this.y+9);
+			            lavaBubbles(this.x+5,this.y+5);
+			            lavaBubbles(this.x+6,this.y+16);
+			            break;
+			        case 'poison':
+			            //poison
+			            noStroke();
+			            fill(128, 51, 222);
+			            rect(this.x,this.y,this.w,this.h);
+			            
+			            var poisonBubbles = function(X,Y){
+			   
+			                var randomWidth = random(1,5);
+			                var randomHeight = random(1,5);
+			               
+			                fill(197, 78, 224);
+			                ellipse(X,Y,randomWidth,randomHeight);
+			               
+			                };
+			                
+			            poisonBubbles(this.x+10,this.y+14);
+			            poisonBubbles(this.x+16,this.y+9);
+			            poisonBubbles(this.x+5,this.y+5);
+			            poisonBubbles(this.x+6,this.y+16);
+			            break;
+			        case 'spike':
+			            fill(168, 163, 163);
+			            triangle(this.x+9, this.y,this.x+-2,this.y+20,this.x+19,this.y+20);
+			            
+			            fill(232, 225, 225);
+			            triangle(this.x+9, this.y,this.x+8,this.y+20,this.x+19,this.y+20);
+			            break;
+			        case 'trampoline':
+			            //trampoline
+			            noStroke();
+			            fill(242, 177, 241);
+			            rect(this.x,this.y,this.w,this.h);
+			            
+			            fill(240, 9, 198);
+			            triangle(2+this.x,9+this.y,18+this.x,9+this.y,10+this.x,2+this.y);
+			            rect(this.x+7,this.y+9,this.w-14,this.h-10);
+			    }
+			};
+			
+			// Player constructor
+			var Player = function(x, y){
+			    this.x = x;
+			    this.y = y;
+			    this.w = 20;
+			    this.h = 20;
+			    
+			    this.px = 0;
+			    this.py = 0;
+			    
+			    this.xv = 0;
+			    this.yv = 0;
+			    this.grav = 0.32;
+			    
+			    this.canJump = false;
+			    this.jumpPower = 7;
+			};
+			
+			// Draws the player
+			Player.prototype.draw = function() {
+			    if (owned[3] === true) {
+			        if (keys[81]) {
+			            iTimer++;
+			            if (iTimer > 0 && iTimer < 120) {
+			                used[3] = true;
+			            } else {
+			                used[3] = false;
+			            }
+			        } else if (!keys[81]) {
+			            if (iTimer > 0) {
+			                iTimer = -30;
+			            } else {
+			                iTimer++;
+			            }
+			            
+			            used[3] = false;
+			        }
+			    }
+			    
+			    if (used[3] === false) {
+			        fill(0, 200, 0);
+			    } else if (used[3] === true) {
+			        fill(255, 255, 255);
+			        textSize(15);
+			        text("invisible", this.x + 10, this.y - 15);
+			    }
+			    
+			    noStroke();
+			    rect(this.x, this.y, this.w, this.h, 2.5);
+			    fill(0);
+			    ellipse(this.x + 6, this.y + 10, 4, 10);
+			    ellipse(this.x + 14, this.y + 10, 4, 10);
+			};
+			
+			// Moves the player
+			Player.prototype.move = function(){
+			    this.px = this.x;
+			    this.py = this.y;
+			    
+			    this.y += this.yv;
+			    this.yv += this.grav;
+			    
+			    this.x += this.xv;
+			    this.xv = 0;
+			    
+			    if (powers[2] === true) {
+			        this.jumpPower = 9;
+			    }
+			    
+			    if (keys[LEFT] && used[1] === true || keys[65] && used[1] === true && sTimer <= 120) {
+			        this.xv = -5;
+			    } else if (keys[LEFT] || keys[65]) {
+			        this.xv = -3;
+			    }
+			    
+			    if (keys[RIGHT] && used[1] === true || keys[68] && used[1] === true) {
+			        this.xv = 5;
+			    } else if (keys[RIGHT] || keys[68]) {
+			        this.xv = 3;
+			    }
+			    
+			    if (keys[UP] && this.canJump || keys[87] && this.canJump) {
+			        this.yv = -this.jumpPower;
+			        this.canJump = false;
+			    }
+			};
+			
+			// Sees if the player is colliding with an object
+			Player.prototype.collide = function(obj){
+			    if(obj.checkColl(this)){
+			        if(this.py <= obj.y - this.h) {
+			            this.y = obj.y - this.h;    
+			            this.canJump = true;
+			            this.yv=0;
+			        }
+			        else if(this.px >= obj.x + obj.w) {
+			            this.x = obj.x+obj.w;
+			            this.xv = 0;
+			        }
+			        else if(this.px  <= obj.x- this.w) {
+			            this.x = obj.x-this.w;
+			            this.xv = 0;
+			        }
+			        else if(this.py >= obj.y + obj.h){
+			            this.y = this.py;
+			            this.yv = -this.yv;
+			        }  
+			    }
+			};
+			
+			// Creates the player
+			var player = new Player(200, 200);
+			
+			// Enemy constructor
+			var enemy = function(x, y) {
+			    this.x = x;
+			    this.y = y;
+			    this.w = 20;
+			    this.h = 20;
+			    
+			    this.px = 0;
+			    this.py = 0;
+			    
+			    this.xv = 0;
+			    this.yv = 0;
+			    this.grav = 0.32;
+			    
+			    this.canJump = false;
+			    this.jumpPower = 7;
+			    
+			    this.canMove = eMoving;
+			};
+			
+			// Enemy draw
+			enemy.prototype.draw = function() {
+			    for (var i = 0; i < enemyColors.length; i++) {
+			        noStroke();
+			        fill(enemyColors[i]);
+			        rect(this.x+i*0.75, this.y+i*0.75, this.w-i*1.5, this.h-i*1.5, 2.5);
+			        
+			        fill(3, 3, 3);
+			        ellipse(this.x + 6, this.y + 10, 4, 10);
+			        ellipse(this.x + 14, this.y + 10, 4, 10);
+			    }
+			    
+			    fill(255, 255, 255);
+			    textSize(15);
+			    if (eHealth > 0) {
+			        text(eHealth + " Health", this.x + 10, this.y - 15);
+			    } else {
+			        text("dead", this.x + 10, this.y - 15);
+			    }
+			    textSize(25);
+			};
+			
+			// Enemy AI move
+			enemy.prototype.move = function() {
+			    this.px = this.x;
+			    this.py = this.y;
+			    
+			    this.y += this.yv;
+			    this.yv += this.grav;
+			    
+			    this.x += this.xv;
+			    this.xv = 0;
+			    
+			    
+			    if (eMoving === true) {
+			        // AI move
+			        if (player.x < this.x - 5 && used[3] === false) {
+			            this.xv = -2.5;
+			        }
+			        
+			        if (player.x > this.x + 5 && used[3] === false) {
+			            this.xv = 2.5;
+			        }
+			        
+			        if (player.y < this.y && this.canJump && used[3] === false) {
+			            this.yv = -this.jumpPower;
+			            this.canJump = false;
+			        }
+			    }
+			};
+			
+			// Sees if the enemy is colliding with an object
+			enemy.prototype.collide = function(obj){
+			    if(obj.checkColl(this)){
+			        if(this.py <= obj.y - this.h) {
+			            this.y = obj.y - this.h;    
+			            this.canJump = true;
+			            this.yv=0;
+			        }
+			        else if(this.px >= obj.x + obj.w) {
+			            this.x = obj.x+obj.w;
+			            this.xv = 0;
+			        }
+			        else if(this.px  <= obj.x- this.w) {
+			            this.x = obj.x-this.w;
+			            this.xv = 0;
+			        }
+			        else if(this.py >= obj.y + obj.h){
+			            this.y = this.py;
+			            this.yv = -this.yv;
+			        }  
+			    }
+			};
+			
+			var enemy = new enemy(200, 200);
+			// }
+			
+			/** Functions **/
+			// {
+			var drawLevel = function() {
+			    // Resets the current array of blocks for next level
+			    blocks = [];
+			    
+			    // Loop to display blocks
+			    for (var i = 0; i < levels[level].length; i++) {
+			        for (var j = 0; j < levels[level][i].length; j++) {
+			            switch (levels[level][i][j]) {
+			                // Regular block
+			                case 'z':
+			                    blocks.push(new Block(j * 20, i * 20, 'block1'));
+			                    break;
+			                case 'x':
+			                    blocks.push(new Block(j * 20, i * 20, 'block2'));
+			                    break;
+			                case 'c':
+			                    blocks.push(new Block(j * 20, i * 20, 'block3'));
+			                    break;
+			                case 'v':
+			                    blocks.push(new Block(j * 20, i * 20, 'block4'));
+			                    break;
+			                case 'b':
+			                    blocks.push(new Block(j * 20, i * 20, 'block5'));
+			                    break;
+			                case 'n':
+			                    blocks.push(new Block(j * 20, i * 20, 'block6'));
+			                    break;
+			                case 'm':
+			                    blocks.push(new Block(j * 20, i * 20, 'block7'));
+			                    break;
+			                case ',':
+			                    blocks.push(new Block(j * 20, i * 20, 'block8'));
+			                    break;
+			                case '@':
+			                    blocks.push(new Block(j * 20, i * 20, 'portal'));
+			                    break;
+			                case 'j':
+			                    blocks.push(new Block(j * 20, i * 20, 'coin'));
+			                    break;
+			                case 'P':
+			                    player.x = j * 20;
+			                    player.y = i * 20;
+			                    break;
+			                case 'E':
+			                    enemy.x = j * 20;
+			                    enemy.y = i * 20;
+			                    break;
+			                case 'l':
+			                    blocks.push(new Block(j * 20, i * 20, 'lava'));
+			                    break;
+			                case 'p':
+			                    blocks.push(new Block(j * 20, i * 20, 'poison'));
+			                    break;
+			                case 's':
+			                    blocks.push(new Block(j * 20, i * 20, 'spike'));
+			                    break;
+			                case 't':
+			                    blocks.push(new Block(j * 20, i * 20, 'trampoline'));
+			            }
+			        }
+			    }
+			};
+			
+			var city = function() {
+			    //stars
+			    var randomWidth = random(2,5);
+			    
+			    var stars = function(X,Y){
+			        var randomWidth = random(2,4);
+			        var randomHeight = random(2,4);
+			       
+			        fill(255, 255, 255);
+			        ellipse(X,Y,randomWidth,randomHeight);
+			    };
+			    
+			    stars(10,138);
+			    stars(68,20);
+			    stars(19,66);
+			    stars(10,15);
+			    stars(260,119);
+			    stars(117,140);
+			    stars(37,190);
+			    stars(68,111);
+			    stars(178,154);
+			    stars(145,41);
+			    stars(4,237);
+			    stars(105,358);
+			    stars(125,284);
+			    stars(94,224);
+			    stars(125,400);
+			    stars(121,479);
+			    stars(239,259);
+			    stars(97,538);
+			    stars(107,573);
+			    stars(329,80);
+			    stars(277,190);
+			    stars(129,561);
+			    stars(400,27);
+			    stars(293,47);
+			    stars(400,98);
+			    stars(108,77);
+			    stars(522,138);
+			    stars(476,57);
+			    stars(571,235);
+			    stars(531,5);
+			    stars(500,202);
+			    stars(563,83);
+			    stars(366,372);
+			    stars(376,452);
+			    stars(347,231);
+			    stars(322,109);
+			    stars(254,295);
+			    stars(293,240);
+			    stars(369,346);
+			    stars(373,558);
+			    stars(513,264);
+			    stars(553,343);
+			    stars(589,427);
+			    stars(573,569);
+			    stars(571,490);
+			    stars(546,533);
+			    stars(545,397);
+			    stars(598,303);
+			    stars(580,169);
+			    stars(336,277);
+			     
+			    fill(43, 43, 43);
+			    rect(-4,271,100,335);
+			    
+			    fill(28, 27, 27);
+			    rect(138,196,87,473);
+			    
+			    fill(71, 70, 70);
+			    rect(482,295,56,327);
+			    
+			    fill(51, 54, 64);
+			    rect(226,315,134,301);
+			    
+			    fill(3, 3, 3);
+			    rect(382,123,100,483);
+			    
+			    //spires
+			    fill(54, 53, 54);
+			    rect(6,253,77,18);
+			    
+			    fill(102, 99, 99);
+			    triangle(44,187,47,253,41,253);
+			    
+			    fill(84, 84, 84);
+			    rect(482,282,42,13);
+			    
+			    fill(158, 158, 158);
+			    triangle(489,282,483,227,482,282);
+			    
+			    //tv dishes
+			    var dishes = function(X,Y) {
+			        pushMatrix();
+			        scale(0.737);
+			        translate(X,Y);
+			        pushMatrix();
+			        noStroke();
+			        rotate(21);
+			        fill(148, 146, 146);
+			        rect(103,98,9,5);
+			        fill(199, 191, 191);
+			    
+			        ellipse(100,100,7,25);
+			    
+			        popMatrix();
+			        fill(148, 146, 146);
+			        rect(65,132,5,14);
+			        rect(57,145,19,9);
+			    
+			        stroke(110, 108, 110);
+			        strokeWeight(2);
+			        line(47,125,54,127.5);
+			        noStroke();
+			        popMatrix();
+			    
+			    };
+			    
+			    dishes(141,114);
+			    dishes(470,13);
+			    dishes(395,273);
+			    dishes(362,273);
+			    
+			    // Lights on building 1
+			    for(var i = 5; i< 98; i+=20){
+			        
+			        fill(252, 252, 124);
+			        
+			        for (var j = 283; j < 629; j+=32){
+			            
+			            noStroke();
+			            rect(i,j,5,15,10);
+			            
+			        }
+			        
+			    }
+			    
+			    // Lights on building 2
+			    for(var i = 147; i< 222; i+=23){
+			        
+			        fill(217, 217, 94);
+			        
+			        for (var j = 204; j < 629; j+=32){
+			            
+			            noStroke();
+			            //X,Y, Width, Height, corner 1 edge, corner 2 edge, corner 3 edge, corner 4 edge.
+			            rect(i, j, 5, 15, 2, 0, 2, 0);
+			            
+			        }
+			        
+			    }
+			    
+			    // Lights on building 3
+			    for(var i = 236; i< 351; i+=12){
+			        
+			        fill(250, 250, 187);
+			        
+			        for (var j = 326; j < 586; j+=23){
+			            
+			            noStroke();
+			            rect(i,j,5,15,10);
+			            
+			        }
+			        
+			    }
+			    
+			    // Lights on building 4
+			    for(var i = 163; i< 247; i+=23){
+			        
+			        fill(250, 250, 187);
+			        
+			        for (var j = -133; j < 343; j+=28){
+			            
+			            noStroke();
+			            
+			            quad(226+i,277+j,231+i,268+j,236+i,268+j,242+i,277+j);
+			            
+			        }
+			        
+			    }
+			    
+			    // Lights on building 5
+			    for(var i = 491; i< 535; i+=33){
+			        
+			        fill(230, 230, 212);
+			        
+			        for (var j = 314; j < 607; j+=28){
+			            
+			            noStroke();
+			            rect(i,j,5,15+-26,-3);
+			            
+			        }
+			        
+			    }
+			 
+			};
+			
+			var flash = function() {
+			    var fTimer = 0;
+			    if (fTimer < 25) {
+			        background(255, 0, 0);
+			        fTimer++;
+			    }
+			};
+			// }
+			
+			/** Scenes **/
+			// {
+			
+			// Game
+			var game = function() {
+			    
+			    background(3, 22, 87);
+			    fill(0);
+			    
+			    city();
+			    
+			    noStroke();
+			    
+			    // Player setup
+			    player.draw();
+			    player.move();
+			    
+			    // Enemy setup
+			    enemy.draw();
+			    enemy.move();
+			    
+			    // Has player collide with base block
+			    for (var i = 0; i < blocks.length; i++) {
+			        if (blocks[i].type === 'block1') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			        
+			        if (blocks[i].type === 'block2') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			        
+			        if (blocks[i].type === 'block3') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			        
+			        if (blocks[i].type === 'block4') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			        
+			        if (blocks[i].type === 'block5') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			        
+			        if (blocks[i].type === 'block6') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			        
+			        if (blocks[i].type === 'block7') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			        
+			        if (blocks[i].type === 'block8') {
+			            player.collide(blocks[i]);
+			            enemy.collide(blocks[i]);
+			        }
+			    }
+			    
+			    // Player collision with blocks
+			    for (var i = blocks.length; i-- > 0;) {
+			        blocks[i].display();
+			        if (blocks[i].checkColl(player)) {
+			            switch (blocks[i].type) {
+			                // Collision with types of blocks
+			                case 'portal':
+			                    // If it's not the last level
+			                    if (level < levels.length - 1) {
+			                        level++;
+			                        levelOn++;
+			                        // Draw this after adding one to the level counter or else it will display the same level
+			                        drawLevel();
+			                        coinsCollectedLevel = 0;
+			                        eHealth = 3;
+			                        eCanDamage = true;
+			                        eMoving = true;
+			                        eCanTakeDamage = true;
+			                        health = 3;
+			                    } else {
+			                        scene = "endgame";
+			                        level = 0;
+			                    }
+			                    
+			                    health = 3;
+			                    
+			                    break;
+			                    
+			                // Coin
+			                case 'coin':
+			                    // Removes the coin
+			                    blocks.splice(i, 1);
+			                    coins++;
+			                    
+			                    // Adds one to the amount of coins collected on the level that way if you die it will remove this number of coins from your total number of coins
+			                    coinsCollectedLevel++;
+			                    
+			                    // Anti cheat SECRET {
+			                        coinsCollectedGame++;
+			                    // }
+			                    break;
+			                
+			                case 'lava':
+			                    drawLevel();
+			                    deathCount++;
+			                    coins -= coinsCollectedLevel;
+			                    // Notice how this is after subtracting
+			                    // coinsCollectedLevel.
+			                    // This is to prevent subtracting 0 coins.
+			                    coinsCollectedLevel = 0;
+			                    health = 3;
+			                    eHealth = 3;
+			                    eMoving = true;
+			                    eCanDamage = true;
+			                    eCanTakeDamage = true;
+			                    break;
+			                case 'spike':
+			                    drawLevel();
+			                    deathCount++;
+			                    coins -= coinsCollectedLevel;
+			                    coinsCollectedLevel = 0;
+			                    health = 3;
+			                    eHealth = 3;
+			                    eMoving = true;
+			                    eCanDamage = true;
+			                    eCanTakeDamage = true;
+			                    break;
+			                case 'poison':
+			                    drawLevel();
+			                    deathCount++;
+			                    coins -= coinsCollectedLevel;
+			                    coinsCollectedLevel = 0;
+			                    health = 3;
+			                    eHealth = 3;
+			                    eMoving = true;
+			                    eCanDamage = true;
+			                    eCanTakeDamage = true;
+			                    break;
+			                case 'trampoline':
+			                    // Sends the player in the air
+			                    player.yv = -10;
+			                    // Player can't jump
+			                    player.canJump = false;
+			            }
+			        }
+			        
+			        if (blocks[i].checkColl(enemy)) {
+			            if (blocks[i].type === 'lava') {
+			                enemy.collide(blocks[i]);
+			            }
+			        }
+			    }
+			    
+			    if (enemy.x > player.x - 10 && enemy.x < player.x + 30 && enemy.y < player.y + 22.5 && enemy.y > player.y - 2.5 && healthTimer > 60 && eCanDamage === true) {
+			        health -= eDamage;
+			        flash();
+			        healthTimer = 0;
+			    }
+			    
+			    if (player.x > enemy.x - 10 && player.x < enemy.x + 30 && player.y < enemy.y + 22.5 && player.y > enemy.y - 2.5 && eHealthTimer > 45 && keys[32] && eCanTakeDamage === true) {
+			        eHealth--;
+			        eHealthTimer = 0;
+			    }
+			    
+			    if (health <= 0) {
+			        coins -= coinsCollectedLevel;
+			        coinsCollectedLevel = 0;
+			        drawLevel();
+			        deathCount++;
+			        health = 3;
+			        eHealth = 3;
+			        eMoving = true;
+			        eCanDamage = true;
+			    }
+			    
+			    if (eHealth === 0) {
+			        eMoving = false;
+			        eCanDamage = false;
+			        eCanTakeDamage = false;
+			    }
+			    
+			    if (keys[SHIFT] && owned[1] === true) {
+			        used[1] = true;
+			    }
+			    
+			    if (!keys[SHIFT]) {
+			        used[1] = false;
+			    }
+			    
+			    if (iTimer >= 30) {
+			        iTimer = 0;
+			    }
+			    
+			    text(levelText[levelOn], 300, 190);
+			    
+			    textSize(25);
+			    text("Coins: " + coins, 475, 50);
+			    text("Health: " + Math.floor(health), 100, 50);
+			    text("Deaths: " + deathCount, 300, 50);
+			    
+			    healthTimer++;
+			    eHealthTimer++;
+			};
+			
+			// Menu
+			var menu = function() {
+			    background(3, 22, 87);
+			    
+			    city();
+			    
+			    rectMode(CENTER);
+			    fill(94, 159, 191);
+			    rect(300, 400, 150, 75, 10);
+			    rect(300, 500, 150, 75, 10);
+			    rect(125, 450, 150, 75, 10);
+			    rect(475, 450, 150, 75, 10);
+			    fill(colors[1]);
+			    textSize(30);
+			    text("PLAY", 300, 400);
+			    text("SHOP", 300, 500);
+			    text("CREDITS", 125, 450);
+			    text("HOW", 475, 450);
+			    
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 400 - (75 / 2) && mouseY < 400 + (75 / 2) && click === true) {
+			        level = 0;
+			        scene = "game";
+			        drawLevel();
+			        click = false;
+			        health = 3;
+			        eCanTakeDamage = true;
+			        eMoving = true;
+			        eCanDamage = true;
+			        eHealth = 3;
+			        healthTimer = 0;
+			        eHealthTimer = 0;
+			    }
+			    
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 500 - (75 / 2) && mouseY < 500 + (75 / 2) && click === true) {
+			        scene = "shop";
+			        click = false;
+			    }
+			    
+			    if (mouseX > 50 && mouseX < 200 && mouseY > 450 - 32.5 && mouseY < 450 + 32.5 && click === true) {
+			        scene = "credits";
+			        click = false;
+			    }
+			    
+			    if (mouseX > 400 && mouseX < 550 && mouseY > 450 - 32.5 && mouseY < 450 + 32.5 && click === true) {
+			        scene = "how";
+			        click = false;
+			        page = 0;
+			    }
+			    
+			    rectMode(CORNER);
+			    
+			    // Hover
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 500 - (75 / 2) && mouseY < 500 + (75 / 2)) {
+			        fill(28, 192, 217);
+			        rect(225, 462, 150, 75, 10);
+			        fill(252, 249, 249);
+			        text("SHOP", 300, 500);
+			    }
+			    
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 400 - (75 / 2) && mouseY < 400 + (75 / 2)) {
+			        fill(28, 192, 217);
+			        rectMode(CENTER);
+			        rect(300, 400, 150, 75, 10);
+			        fill(252, 249, 249);
+			        text("PLAY", 300, 400);
+			    }
+			    
+			    if (mouseX > 50 && mouseX < 200 && mouseY > 450 - 32.5 && mouseY < 450 + 32.5) {
+			        rectMode(CENTER);
+			        fill(28, 192, 217);
+			        rect(125, 450, 150, 75, 10);
+			        fill(255, 255, 255);
+			        text("CREDITS", 125, 450);
+			    }
+			    
+			    if (mouseX > 400 && mouseX < 550 && mouseY > 450 - 32.5 && mouseY < 450 + 32.5) {
+			        fill(28, 192, 217);
+			        rect(400, 412.5, 150, 75, 10);
+			        fill(255, 255, 255);
+			        text("HOW", 475, 450);
+			    }
+			    
+			    rectMode(CORNER);
+			    
+			    // PURPOSELY NOT ROTATED PROPERLY
+			    pushMatrix();
+			    translate(-23,-11);
+			    rotate(-45);
+			    fill(252, 252, 252);
+			    textSize(50);
+			    text("POWER", 75, 250);
+			    pushMatrix();
+			    rotate(75);
+			    text("PLATFORMER", 455, 0);
+			    
+			   
+			    // Character dude
+			    translate(404,-136);
+			    fill(2, 207, 6);
+			    rect(100,100,17,17,3);
+			    fill(3, 3, 3);
+			    rect(111,102,5,12,10);
+			    rect(104,102,5,12,10);
+			    
+			    // Enemy
+			    translate(-250,0);
+			    fill(255, 0, 0);
+			    rect(266,100,17,17,3);
+			    fill(252, 249, 252);
+			    rect(276,102,5,12,10);
+			    rect(270,102,5,12,10);
+			    
+			    popMatrix();
+			    popMatrix();
+			    
+			    // Movement lines
+			    stroke(252, 252, 252);
+			    strokeWeight(0.4);
+			    line(351,167,327,152);
+			    line(351,175,307,149);
+			    line(422,217,386,197);
+			    line(425,209,406,198);
+			    noStroke();
+			    
+			};
+			
+			// Game finished
+			var endgame = function() {
+			    background(0);
+			    
+			    fill(255, 255, 255);
+			    text("You Have Won!\nYou succesfully found the Shadow Onyx!\n'The Hidden' are now in jail\nwhere they belong.\n\n\n(Click to Continue)", 300, 300);
+			    
+			    if (click === true) {
+			        scene = "menu";
+			    }
+			};
+			
+			// Shop
+			var shop = function() {
+			    background(3, 32, 89);
+			    
+			    city();
+			    
+			    textSize(30);
+			    fill(colors[1]);
+			    text("Coins: " + coins, 85, 175);
+			    
+			    fill(174, 236, 245);
+			    rect(43,14,243,139,5);
+			
+			    //speed
+			    fill(7, 113, 115);
+			    textSize(25.3);
+			    text("SUPER SPEED",163,33);
+			    fill(2, 107, 173);
+			    textSize(15);
+			    text("duration: ∞",93,64);
+			    text("cost: 25 coins",102,87);
+			    text("speed: 5",85,111);
+			    text("cooldown: None",110,133);
+			
+			    // Jump boost
+			    fill(174, 236, 245);
+			    rect(310,15,243,139,5);
+			 
+			    fill(7, 113, 115);
+			    textSize(25.3);
+			    text("JUMP BOOST",432,34);
+			
+			    fill(2, 107, 173);
+			    textSize(15);
+			    text("double jump",364,62);
+			    text("cost: 25 coins",368,86);
+			    text("height: 2x",355,111);
+			    text("cooldown: None",375,133);
+			  
+			    // Invisibility
+			    pushMatrix();
+			    translate(-125, 0);
+			    fill(174, 236, 245);
+			    rect(310,164,243,139,5);
+			  
+			    fill(7, 113, 115);
+			    textSize(25.3);
+			    text("INVISIBILITY",432,183);
+			  
+			    fill(2, 107, 173);
+			    textSize(15);
+			    text("duration: 3s",358,217);
+			    text("cost: 50 coins",364,241);
+			    text("cooldown: 2s",362,267);
+			    popMatrix();
+			  
+			    // Home button
+			    fill(94, 159, 191);
+			    rectMode(CENTER);
+			    rect(300, 500, 150, 75, 10);
+			    rectMode(CORNER);
+			    fill(247, 247, 247);
+			    textSize(30);
+			    text("HOME", 300, 500);
+			    
+			 
+			    
+			    //button pressing
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 500 - 32.5 && mouseY < 500 + 32.5 && click === true) {
+			        scene = "menu";
+			        click = false;
+			    }
+			    
+			    //mouse over
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 492 - 32.5 && mouseY < 503 + 32.5){
+			        
+			        fill(28, 192, 217);
+			        rect(225, 462, 150, 75, 10);
+			        fill(252, 249, 249);
+			        text("HOME", 300, 500);
+			    }
+			    
+			    
+			    // Powerups pressing
+			    if (mouseX > 40 && mouseX < 290 && mouseY > 15 && mouseY < 155 && click === true && coins >= 25 && owned[1] === false) {
+			        powers[1] = true;
+			        used[1] = true;
+			        owned[1] = true;
+			        coins -= 25;
+			    }
+			    
+			    // Mouse over
+			    if (mouseX > 40 && mouseX < 290 && mouseY > 15 && mouseY < 155) {
+			        //speed
+			        fill(28, 192, 217);
+			        rect(43,14,243,139,5);
+			        fill(7, 113, 115);
+			        textSize(25.3);
+			        text("SUPER SPEED",163,33);
+			        fill(2, 107, 173);
+			        textSize(15);
+			        text("duration: ∞",93,64);
+			        text("cost: 25 coins",102,87);
+			        text("speed: 5",85,111);
+			        text("cooldown: None",110,133);
+			    }
+			    
+			    if (owned[1] === true) {
+			        fill(0, 200, 0);
+			        textSize(50);
+			        text("✓", 150, 100);
+			    }
+			    
+			    // Click
+			    if (mouseX > 305 && mouseX < 555 && mouseY > 15 && mouseY < 155 && click === true && owned[2] === false && coins >= 25) {
+			        powers[2] = true;
+			        used[2] = true;
+			        owned[2] = true;
+			        coins -= 25;
+			    }
+			    
+			    // Mouse over
+			    if (mouseX > 305 && mouseX < 555 && mouseY > 15 && mouseY < 155) {
+			        // Jump boost
+			        fill(28, 192, 217);
+			        rect(310,15,243,139,5);
+			     
+			        fill(7, 113, 115);
+			        textSize(25.3);
+			        text("JUMP BOOST",432,34);
+			    
+			        fill(2, 107, 173);
+			        textSize(15);
+			        text("double jump",364,62);
+			        text("cost: 25 coins",368,86);
+			        text("height: 2x",355,111);
+			        text("cooldown: None",375,133);
+			    }
+			    
+			    if (owned[2] === true) {
+			        fill(0, 200, 0);
+			        textSize(50);
+			        text("✓", 435, 100);
+			    }
+			    
+			    if (mouseX > 175 && mouseX < 425 && mouseY > 160 && mouseY < 305 && coins >= 50 && click === true && owned[3] === false) {
+			        owned[3] = true;
+			        powers[3] = true;
+			    }
+			    
+			    if (mouseX > 175 && mouseX < 425 && mouseY > 160 && mouseY < 305) {
+			        // Invisibility
+			        pushMatrix();
+			        translate(-125, 0);
+			        fill(28, 192, 217);
+			        rect(310,164,243,139,5);
+			      
+			        fill(7, 113, 115);
+			        textSize(25.3);
+			        text("INVISIBILITY",432,183);
+			      
+			        fill(2, 107, 173);
+			        textSize(15);
+			        text("duration: 3s",358,217);
+			        text("cost: 50 coins",364,241);
+			        text("cooldown: 2s",362,267);
+			        popMatrix();
+			    }
+			    
+			    if (owned[3] === true) {
+			        pushMatrix();
+			        translate(-135, 135);
+			        fill(0, 200, 0);
+			        textSize(50);
+			        text("✓", 435, 100);
+			        popMatrix();
+			    }
+			};
+			
+			// Credits
+			var credits = function() {
+			    background(3, 32, 89);
+			    
+			    city();
+			    
+			    fill(174, 236, 245);
+			    rect(81,67,438,168,5);
+			   
+			    fill(2, 107, 173);
+			    textSize(20.6);
+			    text("GAME DESIGN:",198,117);
+			    text("GRAPHICS:",179,185);
+			    text("DigiFox9",396,184);
+			    text("Community Coder",402,115); 
+			   
+			    rectMode(CENTER);
+			    fill(94, 159, 191);
+			    rect(300, 500, 150, 75, 10);
+			    rectMode(CORNER);
+			    fill(255, 250, 250);
+			    textSize(30);
+			     
+			    text("HOME", 300, 500);
+			    
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 460 && mouseY < 500 + 32.5 && click === true) {
+			        scene = "menu";
+			        click = false;
+			    }
+			    
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 460 && mouseY < 500 + 32.5) {
+			        rectMode(CENTER);
+			        fill(28, 192, 217);
+			        rect(300, 500, 150, 75, 10);
+			        fill(255, 255, 255);
+			        text("HOME", 300, 500);
+			        rectMode(CORNER);
+			    }
+			};
+			
+			// How To Play
+			var how = function() {
+			    background(0);
+			    
+			    if (page === 0) {
+			        textSize(30);
+			        
+			        text(howMessage + "\n\n" + storyM, 300, hy);
+			        
+			        if (hy > -250) {
+			            hy -= 0.75;
+			        } else {
+			            text("(Click to Continue)", 300, 550);
+			            if (click === true) {
+			                page++;
+			            }
+			        }
+			    }
+			};
+			
+			// Intro
+			var trans = function() {
+			    
+			    if (y1 < 430) {
+			        background(0);
+			        fill(100, 100, 100);
+			        rect(0, 450, 600, 150);
+			        
+			        rectMode(CENTER);
+			        fill(255, 255, 255);
+			        rect(x1, y1, 50, 50, 5);
+			        rectMode(CORNER);
+			        fill(0);
+			        rect(x1 - 15, y1 - 15, 10, 20, 2.5);
+			        rect(x1 + 10, y1 - 15, 10, 20, 2.5);
+			        
+			        y1 += 5;
+			    } else if (y1 === 430) {
+			        // Makes it so it doen't appear simultaniously
+			        if (timer1 > 5) {
+			            // Cracks in the ground
+			            stroke(0);
+			            strokeWeight(2.5);
+			            line(x1, 450, 350, 500);
+			            line(x1, 450, 300, 475);
+			        }
+			        
+			        if (timer1 > 10) {
+			            line(300, 475, 310, 525);
+			        }
+			        
+			        if (timer1 > 15) {
+			            line(305, 500, 340, 525);
+			            line(306, 510, 295, 530);
+			            line(300, 485, 280, 515);
+			        }
+			        
+			        timer1++;
+			    }
+			    
+			    if (timer1 > 60) {
+			        scene = "menu";
+			    }
+			    
+			    noStroke();
+			};
+			
+			// }
+			
+			// Self-explanitory
+			drawLevel();
+			
+			/** Loop **/
+			draw = function() {
+			    switch (scene) {
+			        case "game":
+			            game();
+			            break;
+			        case "menu":
+			            menu();
+			            break;
+			        case "endgame":
+			            endgame();
+			            break;
+			        case "transition":
+			            trans();
+			            break;
+			        case "shop":
+			            shop();
+			            break;
+			        case "credits":
+			            credits();
+			            break;
+			        case "how":
+			            how();
+			            break;
+			    }
+			    
+			    click = false;
+			};
+			
+			/** Other **/
+			// {
+			mousePressed = function() {
+			    click = true;
+			};
+			
+			mouseReleased = function() {
+			    click = false;
+			};
+			
+			keyPressed = function() {
+			    keys[keyCode] = true;
+			};
+			
+			keyReleased = function() {
+			    keys[keyCode] = false;
+			};
+			// }
+			
+		}
+		
+		runPJS(program);
+		
+		// Add reload button on KA --> <script>
+		
+	</script>
+</body>
+
+</html>

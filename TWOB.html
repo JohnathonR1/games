@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html>
+<!-- Program exported to HTML using the KA Project Exporter by @MushyAvocado 
+https://www.khanacademy.org/computer-programming/ka-project-exporter/5195486791385088
+-->
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>The World Of Block</title>
+	<style>
+		
+		
+		/* Change the color as you want */
+		:root {
+			--background-color: #000000;
+		}
+		
+		body {
+		    background-color: var(--background-color);
+		}
+		
+		html, body, #wrapper {
+			width: 100%;
+		    height: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		
+		canvas {
+			width: fit-content;
+			height: fit-content;
+		}
+		
+		canvas:focus {
+			outline: none;
+		}
+		
+		/* Automatically fits to the remaining height and centers the canvas it contains */
+		#wrapper {
+			padding: 0px;
+			margin: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+
+        .back-btn {
+            position: absolute;
+            top: 90%;
+            left: 90%;
+        }
+
+        #Karlson-back-btn {
+            text-align: center;
+            color: black;
+            border-radius: 7px;
+            width: 9%;
+            height: 7%;
+            background-color: white;
+            transition: 0.35s;
+        }
+
+        #Karlson-back-btn:hover {
+            cursor: pointer;
+            background-color: darkgrey;
+        }
+		
+</style>
+</head>
+<body id="wrapper">
+
+    <a href="index.html">
+        <button class="back-btn" id="Karlson-back-btn" type="button">← Back</button>
+    </a>
+    
+    <!-- Canvases with a class of "sketch" are applied to the program in the order importPJS() is called. -->
+    <canvas class="sketch"></canvas>
+	<!-- Load the PJS library -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Khan/processing-js@master/processing.js"></script>
+	<!-- The exporter script must be loaded before the program script -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Mushy-Avocado/KA-exporter@main/exporter.js"></script>
+	<!-- Run Khan Academy program and import PJS -->
+	<script type="application/javascript">
+		
+		
+		function program() {
+		    
+		    title("The World Of Block");
+		    size(600, 600);
+		    
+		    // All code goes here
+			// Read {
+			
+			
+			
+			/** 
+			 * Honestly, I never thought that I would be able to make a game to this level.
+			 * 
+			 * I started programming in 3rd grade on an ipad. I was doing it with my friend, who I no longer know now.
+			 * 
+			 * I started using my parents computer in 5th grade and started programming constantly.
+			 * 
+			 * I programmed on every app I could find. VS Code, Unity UE4, UE5, Notepad++, and sublime
+			 * 
+			 * However, I never really liked any debugger for JS exept for the one on Khan.
+			 * 
+			 * That is why I am here. I love the community and the editor, even if it's not the best for HTML.
+			 * 
+			 * I finished the intro into JS somewhere in the middle of fith grade.
+			 * 
+			 * I thought that that was all of the knowlege I needed to build a full game.
+			 * 
+			 * That was until I started re-programming other peoples games. (Dat, Greenghost) big game developers games that they created.
+			 * 
+			 * I realized that I needed to finish the rest of the JS courses before building a full game.
+			 * 
+			 * Unfortanatley, I do not know all of the math concepts to finish the natural simulations but I finished games and visualizations.
+			 * 
+			 * I found Liam K.'s Platformer engine a few weeks ago.
+			 * 
+			 * I always wanted to make a platformer I started work.
+			 * 
+			 * The first time I made a platformer was not actually this game.
+			 * 
+			 * I was looking through the hot list and I saw WS Studios "Platformer Engine Improved ll"
+			 * 
+			 * I made a verson of that with more levels before I started working on this game.
+			 * 
+			 * When I started this game I had no real idea what I wanted to make except for knowing I wanted to make a platformer.
+			 * 
+			 * I took a lot of "shortcuts" that made me work more, i.e not making a button object, just a rectangle with an "if" statment and text.
+			 * 
+			 * But, it works.
+			
+			                       So I present
+			
+			                    The World of Block
+			*/
+			
+			
+			
+			
+			// }
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			// Started: 10/3/2023
+			
+			// Finished: 10/26/2023
+			
+			// What's in the game {
+			
+			    // 10/26/2023: V 1.0
+			        // Base game with coins, multiple skins, death counter, multiple levels, and main menu.
+			        
+			    // 10/27/2023: V 1.1 
+			        // Fixed glitch where bottom skins can be bought without required amount of coins.
+			        
+			        // Also made it so that deaths reset each time you re-play the game
+			        
+			//}
+			
+			// Ps plz don't look at the shop scene... The code is awfully written
+			
+			// Code {   
+			
+			// Amount of coins
+			var score = 0;
+			
+			// The death text in the top left of your screen
+			var deathText = "Deaths";
+			
+			// Amount of deaths.
+			var deathCount = 0;
+			
+			// Text for levels
+			// 15 Levels
+			var text1 = [
+			    "Collect the coin to buy new characters\nGo to the purple circle to get to the next level",
+			    "Avoid Lava",
+			    "A little trickier",
+			    "Even harder",
+			    "'Impossible'",
+			    "Uh oh",
+			    "This is a trampoline.\nYou can jump on it",
+			    "These are spikes.\nYou'll find out what they do:)",
+			    "Impossible",
+			    "Very Annoying",
+			    "Its Possible",
+			    "Watch out for fake blocks",
+			    "Not as easy as you think",
+			    "Final level..."
+			];
+			
+			// Array of keys
+			var keys = {};
+			
+			var blocks = []; // Array to store our blocks
+			
+			// Current scene
+			var scene = 0;
+			
+			// If mouse is clicked
+			var click = false;
+			
+			// Coins collected for the current level.
+			var coinsCollectedLevel = 0;
+			
+			// Level your on, mostly for displaying text
+			var levelAmt = 0;
+			
+			// Sees if 2 objects are colliding.
+			var rectRect = function(x1, y1, w1, h1, x2, y2, w2, h2) {
+			    return(x1 + w1 > x2 && y1 + h1 > y2 && x1 < x2 + w2 && y1 < y2 + h2);
+			};
+			
+			// If the skin has been bought
+			var owned = [true, false, false, false, false, false, false, false];
+			
+			// If the skin is being used
+			var used = [true, false, false, false, false, false, false, false];
+			
+			var cGame = 0;
+			
+			// Block constructor
+			var Block = function(x, y, type) {
+			    this.x = x;
+			    this.y = y;
+			    this.w = 20;
+			    this.h = 20;
+			    
+			    this.type = type;
+			};
+			
+			// Checks for collision with blocks
+			Block.prototype.checkColl = function(obj){
+			    return(rectRect(this.x,this.y,this.w,this.h,obj.x,obj.y,obj.w,obj.h));
+			};
+			
+			// Displays the block
+			Block.prototype.display = function() {
+			    switch(this.type){
+			        case 'block':
+			            fill(0);
+			            rect(this.x,this.y,this.w,this.h);
+			        break;
+			        case 'portal':
+			            fill(255, 0, 242);
+			            ellipse(this.x+10,this.y+10,20,20);
+			        break;
+			        case 'lava':
+			            fill(219, 40, 40);
+			            rect(this.x,this.y,this.w,this.h);
+			        break;
+			        case 'Poison':
+			            fill(50, 255, 100);
+			            rect(this.x, this.y, this.w, this.h);
+			            break;
+			        case 'coin':
+			            fill(255, 215, 50);
+			            ellipse(this.x + 10, this.y + 10, 20, 20);
+			            break;
+			        case 'tramp':
+			            fill(255, 0, 255);
+			            rect(this.x, this.y + 10, this.w, this.h / 2);
+			            break;
+			        case 'spike':
+			            fill(100, 100, 100);
+			            triangle(this.x, this.y + 20, this.x + 10, this.y, this.x + 20, this.y + 20);
+			            break;
+			        case 'fakeB':
+			            fill(25, 25, 25);
+			            rect(this.x, this.y, this.w, this.h);
+			            break;
+			    }
+			};
+			
+			// Player constructor
+			var Player = function(x,y){
+			    this.x = x;
+			    this.y = y;
+			    this.w = 20;
+			    this.h = 20;
+			    
+			    this.px = 0;
+			    this.py = 0;
+			    
+			    this.xv = 0;
+			    this.yv = 0;
+			    this.grav = 0.32;
+			    
+			    this.canJump = false;
+			    this.jumpPower = 7;
+			};
+			
+			// Draws the player
+			Player.prototype.draw = function() {
+			    if (used[0] === true) {
+			        fill(0, 0, 255);
+			    } else if (used[1] === true) {
+			        fill(255, 255, 255);
+			    } else if (used[2] === true) {
+			        fill(255, 0, 0);
+			    } else if (used[3] === true) {
+			        fill(100, 0, 255);
+			    } else if (used[4] === true) {
+			        fill(255, 255, 0);
+			    } else if (used[5] === true) {
+			        fill(0, 255, 255);
+			    } else if (used[6] === true) {
+			        fill(255, 0, 255);
+			    } else if (used[7] === true) {
+			        fill(random(0, 255), random(0, 255), random(0, 255));
+			    }
+			    
+			    noStroke();
+			    rect(this.x, this.y, this.w, this.h, 2.5);
+			    fill(0);
+			    ellipse(this.x + 6, this.y + 10, 4, 10);
+			    ellipse(this.x + 14, this.y + 10, 4, 10);
+			};
+			
+			// Moves the player
+			Player.prototype.move = function(){
+			    this.px = this.x;
+			    this.py = this.y;
+			    
+			    this.y += this.yv;
+			    this.yv += this.grav;
+			    
+			    this.x += this.xv;
+			    this.xv = 0;
+			    
+			    if(keys[LEFT] || keys[65]) {
+			        this.xv = -3;   
+			    }
+			    
+			    if(keys[RIGHT] || keys[68]) {
+			        this.xv = 3;   
+			    }
+			    
+			    if(keys[UP]&&this.canJump || keys[87]&&this.canJump){
+			        this.yv = -this.jumpPower;
+			        this.canJump = false;
+			    }
+			};
+			
+			// Sees if the player is colliding with an object
+			Player.prototype.collide = function(obj){
+			    if(obj.checkColl(this)){
+			        if(this.py <= obj.y - this.h) {
+			            this.y = obj.y - this.h;    
+			            this.canJump = true;
+			            this.yv=0;
+			        }
+			        else if(this.px >= obj.x + obj.w) {
+			            this.x = obj.x+obj.w;
+			            this.xv = 0;
+			        }
+			        else if(this.px  <= obj.x- this.w) {
+			            this.x = obj.x-this.w;
+			            this.xv = 0;
+			        }
+			        else if(this.py >= obj.y + obj.h){
+			            this.y = this.py;
+			            this.yv = -this.yv;
+			        }  
+			    }
+			};
+			
+			// Sets a variable for the new player
+			var player = new Player(200, 200);
+			
+			// Current level
+			var level = 0;
+			
+			// Array of levels (15 Levels!!!)
+			
+			// Also in bitmaps
+			var levels = [
+			
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b...P........................b',
+			        'b............c.c.c........@..b',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b...P........................b',
+			        'b.........lll.....lll.....@..b',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b.....................cc..cc@b',
+			        'b...............cc....bb..bbbb',
+			        'b.........cc....bb...........b',
+			        'b...P.....bb.................b',
+			        'b...bb.......................b',
+			        'bllllllllllllllllllllllllllllb',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b...........................@b',
+			        'b...........................bb',
+			        'b.......................b....b',
+			        'b...................b........b',
+			        'b...............b............b',
+			        'b...........b................b',
+			        'bP......b....................b',
+			        'bbbbb........................b',
+			        'bllllllllllllllllllllllllllllb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b..............b.............b',
+			        'b..............b.............b',
+			        'b..............b.............b',
+			        'b............................b',
+			        'b............................b',
+			        'b......P.......b.............b',
+			        'bbbbbbbbbbbb...b.............b',
+			        'b..............b.............b',
+			        'b..............bbbb..........b',
+			        'b.................b..........b',
+			        'b.................b..........b',
+			        'b.................b..........b',
+			        'b..............c..b..........b',
+			        'b.........bbbbbbbbb..........b',
+			        'b......bbb...................b',
+			        'b.....b......................b',
+			        'b..b.........................b',
+			        'b............................b',
+			        'b.....b......................b',
+			        'b............................b',
+			        'b............................b',
+			        'b.............c..@...........b',
+			        'b.......b.....bbbbbb.........b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'bllllllllllllllllllllllllllllb',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b..............cc.@..........b',
+			        'b........b.....bbbbb.........b',
+			        'b............................b',
+			        'b............................b',
+			        'b....b.......................b',
+			        'b............................b',
+			        'b......p..b....b....c........b',
+			        'b...................b........b',
+			        'b............................b',
+			        'b.......................b....b',
+			        'b............................b',
+			        'b............................b',
+			        'b.......................b....b',
+			        'b............................b',
+			        'b...............c...b........b',
+			        'b...............b............b',
+			        'b.......b..b.................b',
+			        'b.P...p......................b',
+			        'bbbbb........................b',
+			        'bllllllllllllllllllllllllllllb',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b......................@.....b',
+			        'b.....................bbb....b',
+			        'b............................b',
+			        'b.P..........................b',
+			        'b............................b',
+			        'b........c....c....t.........b',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b.P..........................b',
+			        'b............................b',
+			        'b........c..s..c..s..ccc..@..b',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b...cc@......................b',
+			        'b..bbb.......................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'bt.s.cc....c.....c...........b',
+			        'bbbbbbb....bbbllllbbbsssssb..b',
+			        'b...................bbbbbbb..b',
+			        'b............................b',
+			        'b........................cc.tb',
+			        'b....................bbbbbbbbb',
+			        'b.................cc.........b',
+			        'b..bllb...bllb...bbbb........b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'bt....c.....c..c..c..........b',
+			        'bb....b....bbllbllbllb.s.....b',
+			        'bsssssssssss...........b.b...b',
+			        'bbbbbbbbbbbb..........ccc....b',
+			        'b..................bbbbbbbbbbb',
+			        'b................cb..........b',
+			        'b................b...........b',
+			        'b...............b............b',
+			        'bP..s.c.s..s...b.............b',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b..............@c.c.c.c......b',
+			        'b...............bbbbbbsbbb...b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b.......c...c...c...c...c...tb',
+			        'b...b...b...b...b...b...b...bb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'bt........c..................b',
+			        'bbb...b...b...b...c..........b',
+			        'b.................b...c......b',
+			        'b.....................b...c..b',
+			        'b.........................b..b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b...........................tb',
+			        'b...........b..b..b....b..bbbb',
+			        'bP....ccc...lllllllllllllllllb',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b......@.....................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b......tcc.....tcc.....tc....b',
+			        'b......bbb.....bbb.....bb....b',
+			        'b..........................c.b',
+			        'b..........................b.b',
+			        'b............................b',
+			        'b............................b',
+			        'b..........................ctb',
+			        'b..........................bbb',
+			        'b............................b',
+			        'b............................b',
+			        'b...................t........b',
+			        'b............................b',
+			        'b............................b',
+			        'b............t...............b',
+			        'b............................b',
+			        'b.P....t.....................b',
+			        'b.t..........................b',
+			        'b.b..........................b',
+			        'bllllllllllllllllllllllllllllb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............cccccc@.........b',
+			        'b......c.b...bbbbbbb.........b',
+			        'b......f.....................b',
+			        'b....b.......................b',
+			        'bP.b.........................b',
+			        'bblllllllllllllllllllllllllllb',
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b.P..........................b',
+			        'b......cccccccccccccccccccc@.b',
+			        'bbbbbbbbbbbbbbbbffffbbbbbbbbbb',
+			        'bbbbbbbbbbbbbbbbllllbbbbbbbbbb',
+			        
+			    ],
+			    [
+			        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b....................ccccc@..b',
+			        'b..b...b...bfffb.....bbbbbb..b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'bt.....c....c....c....c......b',
+			        'bbb....b....b....b....b......b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b............................b',
+			        'b..................c...t.....b',
+			        'b..................b...b.....b',
+			        'b................f...........b',
+			        'b..........c..b..............b',
+			        'b..........b.................b',
+			        'b....c..b....................b',
+			        'b.P..b.......................b',
+			        'b.b..........................b',
+			        'bllllllllllllllllllllllllllllb',
+			        
+			    ],
+			    
+			];
+			
+			// Function for drawing a level
+			var drawLevel = function(){
+			    // Block array
+			    blocks = [];
+			    
+			    // For loops to display the blocks
+			    for(var i = 0; i < levels[level].length;i++){    
+			        for(var j = 0; j < levels[level][i].length;j++){
+			            switch(levels[level][i][j]){
+			                // Regular block
+			                case 'b':
+			                    blocks.push(new Block(j*20,i*20,'block'));
+			                break;
+			                // Player
+			                case 'P':
+			                    player.x = j*20;
+			                    player.y = i*20;
+			                break;
+			                // Portal that sends you forward a level
+			                case '@':
+			                    blocks.push(new Block(j*20,i*20,'portal'));
+			                break;
+			                // Lava
+			                case 'l':
+			                    blocks.push(new Block(j*20,i*20,'lava'));
+			                break;
+			                // Poison
+			                case 'p':
+			                    blocks.push(new Block(j * 20, i * 20, 'Poison'));
+			                    break;
+			                // Coin
+			                case 'c':
+			                    blocks.push(new Block(j * 20, i * 20, 'coin'));
+			                    break;
+			                // Trampoline
+			                case 't':
+			                    blocks.push(new Block(j * 20, i * 20, 'tramp'));
+			                    break;
+			                // Spike
+			                case 's':
+			                    blocks.push(new Block(j * 20, i * 20, 'spike'));
+			                    break;
+			                case 'f':
+			                    blocks.push(new Block(j * 20, i * 20, 'fakeB'));
+			            }
+			        }
+			    }
+			};
+			
+			// Homescreen
+			var scene0 = function() {
+			    background(0);
+			        fill(0, 50, 255);
+			        rect(150, 225, 300, 300, 20);
+			        fill(0);
+			        rect(200, 275, 45, 45, 10);
+			        rect(350, 275, 45, 45, 10);
+			        rect(200, 375, 200, 35, 10);
+			        textSize(50);
+			        fill(255, 255, 255);
+			        text("The World of Block", 90, 200);
+			        textSize(25);
+			        text(deathText + ": " + deathCount, 50, 575);
+			        text("Coins: " + score, 425, 575);
+			        fill(0, 100, 255);
+			        rectMode(CENTER);
+			        rect(300, 450, 150, 75, 10);
+			        rect(100, 425, 150, 75, 10);
+			        rect(500, 425, 150, 75, 10);
+			        textAlign(CENTER, CENTER);
+			        fill(0);
+			        text("P L A Y", 300, 450);
+			        text("S H O P", 100, 425);
+			        text("H O W", 500, 425);
+			        textAlign(CORNER, CORNER);
+			        rectMode(CORNER);
+			        // Button Collision
+			        if (mouseX > 225 && mouseX < 350 && mouseY > 450 - (75 / 2) && mouseY < 450 + (75 / 2) && mouseIsPressed === true) {
+			            // Game scene
+			            scene = 1;
+			            
+			            // Sets the level to 0
+			            level = 0;
+			            
+			            // sets the text level to 0
+			            levelAmt = 0;
+			            
+			            // Coins Collected Game
+			            cGame = 0;
+			            
+			            // Sets death count to 0
+			            deathCount = 0;
+			        }
+			        
+			        if (mouseX > 25 && mouseX < 175 && mouseY > 425 - (75 / 2) && mouseY < 425 + (75 / 2) && mouseIsPressed === true) {
+			            // Shop scene
+			            scene = 2;
+			        }
+			        
+			        if (mouseX > 425 && mouseX < 575 && mouseY > 425 - (75 / 2) && mouseY < 425 + (75 / 2) && mouseIsPressed === true) {
+			            // How Scene
+			            scene = 4;
+			        }
+			};
+			
+			// Game
+			var scene1 = function() {
+			    textAlign(CENTER, CENTER);
+			    text(text1[levelAmt], 300, 100);
+			    
+			    textAlign(CORNER, CORNER);
+			    textSize(25);
+			    text("Coins: " + score, 425, 50);
+			    text(deathText + ": " + deathCount, 50, 50);
+			    
+			    textAlign(CENTER, CENTER);
+			    text("<< Back", 300, 50);
+			    if (mouseX > 275 && mouseX < 325 && mouseY > 40 && mouseY < 100 && mouseIsPressed) {
+			        scene = 0;
+			        
+			        score -= cGame;
+			    }
+			    textAlign(CORNER, CORNER);
+			};
+			
+			// Shop
+			var scene2 = function() {
+			    background(0);
+			        rectMode(CENTER);
+			        textAlign(CENTER, CENTER);
+			        fill(255, 255, 255);
+			        text("Coins: " + score, 75, 50);
+			        fill(0);
+			        stroke(255, 255, 255);
+			        strokeWeight(5);
+			        rect(100, 150, 75, 75, 10);
+			        rect(225, 150, 75, 75, 10);
+			        rect(350, 150, 75, 75, 10);
+			        rect(475, 150, 75, 75, 10);
+			        rect(100, 300, 75, 75, 10);
+			        rect(225, 300, 75, 75, 10);
+			        rect(350, 300, 75, 75, 10);
+			        rect(475, 300, 75, 75, 10);
+			        fill(255, 255, 255);
+			        
+			        noStroke();
+			        fill(0, 0, 255);
+			        ellipse(100, 150, 50, 50);
+			        fill(255, 255, 255);
+			        ellipse(225, 150, 50, 50);
+			        fill(255, 0, 0);
+			        ellipse(350, 150, 50, 50);
+			        fill(100, 0, 255);
+			        ellipse(475, 150, 50, 50);
+			        fill(255, 255, 0);
+			        ellipse(100, 300, 50, 50);
+			        fill(0, 255, 255);
+			        ellipse(225, 300, 50, 50);
+			        fill(255, 0, 255);
+			        ellipse(350, 300, 50, 50);
+			        fill(random(0, 255), random(0, 255), random(0, 255));
+			        ellipse(475, 300, 50, 50);
+			        fill(255, 255, 255);
+			        
+			        
+			        text("This is the shop. Use your coins\n to buy new skins for block.", 300, 450);
+			        
+			        
+			        if (used[0] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 100, 150);
+			            fill(255, 255, 255);
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[0] = true;
+			            used[6] = false;
+			            used[7] = false;
+			            text("Owned", 100, 215);
+			        } else if (owned[0] === false) {
+			            text("25 Coins", 100, 215);
+			        } else if (used[0] === false && owned[0] === true) {
+			            text("Owned", 100, 215);
+			        }
+			        
+			        if (used[1] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 225, 150);
+			            fill(255, 255, 255);
+			            used[0] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            owned[1] = true;
+			            used[6] = false;
+			            used[7] = false;
+			            text("Owned", 225, 215);
+			        } else if (owned[1] === false) {
+			            text("25 Coins", 225, 215);
+			        } else if (used[1] === false && owned[1] === true) {
+			            text("Owned", 225, 215);
+			        }
+			        
+			        if (used[2] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 350, 150);
+			            fill(255, 255, 255);
+			            used[0] = false;
+			            used[1] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            owned[2] = true;
+			            used[6] = false;
+			            used[7] = false;
+			            text("Owned", 350, 215);
+			        } else if (owned[2] === false) {
+			            text("25 Coins", 350, 215);
+			        } else if (used[2] === false && owned[2] === true) {
+			            text("Owned", 350, 215);
+			        }
+			        
+			        if (used[3] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 475, 150);
+			            fill(255, 255, 255);
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            owned[3] = true;
+			            used[6] = false;
+			            used[7] = false;
+			            text("Owned", 475, 215);
+			        } else if (owned[3] === false) {
+			            text("25 Coins", 475, 215);
+			        } else if (used[3] === false && owned[3] === true) {
+			            text("Owned", 475, 215);
+			        }
+			        
+			        if (used[4] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 100, 300);
+			            fill(255, 255, 255);
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[5] = false;
+			            owned[4] = true;
+			            used[6] = false;
+			            used[7] = false;
+			            text("Owned", 100, 375);
+			        } else if (owned[4] === false) {
+			            text("50 Coins", 100, 375);
+			        } else if (used[4] === false && owned[4] === true) {
+			            text("Owned", 100, 375);
+			        }
+			        
+			        if (used[5] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 225, 300);
+			            fill(255, 255, 255);
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            owned[5] = true;
+			            used[5] = true;
+			            used[6] = false;
+			            used[7] = false;
+			            text("Owned", 225, 375);
+			        } else if (owned[5] === false) {
+			            text("50 Coins", 225, 375);
+			        } else if (used[5] === false && owned[5] === true) {
+			            text("Owned", 225, 375);
+			        }
+			        
+			        if (used[6] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 350, 300);
+			            fill(255, 255, 255);
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            owned[6] = true;
+			            used[6] = true;
+			            used[7] = false;
+			            text("Owned", 350, 375);
+			        } else if (owned[6] === false) {
+			            text("100 Coins", 350, 375);
+			        } else if (used[6] === false && owned[6] === true) {
+			            text("Owned", 350, 375);
+			        }
+			        
+			        if (used[7] === true) {
+			            fill(0, 255, 0);
+			            text("✓", 475, 300);
+			            fill(255, 255, 255);
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            owned[7] = true;
+			            used[7] = true;
+			            text("Owned", 475, 375);
+			        } else if (owned[7] === false) {
+			            text("200 Coins", 475, 375);
+			        } else if (used[7] === false && owned[7] === true) {
+			            text("Owned", 475, 375);
+			        }
+			        
+			        if (mouseX > 100 - (75 / 2) && mouseX < 100 + (75 / 2) && mouseY > 150 - (75 / 2) && mouseY < 150 + (75 / 2) && mouseIsPressed && owned[0] === true) {
+			            used[0] = true;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (score >= 25 && mouseX > 225 - (75 / 2) && mouseX < 225 + (75 / 2) && mouseY > 150 - (75 / 2) && mouseY < 225 + (75 / 2) && mouseIsPressed && owned[1] === false) {
+			            owned[1] = true;
+			            used[1] = true;
+			            score -= 25;
+			            
+			            used[0] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (mouseX > 225 - (75 / 2) && mouseX < 225 + (75 / 2) && mouseY > 150 - (75 / 2) && mouseY < 225 + (75 / 2) && mouseIsPressed && owned[1] === true) {
+			            used[1] = true;
+			            used[2] = false;
+			            used[0] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (score >= 25 && mouseX > 350 - (75 / 2) && mouseX < 350 + (75 / 2) && mouseY > 150 - (75 / 2) && mouseY < 150 + (75 / 2) && mouseIsPressed && owned[2] === false) {
+			            owned[2] = true;
+			            used[2] = true;
+			            score -= 25;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (mouseX > 350 - (75 / 2) && mouseX < 350 + (75 / 2) && mouseY > 150 - (75 / 2) && mouseY < 150 + (75 / 2) && mouseIsPressed && owned[2] === true) {
+			            used[2] = true;
+			            used[0] = false;
+			            used[1] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (score >= 25 && mouseX > 475 - (75 / 2) && mouseX < 475 + (75 / 2) && mouseY > 150 - (75 / 2) && mouseY < 150 + (75 / 2) && mouseIsPressed && owned[3] === false) {
+			            owned[3] = true;
+			            used[3] = true;
+			            score -= 25;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (mouseX > 475 - (75 / 2) && mouseX < 475 + (75 / 2) && mouseY > 150 - (75 / 2) && mouseY < 150 + (75 / 2) && mouseIsPressed && owned[3] === true) {
+			            used[3] = true;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (score >= 50 && mouseX > 100 - (75 / 2) && mouseX < 100 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && owned[4] === false) {
+			            used[4] = true;
+			            owned[4] = true;
+			            score -= 50;
+			            
+			            used[4] = true;
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (mouseX > 100 - (75 / 2) && mouseX < 100 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && used[4] === false && owned[4] === true) {
+			            used[4] = true;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[5] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (score >= 50 && mouseX > 225 - (75 / 2) && mouseX < 225 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && owned[5] === false) {
+			            used[5] = true;
+			            owned[5] = true;
+			            score -= 50;
+			            
+			            used[5] = true;
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (mouseX > 225 - (75 / 2) && mouseX < 225 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && used[5] === false && owned[5] === true) {
+			            used[5] = true;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[6] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (score >= 100 && mouseX > 350 - (75 / 2) && mouseX < 350 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && owned[6] === false) {
+			            used[6] = true;
+			            owned[6] = true;
+			            score -= 100;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = true;
+			            used[7] = false;
+			        }
+			        
+			        if (mouseX > 350 - (75 / 2) && mouseX < 350 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && used[6] === false && owned[6] === true) {
+			            used[6] = true;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[7] = false;
+			        }
+			        
+			        if (mouseX > 475 - (75 / 2) && mouseX < 475 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && owned[7] === false && score >= 200) {
+			            used[7] = true;
+			            owned[7] = true;
+			            score -= 200;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			        }
+			        
+			        if (mouseX > 475 - (75 / 2) && mouseX < 475 + (75 / 2) && mouseY > 300 - (75 / 2) && mouseY < 300 + (75 / 2) && mouseIsPressed && used[7] === false && owned[7] === true) {
+			            used[7] = true;
+			            
+			            used[0] = false;
+			            used[1] = false;
+			            used[2] = false;
+			            used[3] = false;
+			            used[4] = false;
+			            used[5] = false;
+			            used[6] = false;
+			        }
+			        
+			        
+			        fill(0, 100, 255);
+			        rect(300, 550, 150, 75, 10);
+			        fill(0);
+			        text("H O M E", 300, 550);
+			        rectMode(CORNER);
+			        
+			        // Button Collision
+			        if (mouseX > 225 && mouseX < 375 && mouseY > 500 && mouseY < 575 && mouseIsPressed === true) {
+			            // Home scene
+			            scene = 0;
+			        }
+			};
+			
+			// Endgame
+			var scene3 = function() {
+			    background(0);
+			    fill(255, 255, 255);
+			    textAlign(CENTER, CENTER);
+			    textSize(35);
+			    text("You have won!\n If there is anything you want me to fix,\n tell me in the tips and thanks!", 295, 100);
+			    text("You won with " + deathCount + " deaths and " + cGame + " coins", 300, 300);
+			    
+			    text("(Click to continue)", 300, 500);
+			    
+			    if (mouseIsPressed) {
+			        scene = 0;
+			    }
+			};
+			
+			// How
+			var scene4 = function() {
+			    background(0);
+			    textAlign(CENTER, CENTER);
+			    fill(255, 255, 255);
+			    textSize(40);
+			    text("How to Play", 300, 50);
+			    textSize(25);
+			    
+			    // How Text
+			    text("Arrow Keys or WASD to move.\n Collect coins to buy new skins in the shop.\nPortals are the pink circles.\n Spikes, lava and poison all kill you.\nTry to beat the game with the least amount\n of deaths possible.\n Trampolines can boost your jump. \n They are the pink half blocks.\n Have Fun!!!", 300, 300);
+			    rectMode(CENTER);
+			    fill(0, 100, 255);
+			    rect(300, 550, 150, 75, 10);
+			    fill(0);
+			    text("H O M E", 300, 550);
+			    rectMode(CORNER);
+			    
+			    // Button Collision
+			    if (mouseX > 225 && mouseX < 375 && mouseY > 500 && mouseY < 575 && mouseIsPressed === true) {
+			        // Home scene
+			        scene = 0;
+			    }
+			};
+			
+			drawLevel();
+			
+			// Repeats each frame
+			draw = function(){
+			    
+			    // setup {
+			    // Background
+			    background(25, 100, 255);
+			    
+			    // Draws the player then allows it to move
+			    player.draw();
+			    player.move();
+			    
+			    // Has the player collide with blocks based on the type of block
+			    for(var i = 0; i < blocks.length; i ++){
+			        if(blocks[i].type === 'block'){
+			            player.collide(blocks[i]);
+			        }
+			    }
+			    
+			    // For loop for displaying blocks
+			    for (var i = blocks.length; i-- > 0;) {
+			        // Displays blocks
+			        blocks[i].display();
+			        
+			        if(blocks[i].checkColl(player)){
+			            switch(blocks[i].type){
+			                // Says what happens if player collides with a portal
+			                case 'portal':
+			                    // Sees if its not the last level
+			                    if (level < levels.length - 1){
+			                        level++;
+			                        drawLevel();
+			                        coinsCollectedLevel = 0;
+			                        levelAmt++;
+			                    }
+			                    
+			                    // Else endgame scene
+			                    else {
+			                        scene = 3;
+			                        level = 0;
+			                    }
+			                    break;
+			                // Lava collision
+			                case 'lava':
+			                    drawLevel();
+			                    deathCount++;
+			                    score -= coinsCollectedLevel;
+			                    cGame -= coinsCollectedLevel;
+			                    coinsCollectedLevel = 0;
+			                    break;
+			                // Poison collision
+			                case 'Poison':
+			                    drawLevel();
+			                    deathCount++;
+			                    score -= coinsCollectedLevel;
+			                    cGame -= coinsCollectedLevel;
+			                    coinsCollectedLevel = 0;
+			                    break;
+			                // Coin collision
+			                case 'coin':
+			                    // Removes the coin
+			                    blocks.splice(i, 1);
+			                    // Score adds 1
+			                    score++;
+			                    // Adds one to the amount of coins collected on the level that way if you die it will remove this number of coins from your total number of coins
+			                    coinsCollectedLevel++;
+			                    // You can't leave the game all the time and get the coins???
+			                    cGame++;
+			                    break;
+			                // Trampoline collision
+			                case 'tramp':
+			                    // Sends the player in the air
+			                    player.yv = -10;
+			                    // Player can't jump
+			                    player.canJump = false;
+			                    break;
+			                // Spike collision
+			                case 'spike':
+			                    drawLevel();
+			                    deathCount++;
+			                    score -= coinsCollectedLevel;
+			                    cGame -= coinsCollectedLevel;
+			                    coinsCollectedLevel = 0;
+			                    break;
+			            }
+			        }
+			    }
+			    
+			    // }
+			    
+			    // If it's the homescreen
+			    if (scene === 0) {
+			        scene0();
+			    }
+			    
+			    // If the game has started
+			    if (scene === 1) {
+			        scene1();
+			    }
+			    
+			    // Shop
+			    if (scene === 2) {
+			        scene2();
+			    }
+			    
+			    // If the game has ended
+			    if (scene === 3) {
+			        scene3();
+			    }
+			    
+			    // How scene
+			    if (scene === 4) {
+			        scene4();
+			    }
+			};
+			
+			// Key pressed
+			keyPressed = function() {
+			    keys[keyCode] = true;
+			};
+			
+			// Key released
+			keyReleased = function() {
+			    keys[keyCode] = false;
+			};
+			
+			
+			// }
+			
+			// 1500 lines!?!
+		}
+		
+		runPJS(program);
+		
+		// Add reload button on KA --> <script>
+		
+	</script>
+</body>
+
+</html>
