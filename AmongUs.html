@@ -1,0 +1,4880 @@
+<!DOCTYPE html>
+<html>
+<!-- Program exported to HTML using the KA Project Exporter by @MushyAvocado 
+https://www.khanacademy.org/computer-programming/ka-project-exporter/5195486791385088
+-->
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Among Us</title>
+	<style>
+		
+		
+		/* Change the color as you want */
+		:root {
+			--background-color: #000000;
+		}
+		
+		body {
+		    background-color: var(--background-color);
+		}
+		
+		html, body, #wrapper {
+			width: 100%;
+		    height: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		
+		canvas {
+			width: fit-content;
+			height: fit-content;
+		}
+		
+		canvas:focus {
+			outline: none;
+		}
+		
+		/* Automatically fits to the remaining height and centers the canvas it contains */
+		#wrapper {
+			padding: 0px;
+			margin: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+		
+</style>
+</head>
+<body id="wrapper">
+    <!-- Canvases with a class of "sketch" are applied to the program in the order importPJS() is called. -->
+    <canvas class="sketch"></canvas>
+	<!-- Load the PJS library -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Khan/processing-js@master/processing.js"></script>
+	<!-- The exporter script must be loaded before the program script -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Mushy-Avocado/KA-exporter@main/exporter.js"></script>
+	<!-- Run Khan Academy program and import PJS -->
+	<script type="application/javascript">
+		
+		
+		function program() {
+		    
+		    title("Among Us");
+		    size(600, 600);
+		    
+		    // All code goes here
+			var mobile = !true;
+			/**
+			
+			This game is brought to you by a collaboration between HootCode() and Captain Coding
+			
+			1300 votes?!? THANKS Y'all
+			
+			Subify to HootCode()?
+			https://www.khanacademy.org/computer-programming/subify-to-hootcode/6006453480669184
+			
+			Subify to FOX?
+			https://www.khanacademy.org/computer-programming/FOX/6043615975129088
+			
+			Captain Coding has no Sub Page
+			
+			Other Impostors are supposed to be unknown. You are not working with them. You're on your own
+			
+			How To {
+			    BEFORE PLAYING
+			    Please note that this is NOT exactly like Among Us. I have tweaks of my own installed.
+			
+			    BASICS
+			    Among Us is a classic murder mystery, where one impostor is running around killing crewmates, and crewmates are running around doing tasks. When you play, your role will be in the top right corner. The roles should be self-explanatory. If you are a crew role a box labeled 'tasks' should be in the top-left corner. Move with WASD or the arrow keys, and 'M' to call an emergency meeting. Other people are only seen in the same room as yourself.
+			    
+			    END THE GAME
+			    The game ends when one of three things happens: the impostor kills everyone except himself and one other person; all tasks are completed; or all the impostors are killed.
+			    
+			    TASKS
+			    If you are a crew, your main concern should be completing tasks. The yellow arrows on the screen point towards your tasks, which are yellow circles. Click the circle to do the task. PLEASE note that you can't move or see other people when you are doing a task. When the taskbar at the top-left is full, all your tasks are completed for the moment. When someone dies, his tasks are given to you.
+			    
+			    KILLING
+			    If you are the impostor, click to use the knife. When you are close enough to someone and the knife is drawn, it will kill them. Then you have a kill cooldown of fifteen seconds. There is no killing during this period.
+			    
+			    REPORTING
+			    To report a dead body, click on it. The body will then be labeled 'REPORTED' and cannot be reported again. Self-reporting IS a thing.
+			    
+			    TALKING
+			    In the chat scene, you and the AI get one chance to say who is sus. To talk, click the talk button and click on who you think is sus. To hurry up the time limit on talking, you can click the big '✖' button
+			    
+			    VOTING
+			    To vote, click on who is sus. It should highlight that person. Click yourself to skip the vote. You are always the top-left bean. The person with the most votes gets thrown out of the ship. If it's a tie, the voting is skipped. If more people skipped the vote than the how many votes the person with the most votes got, then the voting is skipped.
+			    
+			    VENTING
+			    Click on a vent to enter, press SPACE to crawl around, and press ENTER to come out. There is a time limit on venting, and if anybody sees you go in, they will immediately call a meeting and make you sus for the rest of your short life. Only impostors are able to vent.
+			    
+			    CAMS
+			    Click on the cams to look, press SPACE to switch views, and press ENTER to come out. Press 'L' to sabotage when you are an impostor.
+			    
+			    HITMAN MODE
+			    You are the only impostor. While playing this mode, you can only kill one person at a time
+			    
+			    SABOTAGING
+			    When someone sabotages, the lights go off for 15 seconds, during which only Impostors can see other people. Reporting distances are cut short during this time.
+			}
+			
+			Credits {
+			    Credit to GDB for pathfinding algorithm
+			    Enormous Credit to Captain Coding for AI! Hooray!
+			}
+			
+			Comments from Captain Coding {
+			
+			The chat is not random gibberish, they actually understand what they are saying
+			
+			I did all the AI in this game, HootCode did everything else...except a few small things that I took the liberty of doing
+			
+			Have Fun!
+			
+			}
+			
+			Comments from FOX {
+			I did all of the floor patterns for this game, and I hope to do more in the future! If you have little ideas for the details, I would appreciate it if you let me know! 
+			    ~FOX~
+			}
+			
+			Vote Log {
+			    10   ✔
+			    20   ✔
+			    50   ✔
+			    100  ✔
+			    200  ✔
+			    300  ✔
+			    400  ✔
+			    500  ✔
+			    600  ✔
+			    700  ✔
+			    800  ✔
+			    900  ✔
+			    1000 ✔
+			    1250 ✔
+			    1500
+			    1750
+			    2000
+			    2250
+			    2500
+			    2750
+			    3000
+			    3250
+			    3500
+			    3750
+			    4000
+			    4250
+			    4500
+			    4750
+			    5000
+			    No Way >5000
+			}
+			
+			**/
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			var Which_Map_To_Play = 1;//1 or 2
+			var randomMap = true;
+			var mapt = (randomMap === true ? floor(random(0, 2)) : Which_Map_To_Play - 1);
+			var numPlayer = 10; // Number of Players
+			var belief = 5; // AI belief. 1 to make them believe everything
+			var bug = !true; // Debugging tool. Indicates impostor's identity
+			var spectate = false; // Spectating?
+			var music = !true; // Music?
+			var isimpostor = false; // Are you impostor every game?
+			var hasVents = false;
+			var hasCams = false;
+			var male = 0;
+			var killers = 2;
+			var impsKill;
+			var hitman = false;
+			var nextMan = 0;
+			var sabotaged = false;
+			var saboT = 1200;
+			var floorStatus = "off";
+			var updating = !true;
+			
+			var thumbnail;
+			
+			var reporter = ""; // Who reported the body
+			var roomKilledIn = ""; // Where is the body
+			
+			smooth(); // Make things smoother
+			var PLAY = 0; // Play scene ID
+			var VOTE = 1; // Vote scene ID
+			var RESULTS = 2; // Win scene ID
+			var EXECUTE = 3; // Execute scene ID
+			var MENU = 4;  // Menu scene ID
+			var OPTION = 5; // Option scene ID
+			var LOGO = 6; // Logo scene ID
+			var CHAT = 7; // Chat scene ID
+			var JOIN = 8; // Join scene ID
+			var scene; // Which scene on? Done by scene IDs
+			
+			var chatNum = 0; // Who is talking/accusing?
+			var youTalked = false;
+			var dlay = 10; // Delay on chatting, so AI doesn't do all the talking in one frame
+			
+			var TASKNUM = 4; // How many tasks do you have left?
+			var TASKNUMORIGINAL = TASKNUM; // Resets tasks when needed
+			var tasksDone = 0; // How many tasks have you done?
+			var task1done = false; // Are you done with task 1?
+			var task2done = false; // Are you done with task 2?
+			
+			var emergency = false; // If an emergency meeting is called
+			var emergencyCountdown = 5 * 60; // Countdown for meetings
+			var emergencyReset = emergencyCountdown; // Reset countdown
+			
+			var tooFarAway = 0; // Are you too far away from your task?
+			
+			var youTalking = false;
+			
+			var winner = ''; // Who won?
+			
+			var votee = ''; // Who was voted?
+			var voteTime = 300; // So you have 5 seconds to check who was voted
+			var voteR = voteTime; // Reset time
+			
+			var clicked = false;
+			
+			var song = [
+				{t: 0, sound: "retro/hit1"},
+				{t: 20, sound: "retro/hit1"},
+				{t: 50, sound: "retro/hit1"},
+				{t: 60, sound: "retro/hit2"},
+				{t: 80, sound: "retro/hit1"},
+				{t: 100, sound: "retro/hit1"},
+				{t: 130, sound: "retro/hit1"},
+				{t: 140, sound: "retro/hit2"},
+				{t: 160, sound: "retro/hit1"},
+				{t: 180, sound: "retro/hit1"},
+				{t: 210, sound: "retro/hit1"},
+				{t: 220, sound: "retro/hit2"},
+				{t: 240, sound: "retro/hit1"},
+				{t: 260, sound: "retro/hit1"},
+				{t: 290, sound: "retro/hit1"},
+				//{t: 300, sound: "rpg/battle-swing"},
+				{t: 300, sound: "retro/hit2"},
+			]; // Mucis data
+			song.sort(function(a, b) {return a.t - b.t;}); // Sort music data by time
+			var songFrame = 0; // Frames for song
+			
+			var mapNames = ["Random", "JellyShip I", "Explorer III"];
+			var mapInd = 0;
+			
+			if(spectate) {
+			    frameRate(100); // More frameRate
+			    numPlayer += 1; // Balance player number
+			} // Set spectate
+			
+			var keys = []; // Store the pressed keys
+			var keyDone = false;
+			keyPressed = function(){
+			    keys[keyCode] = true;
+			}; // Input key pressed into keys
+			keyReleased = function(){
+			    keyDone = true;
+			    keys[keyCode] = false;
+			}; // Take key released from keys
+			
+			// Start GDB's camera function
+			var Camera2D = function() {
+			    this.x = 0;
+			    this.y = 0;
+			    this.xfocus = 0;
+			    this.yfocus = 0;
+			    
+			    Camera2D.prototype.focus = function(value, axis) {
+			        return -(value-axis/2);
+			    };
+			    Camera2D.prototype.follow = function(value,find,cushion) {
+			        value += (find-value)/cushion;
+			        return value;
+			    };
+			};
+			Camera2D.prototype.setView = function(x, y, lag) {
+			    this.xfocus = this.focus(x, width);
+			    this.yfocus = this.focus(y, height);
+			    this.x = this.follow(this.x, this.xfocus, lag);
+			    this.y = this.follow(this.y, this.yfocus, lag);
+			    pushMatrix();
+			    translate(this.x, this.y);
+			};
+			Camera2D.prototype.endView = function() {
+			    popMatrix();
+			};
+			Camera2D.prototype.getMouseX = function() {
+			    return mouseX-this.x;
+			};
+			Camera2D.prototype.getMouseY = function() {
+			    return mouseY-this.y;
+			};
+			var cam = new Camera2D();
+			// End GDB's camera function
+			
+			var cols = [
+			    color(30), // Black
+			    color(150), // Gray
+			    color(131, 30, 199), // Purple
+			    color(255, 150, 0), // Orange
+			    color(200, 0, 0), // Red
+			    color(0, 120, 0), // Green
+			    color(0, 0, 200), // Blue
+			    color(255), // White
+			    color(44, 176, 199), // Light Blue
+			    color(220, 220, 0), // Yellow
+			    color(77, 44, 11), // Brown
+			    color(255, 0, 255)
+			]; // Player colors
+			var hats = [
+			    function(){},
+			    function(s){
+			        pushMatrix();
+			            scale(s);
+			            noStroke();
+			            fill(255, 0, 0);
+			            triangle(-10, 0, 10, 0, 0, -20);
+			            fill(250, 220, 0);
+			            quad(-10.1, 0, 8.1, -4, 6.1, -8, -8, -4);
+			            fill(0, 220, 0);
+			            quad(-8, -4, 6.1, -8, 4.8, -10.5, -5.5, -9);
+			            fill(240, 160, 0);
+			            quad(-5.5, -9, 4.8, -10.5, 2.8, -14.5, -3.5, -13);
+			            fill(0, 210, 210);
+			            quad(-3.5, -13, 2.8, -14.5, 1.8, -16.5, -1.5, -17);
+			            fill(105, 0, 200);
+			            triangle(1.8, -16.5, -1.5, -17, 0, -20);
+			        popMatrix();
+			    },
+			    function(s){
+			        pushMatrix();
+			            translate(0, 5);
+			            scale(s);
+			            stroke(150, 0, 0);
+			            strokeWeight(3);
+			            line(0, -1.5, 20, 2.1);
+			            noStroke();
+			            fill(200, 0, 0);
+			            arc(0, 0, 25, 25, -170, 10);
+			            noFill();
+			            stroke(0);
+			            strokeWeight(0.7);
+			            arc(5, 1, 20, 30, -170, -120);
+			            arc(-5, -2.3, 20, 30, -37, 10);
+			            arc(0, 0, 20, 25, -169, 5);
+			        popMatrix();
+			    },
+			    function(s){
+			        pushMatrix();
+			            scale(s);
+			            noFill();
+			            stroke(250, 230, 0);
+			            strokeWeight(2);
+			            ellipse(0, -7, 20, 4);
+			        popMatrix();
+			    },
+			    function(s){
+			        pushMatrix();
+			            scale(s*1.2, s*1.5);
+			            noStroke();
+			            fill(150, 70, 0);
+			            translate(0, -5);
+			            bezier(13, 5, -13, -9, -17, 17, -5, 5);
+			        popMatrix();
+			    },
+			    function(s){
+			        pushMatrix();
+			            scale(s*1.43, s*1.3);
+			            translate(0, -4);
+			            stroke(0);
+			            strokeWeight(2);
+			            noFill();
+			            arc(0, 10, 20, 5, 90, 180);
+			            fill(150);
+			            noStroke();
+			            arc(0, 12, 20, 24, -110, 110);
+			            fill(150);
+			            beginShape();
+			                vertex(-4, 1);
+			                bezierVertex(15, -6, 15, 30, -4, 23);
+			                bezierVertex(-7, 25, 10, 15, -4, 1);
+			            endShape();
+			            fill(0, 40, 40);
+			            ellipse(6, 8, 3, 3);
+			        popMatrix();
+			    },
+			];
+			
+			var assassin = [];
+			var usedNums = [];
+			for(var i = 0; i < killers; i++){
+			    var a = floor(random(0, numPlayer));
+			    var b = true;
+			    while(b){
+			        b = false;
+			        for(var j = 0; j < usedNums.length; j++){
+			            if(usedNums[j] === a){
+			                b = true;
+			            }
+			        }
+			    }
+			    assassin.push(a);
+			}
+			for(var i = 0; i < assassin.length; i++){
+			    assassin[i] = cols[assassin[i]];
+			}
+			
+			var used = []; // Used names
+			var names = [
+			    "Archy",
+			    "Andrew",
+			    "Aaron",
+			    "Alex",
+			    "Abe",
+			    "Allister",
+			    "Arthur",
+			    "Adam",
+			    "Bart",
+			    "Billy",
+			    "Benjamin",
+			    "Bryan",
+			    "Bert",
+			    "Brad",
+			    "Bernard",
+			    "Bob",
+			    "Brody",
+			    "Bennett",
+			    "Carter",
+			    "Chris",
+			    "Charlie",
+			    "Colin",
+			    "Caleb",
+			    "Cole",
+			    "Chester",
+			    "Cyrus",
+			    "Connor",
+			    "Clyde",
+			    "Dan",
+			    "Dylan",
+			    "David",
+			    "Donald",
+			    "Derrick",
+			    "Doug",
+			    "Everett",
+			    "Ethan",
+			    "Eustace",
+			    "Edmund",
+			    "Eric",
+			    "Elijah",
+			    "Edwin",
+			    "Fred",
+			    "Frank",
+			    "Gary",
+			    "Grayson",
+			    "George",
+			    "Gavin",
+			    "Grant",
+			    "Hugo",
+			    "Harry",
+			    "Hank",
+			    "Henry",
+			    "Hal",
+			    "Hudson",
+			    "Ian",
+			    "Ivan",
+			    "James",
+			    "Jeremy",
+			    "Joe",
+			    "Jack",
+			    "Josh",
+			    "Jake",
+			    "John",
+			    "Jason",
+			    "Jim",
+			    "Jerry",
+			    "Jordan",
+			    "Jay",
+			    "Justin",
+			    "Kyle",
+			    "Ken",
+			    "Kevin",
+			    "Lanny",
+			    "Larry",
+			    "Louis",
+			    "Luke",
+			    "Liam",
+			    "Linus",
+			    "Levi",
+			    "Martin",
+			    "Mark",
+			    "Matthew",
+			    "Mike",
+			    "Marshall",
+			    "Mitchell",
+			    "Nathaniel",
+			    "Nick",
+			    "Ned",
+			    "Noah",
+			    "Oscar",
+			    "Owen",
+			    "Peter",
+			    "Paul",
+			    "Parker",
+			    "Qwerty",
+			    "Quentin",
+			    "Rick",
+			    "Ronald",
+			    "Ralph",
+			    "Robert",
+			    "Ryan",
+			    "Sam",
+			    "Sid",
+			    "Steve",
+			    "Sean",
+			    "Silas",
+			    "Tim",
+			    "Terry",
+			    "Tom",
+			    "Titus",
+			    "Victor",
+			    "Wyatt",
+			    "Wilson",
+			    "William",
+			    "Warren",
+			    "Wally",
+			    "Willard",
+			    "Wayne",
+			    "Wesley",
+			    "Xavier",
+			    "Zach",
+			    "Zane",
+			]; // OPEN AT YOUR OWN RISK. This folder contains the names of deadly jelly beans
+			var fnames = [
+			    "Amanda",
+			    "Abigail",
+			    "Amelia",
+			    "Anna",
+			    "Alice",
+			    "Betty",
+			    "Bessy",
+			    "Bonnie",
+			    "Christina",
+			    "Connie",
+			    "Charlotte",
+			    "Dorothy",
+			    "Dolly",
+			    "Emily",
+			    "Esther",
+			    "Elizabeth",
+			    "Grace",
+			    "Helen",
+			    "Hillary",
+			    "Hannah",
+			    "Isabel",
+			    "Jessica",
+			    "Judy",
+			    "Jamie",
+			    "Julie",
+			    "Kim",
+			    "Lisa",
+			    "Lucy",
+			    "Louise",
+			    "Lily",
+			    "Lindsey",
+			    "Martha",
+			    "Mary",
+			    "Mildred",
+			    "Madelyne",
+			    "Margarette",
+			    "Monica",
+			    "Megan",
+			    "Nancy",
+			    "Patty",
+			    "Penny",
+			    "Paige",
+			    "Peggy",
+			    "Pam",
+			    "Paula",
+			    "Rebecca",
+			    "Rose",
+			    "Sally",
+			    "Samantha",
+			    "Susan",
+			    "Sidney",
+			    "Sara",
+			    "Teresa",
+			    "Violet",
+			    "Virginia",
+			    "Veronica",
+			    "Wendy",
+			    "Yvette",
+			];
+			var KAnames = [
+			    "404NameNotFound",
+			    "Arrowhead Co.",
+			    "Ace",
+			    "Aqualine",
+			    "A Random Coder",
+			    "akbaba",
+			    "Anish",
+			    "anshumaanxnaidu",
+			    "Bennimus",
+			    "Corin Fist",
+			    "Chester Banks",
+			    "Captain Coding",
+			    "Cubic Coding",
+			    "Chase L.",
+			    "CoraL",
+			    "delverDwarf",
+			    "Daniel T.",
+			    "Dbear",
+			    "Duskpin",
+			    "ɛʀɮɨʊʍ ǟաɛֆօʍɛռɛֆֆ",
+			    "GDB",
+			    "Green Ghost",
+			    "Gray Wolf 🐺",
+			    "Goatx",
+			    "HootCode();",
+			    "Hopper",
+			    "Hal",
+			    "ImaginaryNeon",
+			    "JentGent",
+			    "joe song",
+			    "Liam The Cool Dude",
+			    "Leafers",
+			    "Light Runner",
+			    "Liam K.",
+			    "LS",
+			    "Leaf",
+			    "Magma",
+			    "Mr. Pink",
+			    "Marcimus",
+			    "Mr. Pants",
+			    "Mr.JS",
+			    "Mushy Avocado",
+			    "Not Multiverse",
+			    "No Name",
+			    "NL",
+			    "Ohnoes",
+			    "Old Spice",
+			    "OJ Squid",
+			    "Pamela",
+			    "Piceratops",
+			    "Primosaur",
+			    "Purple Pi",
+			    "Pro Programmer",
+			    "Red Arrow",
+			    "Steffan",
+			    "Spunky Sam",
+			    "Starky",
+			    "Safiatou",
+			    "Triumvirate",
+			    "TheDoughSmith",
+			    "Tachyon",
+			    "Timothy",
+			    "The Gent",
+			    "Vortex Ninja",
+			    "Willard",
+			    "Winter",
+			    "WalkWorthy",
+			    "Winston",
+			    "Xenon",
+			    "xacer",
+			];
+			var USnames = [
+			    "Andrew Jackson",
+			    "Abraham Lincoln",
+			    "Andrew Johnson",
+			    "Aaron Burr",
+			    "Alexander Hamilton",
+			    "Benjamin Franklin",
+			    "Franklin Pierce",
+			    "George Washington",
+			    "Henry Clay",
+			    "John Adams",
+			    "James Madison",
+			    "James Monroe",
+			    "John Quincy Adams",
+			    "John Tyler",
+			    "James K. Polk",
+			    "James Buchanan",
+			    "James A. Garfield",
+			    "John C. Calhoun",
+			    "Jefferson Davis",
+			    "John Dickinson",
+			    "John Wilkes Booth",
+			    "Martin Van Buren",
+			    "Millard Fillmore",
+			    "Patrick Henry",
+			    "Roger B. Taney",
+			    "Rutherford B. Hayes",
+			    "Stephen A. Douglass",
+			    "Thomas Jefferson",
+			    "Ulysses S. Grant",
+			    "William H. Harrison",
+			    "Zachary Taylor",
+			];
+			var animalNames = [
+			    "Aardvark",
+			    "Anteater",
+			    "Adder",
+			    "Ape",
+			    "Buffalo",
+			    "Bunny",
+			    "Bird",
+			    "Badger",
+			    "Beaver",
+			    "Bee",
+			    "Budgie",
+			    "Bat",
+			    "Cat",
+			    "Caiman",
+			    "Clam",
+			    "Cardinal",
+			    "Chipmunk",
+			    "Cow",
+			    "Chicken",
+			    "Chimpanzee",
+			    "Camel",
+			    "Dinosaur",
+			    "Dolphin",
+			    "Dog",
+			    "Duck",
+			    "Dragon",
+			    "Donkey",
+			    "Elephant",
+			    "Eagle",
+			    "Frog",
+			    "Flamingo",
+			    "Ferret",
+			    "Finch",
+			    "Fox",
+			    "Giraffe",
+			    "Gnat",
+			    "Gorilla",
+			    "Gull",
+			    "Horse",
+			    "Hare",
+			    "Hedgehog",
+			    "Hyena",
+			    "Hawk",
+			    "Hen",
+			    "Iguana",
+			    "Jackal",
+			    "Kiwi",
+			    "Kangaroo",
+			    "Lion",
+			    "Leopard",
+			    "Leech",
+			    "Lizard",
+			    "Loon",
+			    "Lynx",
+			    "Mouse",
+			    "Moose",
+			    "Mule",
+			    "Monkey",
+			    "Newt",
+			    "Ostrich",
+			    "Oyster",
+			    "Otter",
+			    "Owl",
+			    "Osprey",
+			    "Pelican",
+			    "Parakeet",
+			    "Parrot",
+			    "Pig",
+			    "Porcupine",
+			    "Panther",
+			    "Quail",
+			    "Rhinoceros",
+			    "Rat",
+			    "Rabbit",
+			    "Robin",
+			    "Rooster",
+			    "Seal",
+			    "Shark",
+			    "Swan",
+			    "Starfish",
+			    "Squirrel",
+			    "Squid",
+			    "Snake",
+			    "Salamander",
+			    "Stoat",
+			    "Spider",
+			    "Sheep",
+			    "Swine",
+			    "Scorpion",
+			    "Sparrow",
+			    "Tarantula",
+			    "Tyrannosaurus Rex",
+			    "Tiger",
+			    "Vulture",
+			    "Vole",
+			    "Whale",
+			    "Walrus",
+			    "Weasel",
+			    "Wolf",
+			    "Wolverine",
+			    "Zebra",
+			];
+			var movieNames = [
+			    "Narnia",
+			    "Star Wars",
+			    "Star Trek",
+			    "Incredibles",
+			    "Cars",
+			    "Toy Story",
+			    "Kung Fu Panda",
+			    "Ice Age",
+			    "A Bug's Life",
+			    "Curious George",
+			    "Tom & Jerry",
+			    "Wild, Wild West",
+			    "Hogan's Heroes",
+			    "Indiana Jones",
+			    "VeggieTales",
+			    "3-2-1 Penguins",
+			    "Ironside",
+			    "Columbo",
+			    "Gilligan's Island",
+			    "Facing the Giants",
+			    "Monster University",
+			    "Herbie",
+			    "Sesame Street",
+			    "Mickey Mouse",
+			    "Peter Pan",
+			    "Robin Hood",
+			    "Harry Potter",
+			];
+			var superNames = [
+			    "Mr. Incredible",
+			    "Frozone",
+			    "Superman",
+			    "The Flash",
+			    "Batman",
+			    "Ironman",
+			    "Thor",
+			    "Captain America",
+			    "Hulk",
+			    "Hawkeye",
+			    "Gazerbeam",
+			    "Dinaguy",
+			    "Thunderhead",
+			    "Robin",
+			    "Spiderman",
+			    "Black Panther",
+			    "Wolverine",
+			];
+			var obscureMaleFirstNames = [
+			    "Adolph",
+			    "Bransford",
+			    "Barthalomew",
+			    "Frederick",
+			    "Ferdinand",
+			    "Herbert",
+			    "Horatorio",
+			    "JJ",
+			    "Judah",
+			    "Mohammed",
+			    "Rutherford",
+			    "Randolph",
+			    "Rudolph",
+			    "Smith",
+			];
+			var hashtagNames = [
+			    "#Aviconazul",
+			    "#BabiesHaveSouls",
+			    "#BadPunsArmy",
+			    "#BringBackBackgrounds",
+			    "#Brothers",
+			    "#Buck",
+			    "#CacteyeArmy",
+			    "#DownWithOhnoes",
+			    "#EatMorePaper",
+			    "#Frostine",
+			    "#KazooLord",
+			    "#Lappa",
+			    "#SaveOhnoes",
+			    "#Sisimus",
+			    "#StopTheWar",
+			    "#TeamJesus",
+			    "#₮he⋐oolↁude",
+			    "#TheKingofSnipers",
+			    "#Turtela",
+			    "#TWL",
+			    "#v4win",
+			    "#Vortan",
+			    "#WinstonArmy",
+			];
+			var numbers = [1,2,3,4,5,6,7,8,9,10,"007",101,100,9504871623,777,111,1000,0,1975,2007,1776,17,45,22,floor(random(-1000, -1))];
+			var genNames = [names,fnames,KAnames,USnames,animalNames, movieNames, superNames, obscureMaleFirstNames, hashtagNames, numbers];
+			var nameSet = ["Male", "Female", "KA", "18th-19th century\nUS", "Animals", "Movies", "Superheroes", "Obscure Male", "KA Hashtags", "Numbers"];
+			
+			var stoppit = function(){
+			    this[["KAInfiniteLoopCount"]] = -100000000;
+			};
+			stoppit();
+			
+			var JellyCafFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    noStroke();
+			    
+			    fill(195, 175, 145);
+			    rect(0, 0, 500, 500);
+			    
+			    stroke(110, 75, 0);
+			    strokeWeight(5);
+			    rotate(45);
+			    
+			    for (var i = 262; i < 360; i += 100) {
+			        rect(i, -258, 35, 35);
+			    }
+			    for (var i = 222; i < 420; i += 100) {
+			        rect(i, -218, 35, 35);
+			    }
+			    for (var i = 182; i < 480; i += 100) {
+			        rect(i, -178, 35, 35);
+			    }
+			    for (var i = 142; i < 540; i += 100) {
+			        rect(i, -138, 35, 35);
+			    }
+			    for (var i = 102; i < 600; i += 100) {
+			        rect(i, -98, 35, 35);
+			    }
+			    for (var i = 62; i < 660; i += 100) {
+			        rect(i, -58, 35, 35);
+			    }
+			    
+			    for (var i = 22; i < 720; i += 100) {
+			        rect(i, -18, 35, 35);
+			    }
+			    
+			    for (var i = 63; i < 660; i += 100) {
+			        rect(i, 22, 35, 35);
+			    }
+			    for (var i = 103; i < 600; i += 100) {
+			        rect(i, 62, 35, 35);
+			    }
+			    for (var i = 143; i < 540; i += 100) {
+			        rect(i, 102, 35, 35);
+			    }
+			    for (var i = 183; i < 580; i += 100) {
+			        rect(i, 142, 35, 35);
+			    }
+			    for (var i = 222; i < 520; i += 100) {
+			        rect(i, 182, 35, 35);
+			    }
+			    for (var i = 261; i < 460; i += 100) {
+			        rect(i, 222, 35, 35);
+			    }
+			    for (var i = 300; i < 400; i += 100) {
+			        rect(i, 262, 35, 35);
+			    }
+			    
+			    fill(35);
+			    noStroke();
+			    rotate(-45);
+			    triangle(0, 500, 245, 500, 0, 450);
+			    fill(191, 173, 138);
+			    triangle(245, 500, 500, 500, 289, 450);
+			    triangle(500, 0, 500, 500, 395, 0);
+			    
+			    fill(255, 255, 255);
+			    text("CAF", 25, 485);
+			    
+			    
+			    popMatrix();
+			};
+			var JellyAdmFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    noStroke();
+			    fill(35);
+			    rect(0, 0, 350, 250);
+			    
+			    
+			    for (var j = 0; j < 250; j += 2){
+			        for (var i = 0; i < 350; i += 2){
+			            fill(255, 0, 0, random(0, 255));
+			            rect(i, j, 1, 1);
+			        }
+			    }
+			    
+			    fill(35);
+			    triangle(0, 0, 200, 0, 0, 100);
+			    fill(255, 255, 255);
+			    text("ADM", 35, 35);
+			    
+			    popMatrix();
+			};
+			var JellyComFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    noStroke();
+			    fill(0, 35, 255);
+			    rect(0, 0, 450, 400);
+			    
+			    for (var j = 0; j < 401; j += 5){
+			        for (var i = 0; i < 450; i += 5){
+			            fill(0, 0, 0, random(0, 255));
+			            ellipse(i, j, 5, 12.5);
+			        }
+			    }
+			    
+			    fill(35);
+			    triangle(450, 400, 450, 300, 200, 400);
+			    
+			    fill(255, 255, 255);
+			    text("COM", 400, 370);
+			    popMatrix();
+			};
+			var JellyKitFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(168, 0, 168);
+			    noStroke();
+			    rect(0, 0, 400, 500);
+			    
+			    fill(7, 0, 105);
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(0, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(50, i, 50, 50, 10);
+			    }
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(100, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(150, i, 50, 50, 10);
+			    }
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(200, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(250, i, 50, 50, 10);
+			    }
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(300, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(350, i, 50, 50, 10);
+			    }
+			    
+			    
+			    
+			    fill(35);
+			    triangle(400, 0, 400, 65, 200, 0);
+			    
+			    fill(255, 255, 255);
+			    text("KIT", 360, 30);
+			    popMatrix();
+			};
+			var JellyMedFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(114, 127, 194);
+			    noStroke();
+			    rect(0, 0, 400, 400);
+			    
+			    for (var j = 0; j < 400; j += 81){
+			        for (var i = 0; i < 400; i += 81){
+			            fill(35);
+			            rect(i, j, 75, 75, 5);
+			        }
+			    }
+			    
+			    triangle(400, 0, 400, 65, 200, 0);
+			    fill(255, 255, 255);
+			    text("MED", 355, 30);
+			    
+			    popMatrix();
+			};
+			var JellyNavFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(107, 55, 0);
+			    noStroke();
+			    rect(0, 0, 500, 400);
+			    
+			    for (var i = 5; i < 500; i+=30) {
+			        fill(77, 27, 0);
+			        rect(i, 0, 5, 400);
+			    }
+			    
+			    
+			    for (var i = 18; i < 210; i+=9) {
+			        fill(227, 235, 0);
+			        rect(171, i, 10, 4, 1);
+			    }
+			    
+			    for (var i = 18; i < 210; i+=9) {
+			        fill(225, 235, 0);
+			        rect(464, i, 10, 4, 1);
+			    }
+			    
+			    fill(171, 0, 0);
+			    rect(180, 15, 285, 200, 5);
+			    
+			    noFill();
+			    stroke(255, 235, 0);
+			    strokeWeight(5);
+			    rect(205, 40, 235, 150, 5);
+			    quad(330, 60, 420, 110, 330, 170, 230, 110);
+			    
+			    fill(35);
+			    noStroke();
+			    triangle(500, 320, 350, 400, 500, 400);
+			    
+			    fill(255, 255, 255);
+			    text("NAV", 445, 380);
+			    
+			    
+			    popMatrix();
+			};
+			var JellyEngFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(0, 68, 255);
+			    rect(0, 0, 500, 500);
+			    
+			    rotate(45);
+			    for (var i = 0; i < 350; i ++) {
+			        stroke(22, 19, 194);
+			        strokeWeight(5);
+			        triangle(random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i);
+			    }
+			    
+			    rotate(-90);
+			    for (var i = 0; i < 350; i ++) {
+			        stroke(22, 19, 194);
+			        strokeWeight(5);
+			        triangle(random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i);
+			    }
+			    
+			    rotate(45);
+			    for (var i = 0; i < 500; i ++) {
+			        stroke(22, 19, 194);
+			        strokeWeight(5);
+			        triangle(random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i);
+			    }
+			    
+			    popMatrix();
+			    
+			    fill(35);
+			    noStroke();
+			    triangle(500, 420, 350, 500, 500, 500);
+			    
+			    fill(255, 255, 255);
+			    text("ENG", 445, 480);
+			};
+			var JellyConFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(77, 77, 77);
+			    noStroke();
+			    rect(0, 0, 300, 250);
+			    
+			    for (var i = 0; i < 401; i += 1) {
+			        stroke(117, 117, 117);
+			        strokeWeight(2);
+			        line(random(0, 300), random(0, 250), random(0, 300), random(0, 250));
+			    }
+			    
+			    popMatrix();
+			    
+			    fill(35);
+			    noStroke();
+			    triangle(200, 250, 300, 200, 300, 250);
+			    
+			    fill(255, 255, 255);
+			    text("CON", 260, 235);
+			};
+			
+			var ExploCafFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    noStroke();
+			    
+			    fill(195, 175, 145);
+			    rect(0, 0, 500, 500);
+			    
+			    stroke(110, 75, 0);
+			    strokeWeight(5);
+			    rotate(45);
+			    
+			    for (var i = 262; i < 360; i += 100) {
+			        rect(i, -258, 35, 35);
+			    }
+			    for (var i = 222; i < 420; i += 100) {
+			        rect(i, -218, 35, 35);
+			    }
+			    for (var i = 182; i < 480; i += 100) {
+			        rect(i, -178, 35, 35);
+			    }
+			    for (var i = 142; i < 540; i += 100) {
+			        rect(i, -138, 35, 35);
+			    }
+			    for (var i = 102; i < 600; i += 100) {
+			        rect(i, -98, 35, 35);
+			    }
+			    for (var i = 62; i < 660; i += 100) {
+			        rect(i, -58, 35, 35);
+			    }
+			    
+			    for (var i = 22; i < 720; i += 100) {
+			        rect(i, -18, 35, 35);
+			    }
+			    
+			    for (var i = 63; i < 660; i += 100) {
+			        rect(i, 22, 35, 35);
+			    }
+			    for (var i = 103; i < 600; i += 100) {
+			        rect(i, 62, 35, 35);
+			    }
+			    for (var i = 143; i < 540; i += 100) {
+			        rect(i, 102, 35, 35);
+			    }
+			    for (var i = 183; i < 580; i += 100) {
+			        rect(i, 142, 35, 35);
+			    }
+			    for (var i = 222; i < 520; i += 100) {
+			        rect(i, 182, 35, 35);
+			    }
+			    for (var i = 261; i < 460; i += 100) {
+			        rect(i, 222, 35, 35);
+			    }
+			    for (var i = 300; i < 400; i += 100) {
+			        rect(i, 262, 35, 35);
+			    }
+			    
+			    fill(191, 173, 138);
+			    noStroke();
+			    rotate(-45);
+			    triangle(0, 500, 245, 500, 0, 450);
+			    triangle(245, 500, 500, 500, 289, 450);
+			    triangle(500, 0, 500, 500, 395, 0);
+			    
+			    fill(255, 255, 255);
+			    text("CAF", 25, 495);
+			    
+			    
+			    popMatrix();
+			};
+			var ExploAdmFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    noStroke();
+			    fill(35);
+			    rect(0, 0, 350, 250);
+			    
+			    
+			    for (var j = 0; j < 250; j += 2){
+			        for (var i = 0; i < 350; i += 2){
+			            fill(255, 0, 0, random(0, 255));
+			            rect(i, j, 1, 1);
+			        }
+			    }
+			    
+			    fill(35);
+			    triangle(0, 0, 200, 0, 0, 100);
+			    fill(255, 255, 255);
+			    text("ADM", 35, 35);
+			    
+			    popMatrix();
+			};
+			var ExploDorFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    noStroke();
+			    fill(0, 35, 255);
+			    rect(0, 0, 400, 830);
+			    
+			    for (var j = 0; j < 831; j += 5){
+			        for (var i = 0; i < 400; i += 5){
+			            fill(0, 0, 0, random(0, 255));
+			            ellipse(i, j, 10, 12.5);
+			        }
+			    }
+			    
+			    popMatrix();
+			};
+			var ExploKitFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(168, 0, 168);
+			    noStroke();
+			    rect(0, 0, 500, 500);
+			    
+			    fill(7, 0, 105);
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(0, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(50, i, 50, 50, 10);
+			    }
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(100, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(150, i, 50, 50, 10);
+			    }
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(200, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(250, i, 50, 50, 10);
+			    }
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(300, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(350, i, 50, 50, 10);
+			    }
+			    for (var i = 0; i < 401; i+=100) {
+			        rect(400, i, 50, 50, 10);
+			    }
+			    for (var i = 50; i < 501; i+=100) {
+			        rect(450, i, 50, 50, 10);
+			    }
+			    popMatrix();
+			};
+			var ExploMedFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(114, 127, 194);
+			    noStroke();
+			    rect(0, 0, 500, 370);
+			    
+			    for (var j = 0; j < 400; j += 81){
+			        for (var i = 0; i < 440; i += 135){
+			            fill(35);
+			            rect(i, j, 95, 45, 5);
+			        }
+			    }
+			    
+			    popMatrix();
+			};
+			var ExploNavFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(107, 55, 0);
+			    noStroke();
+			    rect(0, 0, 550, 420);
+			    
+			    for (var i = 5; i < 550; i+=30) {
+			        fill(77, 27, 0);
+			        rect(i, 0, 5, 420);
+			    }
+			    
+			    
+			    for (var i = 18; i < 210; i+=9) {
+			        fill(227, 235, 0);
+			        rect(171, i, 10, 4, 1);
+			    }
+			    
+			    for (var i = 18; i < 210; i+=9) {
+			        fill(225, 235, 0);
+			        rect(464, i, 10, 4, 1);
+			    }
+			    
+			    fill(171, 0, 0);
+			    rect(180, 15, 285, 200, 5);
+			    
+			    noFill();
+			    stroke(255, 235, 0);
+			    strokeWeight(5);
+			    rect(205, 40, 235, 150, 5);
+			    quad(330, 60, 420, 110, 330, 170, 230, 110);
+			    
+			    
+			    popMatrix();
+			};
+			var ExploEngFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(0, 68, 255);
+			    rect(0, 0, 400, 600);
+			    
+			    rotate(45);
+			    for (var i = 0; i < 420; i ++) {
+			        stroke(22, 19, 194);
+			        strokeWeight(5);
+			        triangle(random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i);
+			    }
+			    
+			    rotate(-90);
+			    for (var i = 0; i < 280; i ++) {
+			        stroke(22, 19, 194);
+			        strokeWeight(5);
+			        triangle(random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i);
+			    }
+			    
+			    rotate(56);
+			    for (var i = 0; i < 505; i ++) {
+			        stroke(22, 19, 194);
+			        strokeWeight(5);
+			        triangle(random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i, random(0, 1)+i);
+			    }
+			    
+			    popMatrix();
+			};
+			var ExploConFloor = function(x, y, s) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    fill(77, 77, 77);
+			    noStroke();
+			    rect(0, 0, 350, 450);
+			    
+			    for (var i = 0; i < 500; i += 1) {
+			        stroke(117, 117, 117);
+			        strokeWeight(2);
+			        line(random(0, 350), random(0,450), random(0, 350), random(0, 450));
+			    }
+			    
+			    popMatrix();
+			};
+			
+			// Start walkway definition
+			var walkway = function(x, y, w, h, nextTo, name, g){
+			    this.x = x;
+			    this.y = y;
+			    this.w = w;
+			    this.h = h;
+			    this.nextTo = nextTo; // Which floors are next to this one?
+			    this.name = name;
+			    this.g = g;
+			    if(this.g !== undefined){
+			        background(255);
+			        background(255, 0);
+			        this.g();
+			        this.img = get(0, 0, 1000, 1000);
+			        this.g = function(){
+			            image(this.img, 0, 0);
+			            if(this.h > 600){
+			                image(this.img, 0, this.h-600);
+			            }
+			        };
+			    }
+			};
+			walkway.prototype.draw = function() {
+			    // Draw floor
+			    noStroke();
+			    fill(100);
+			    rect(this.x, this.y, this.w, this.h);
+			    fill(0);
+			    textSize(30);
+			    textAlign(CENTER, CENTER);
+			    // So that the doorways are not drawn
+			    if(this.name[0] !== 'N' || this.name[1] !== 'e' || this.name[2] !== 'a' || this.name[3] !== 'r'){
+			        text(this.name, this.x + this.w / 2, this.y + this.h / 2); // Draw name
+			    }
+			};
+			walkway.prototype.drawOver = function(){
+			    if(this.g !== undefined){
+			        pushMatrix();
+			            translate(this.x, this.y);
+			            this.g();
+			        popMatrix();
+			    }
+			};
+			walkway.prototype.limitBean = function(x, y){
+			    // This keeps the beans inside the walkways
+			    return this.x < x && this.y < y && this.x + this.w > x && this.y + this.h > y + 30;
+			};
+			walkway.prototype.findNextFloor = function() {
+			    // This is to make the bean run to a floor that is beside this one. Unforunately, the pathfinding was disabled because of bugs
+			    return this.nextTo[floor(random(0, this.nextTo.length))];
+			};
+			// End walkway definition
+			var floors = [
+			    [
+			        new walkway(-1150, 1050, 150, 180, [1, 2], "Near Control Room"), // 0
+			        new walkway(-1050, 1130, 230, 100, [0, 2, 16], "Near Control Room"), // 1
+			        new walkway(-1300, 900, 300, 230, [0, 1], "Control Room", JellyConFloor), // 2
+			        new walkway(-900, 800, 100, 230, [4, 16], "Near Engine Room"), // 3
+			        new walkway(-1300, 350, 500, 500, [3, 7], "Engine Room", JellyEngFloor), // 4
+			        new walkway(-500, 450, 400, 400, [6], "Medbay", JellyMedFloor), // 5
+			        new walkway(-500, 300, 100, 200, [7], "Near Medbay"), // 6
+			        new walkway(-900, 250, 350, 150, [4, 20], "Near Upper Hallway"), // 7
+			        new walkway(50, 50, 500, 500, [9, 12, 20], "Cafeteria", JellyCafFloor), // 8
+			        new walkway(250, 519, 100, 511, [8, 16], "Near Cafeteria"), // 9
+			        new walkway(349, 700, 52, 100, [9, 11], "Near Admin"), // 10
+			        new walkway(400, 700, 350, 250, [10], "Admin", JellyAdmFloor), // 11
+			        new walkway(530, 100, 71, 150, [8, 13], "Near Cafeteria"), // 12
+			        new walkway(600, -50, 400, 500, [12, 14], "Kitchen", JellyKitFloor), // 13
+			        new walkway(850, 410, 100, 130, [13, 15], "Near Navigation"), // 14
+			        new walkway(790, 500, 500, 400, [14, 19], "Navigation", JellyNavFloor), // 15
+			        new walkway(-900, 980, 1500, 250, [4, 9, 17], "Lower Hallway"), // 16
+			        new walkway(550, 1100, 150, 100, [16, 18], "Near Communications"), // 17
+			        new walkway(630, 990, 450, 400, [17, 19], "Communications", JellyComFloor), // 18
+			        new walkway(920, 830, 200, 200, [15, 18], "Near Communications"), // 19
+			        new walkway(-700, 250, 800, 150, [7, 8], "Upper Hallway"), // 20
+			    ],
+			    [
+			        new walkway(50, 50, 500, 500, [1, 8, 11], "Cafeteria", ExploCafFloor),//0
+			        new walkway(-20, 250, 100, 150, [0, 2], "Near Cafeteria"),//1
+			        new walkway(-500, 150, 500, 500, [1, 3, 16], "Kitchen", ExploKitFloor),//2
+			        new walkway(-300, 600, 150, 250, [2, 4], "Near Kitchen"),//3
+			        new walkway(-400, 770, 400, 600, [3, 5, 14], "Engine Room", ExploEngFloor),//4
+			        new walkway(-20, 1100, 900, 250, [4, 6, 9], "Lower Hallway"),//5
+			        new walkway(300, 1000, 400, 150, [5, 7], "Near Navigation"),//6
+			        new walkway(250, 650, 550, 420, [6, 8], "Navigation", ExploNavFloor),//7
+			        new walkway(260, 500, 140, 200, [0, 7], "Near Cafeteria"),//8
+			        new walkway(850, 1150, 100, 150, [5, 10], "Near Dormitory"),//9
+			        new walkway(920, 500, 400, 830, [9, 13], "Dormitory", ExploDorFloor),//10
+			        new walkway(510, 300, 150, 150, [0, 12], "Near Medbay"),//11
+			        new walkway(610, 100, 500, 370, [11, 13], "Medbay", ExploMedFloor),//12
+			        new walkway(940, 420, 150, 150, [10, 12], "Near Medbay"),//13
+			        new walkway(-500, 1000, 200, 150, [4, 15], "Near Engine Room"),//14
+			        new walkway(-800, 800, 350, 450, [14, 16], "Control Room", ExploConFloor),//15
+			        new walkway(-700, 550, 150, 300, [15, 17], "Near Admin"),//16
+			        new walkway(-800, 350, 350, 250, [2, 16], "Admin", ExploAdmFloor),//17
+			    ],
+			]; // The rooms
+			
+			var them = []; // Them
+			var you; // You
+			
+			var task = function(x, y, time, room){
+			    this.x = x;
+			    this.y = y;
+			    this.time = time;
+			    this.fullTime = this.time; // Full time
+			    this.room = room; // Which room is it in
+			    this.done = false; // Done with task?
+			    this.doing = false; // Doing task?
+			    this.type = floor(random(0, 6));
+			    
+			    //0
+			    this.aims = 5;
+			    this.aimP = {x:random(175, 425), y:random(175, 425)};
+			}; // Task constructor
+			var taskPoses = [
+			    [
+			        {x: 300, y: 50},
+			        {x: 850, y: -50},
+			        {x: 620, y: 820},
+			        {x: 650, y: -50},
+			        {x: 1050, y: 500},
+			        {x: 1290, y: 700},
+			        {x: 650, y: 1000},
+			        {x: -450, y: 1230},
+			        {x: 0, y: 980},
+			        {x: -1200, y: 900},
+			        {x: -1300, y: 1130},
+			        {x: -1300, y: 630},
+			        {x: -1000, y: 350},
+			        {x: -300, y: 850},
+			        {x: -200, y: 550},
+			    ],
+			    [
+			        {x: 850, y: 350},
+			        {x: 620, y: 820},
+			        {x: 650, y: 150},
+			        {x: 950, y: 1000},
+			        {x: 1290, y: 700},
+			        {x: -500, y: 200},
+			        {x: -450, y: 1230},
+			        {x: 0, y: 980},
+			        {x: 500, y: 1300},
+			        {x: -300, y: 1130},
+			        {x: -300, y: 630},
+			        {x: -400, y: 350},
+			        {x: -700, y: 850},
+			        {x: -700, y: 550},
+			    ],
+			]; // Positions for tasks
+			for(var i = 0; i < taskPoses[mapt].length; i += 1) {
+			    for(var j = 0; j < floors[mapt].length; j += 1) {
+			        if(taskPoses[mapt][i].x >= floors[mapt][j].x && taskPoses[mapt][i].x <= floors[mapt][j].x + floors[mapt][j].w && taskPoses[mapt][i].y >= floors[mapt][j].y && taskPoses[mapt][i].y <= floors[mapt][j].y + floors[mapt][j].h) {
+			            taskPoses[mapt][i].room = j;
+			        }
+			    }
+			} // This finds the room which each task is in
+			var vents = function(){
+			    this.ventPoses = [
+			        [
+			            {x:-1150, y:965},
+			            {x:-300, y:600},
+			            {x:800, y:150},
+			            {x:855, y:1140},
+			        ],
+			        [
+			            {x:-625, y:425},
+			            {x:300, y:250},
+			            {x:1120, y:600},
+			            {x:-200, y:1020},
+			        ],
+			    ];
+			    this.ind = [];
+			    this.time = 0;
+			    for(var i = 0; i < this.ventPoses.length; i++){
+			        this.ind.push(0);
+			    }
+			    this.w = 50;
+			    this.h = 40;
+			};
+			vents.prototype.draw = function() {
+			    this.time--;
+			    for(var i = 0; i < this.ventPoses[mapt].length; i++){
+			        var a = this.ventPoses[mapt][i];
+			        pushMatrix();
+			            translate(a.x, a.y);
+			            stroke(0);
+			            strokeWeight(1);
+			            fill(150);
+			            rect(-this.w / 2, -this.h / 2, this.w, this.h);
+			            strokeWeight(2);
+			            strokeCap(SQUARE);
+			            line(-this.w / 3, -this.h / 4, this.w / 3, -this.h / 4);
+			            line(-this.w / 3, 0, this.w / 3, 0);
+			            line(-this.w / 3, this.h / 4, this.w / 3, this.h / 4);
+			            strokeCap(ROUND);
+			        popMatrix();
+			    }
+			};
+			vents.prototype.check = function(){
+			    for(var i = 0; i < this.ventPoses[mapt].length; i++){
+			        var a = this.ventPoses[mapt][i];
+			        if(cam.getMouseX() >= a.x - this.w / 2 && cam.getMouseX() <= a.x + this.w / 2 && cam.getMouseY() >= a.y - this.h / 2 && cam.getMouseY() <= a.y + this.h / 2 && you.role !== "Crew"){
+			            if(dist(you.x, you.y, a.x, a.y) <= 60){
+			                you.venting = true;
+			                this.ind[mapt] = i;
+			                this.time = 600;
+			                for(var j = 0; j < them.length; j++){
+			                    for(var k = 0; k < them[j].findRooms().length; k++){
+			                        if(you.findRooms(true)[0] === them[j].findRooms()[k] && !them[j].dead && dist(them[j].x, them[j].y, a.x, a.y) <= 400){
+			                            them[j].sus = you.name;
+			                            emergency = true;
+			                            reporter = them[j].name;
+			                            them[j].sure = true;
+			                            roomKilledIn = "There isn't one";
+			                        }
+			                    }
+			                }
+			                break;
+			            } else {
+			                tooFarAway = 255;
+			            }
+			        }
+			    }
+			};
+			vents.prototype.move = function(){
+			    if(you.venting && keyCode === 32 && keyDone){
+			        this.ind[mapt]++;
+			        if(this.ind[mapt] >= this.ventPoses[mapt].length){
+			            this.ind[mapt] = 0;
+			        }
+			    }
+			    if(this.time <= 0 && you.venting || you.venting && keys[ENTER]){
+			        you.venting = false;
+			        for(var j = 0; j < them.length; j++){
+			            for(var k = 0; k < them[j].findRooms().length; k++){
+			                if(you.findRooms(true)[0] === them[j].findRooms()[k] && !them[j].dead && dist(them[j].x, them[j].y, you.x, you.y) <= 400){
+			                    them[j].sus = you.name;
+			                    emergency = true;
+			                    reporter = them[j].name;
+			                    them[j].sure = true;
+			                    roomKilledIn = "There isn't one";
+			                }
+			            }
+			        }
+			    }
+			};
+			var ventSet = new vents();
+			
+			var cams = function(s){
+			    this.pos = [
+			        {x:730, y:700},
+			        {x:-800, y:350},
+			    ];
+			    this.s = s;
+			    this.open = false;
+			    this.index = 0;
+			    this.space = [
+			        [{x:0, y:0}, {x:555, y:940}, {x:-1350, y:300}, {x:-600, y:400}],
+			        [{x:10, y:50}, {x:850, y:640}, {x:250, y:600}, {x:-500, y:900}],
+			    ];
+			    this.dim = [20, 70];
+			};
+			cams.prototype.draw = function() {
+			    this.x = this.pos[mapt].x;
+			    this.y = this.pos[mapt].y;
+			    pushMatrix();
+			        translate(this.x, this.y);
+			        scale(this.s);
+			        noStroke();
+			        fill(200);
+			        rect(0, 0, this.dim[0], this.dim[1]);
+			        fill(255, 0, 0);
+			        ellipse(this.dim[0] / 2, this.dim[1] / 4, this.dim[0] / 2, this.dim[1] / 5);
+			        fill(0, 255, 0);
+			        ellipse(this.dim[0] / 2, this.dim[1] / 4 * 3, this.dim[0] / 2, this.dim[1] / 5);
+			        fill(0, 0, 255);
+			        ellipse(this.dim[0] / 2, this.dim[1] / 2, this.dim[0] / 2, this.dim[1] / 5);
+			    popMatrix();
+			};
+			cams.prototype.drawOpen = function(){
+			    if(this.open){
+			        var a = this.space[mapt][this.index];
+			        cam.setView(a.x+300, a.y+300, 1);
+			        cam.endView();
+			        fill(191, 142, 19);
+			        noStroke();
+			        rect(-5, 500, 610, 610);
+			        fill(0);
+			        textSize(20);
+			        textAlign(CENTER, CENTER);
+			        text("SPACE to move - ENTER to leave" + (you.role === "Assassin" && sabotaged === false ? " - L to sabotage lights" : ""), 300, 550);
+			    }
+			};
+			cams.prototype.check = function(){
+			    this.x = this.pos[mapt].x;
+			    this.y = this.pos[mapt].y;
+			    var a = cam.getMouseX();
+			    var b = cam.getMouseY();
+			    return a >= this.x && a <= this.x + this.dim[0] && b >= this.y && b <= this.y + this.dim[1];
+			};
+			cams.prototype.click = function(){
+			    this.x = this.pos[mapt].x;
+			    this.y = this.pos[mapt].y;
+			    if(this.check() && dist(this.x + this.dim[0] / 2, this.y + this.dim[1] / 2, you.x, you.y) <= 40){
+			        this.open = true;
+			    } else if(this.check()){
+			        tooFarAway = 255;
+			    }
+			};
+			cams.prototype.move = function(){
+			    if(this.open && keyCode === 32 && keyDone){
+			        this.index++;
+			        if(this.index >= this.space[mapt].length){
+			            this.index = 0;
+			        }
+			    } else if(this.open && keys[76]){
+			        sabotaged = true;
+			        this.open = false;
+			        for(var j = 0; j < them.length; j++){
+			            for(var k = 0; k < them[j].findRooms().length; k++){
+			                if(you.findRooms()[0] === them[j].findRooms()[k] && !them[j].dead && dist(them[j].x, them[j].y, you.x, you.y) <= 400){
+			                    them[j].sus = you.name;
+			                    emergency = true;
+			                    reporter = them[j].name;
+			                    roomKilledIn = "There isn't one";
+			                }
+			            }
+			        }
+			    }
+			    if(this.open && keys[ENTER]){
+			        this.index = 0;
+			        this.open = false;
+			    }
+			};
+			var adminCam = new cams(1);
+			
+			var dude = function(x, y, vX, vY, cpu){
+			    this.cpu = cpu;
+			    if(this.cpu === undefined){
+			        this.cpu = true;
+			    }
+			    var colForU = floor(random(0, cols.length));
+			    this.col = cols[colForU]; // Gets a color
+			    
+			    this.hat = floor(random(0, hats.length));
+			    
+			    // Task positions
+			    this.taskPos = [
+			        [
+			            {x: 850, y: -50},
+			            {x: 620, y: 820},
+			            {x: 650, y: -50},
+			            {x: 1050, y: 500},
+			            {x: 1290, y: 700},
+			            {x: 650, y: 1000},
+			            {x: -450, y: 1230},
+			            {x: 0, y: 980},
+			            {x: -1200, y: 900},
+			            {x: -1300, y: 1130},
+			            {x: -1300, y: 630},
+			            {x: -1000, y: 350},
+			            {x: -300, y: 850},
+			            {x: -200, y: 550},
+			        ],
+			        [
+			            {x: 850, y: 350},
+			            {x: 620, y: 820},
+			            {x: 650, y: 150},
+			            {x: 950, y: 1000},
+			            {x: 1290, y: 700},
+			            {x: -500, y: 200},
+			            {x: -450, y: 1230},
+			            {x: 0, y: 980},
+			            {x: 500, y: 1300},
+			            {x: -300, y: 1130},
+			            {x: -300, y: 630},
+			            {x: -800, y: 350},
+			            {x: -700, y: 850},
+			            {x: -700, y: 550},
+			        ],
+			    ];
+			    for(var i = 0; i < this.taskPos[mapt].length; i += 1) {
+			        for(var j = 0; j < floors[mapt].length; j += 1) {
+			            if(this.taskPos[mapt][i].x >= floors[mapt][j].x && this.taskPos[mapt][i].x <= floors[mapt][j].x + floors[mapt][j].w && this.taskPos[mapt][i].y >= floors[mapt][j].y && this.taskPos[mapt][i].y <= floors[mapt][j].y + floors[mapt][j].h) {
+			                this.taskPos[mapt][i].room = j;
+			            }
+			        }
+			    } // This finds the room which each task is in
+			    var isA = false;
+			    for(var i = 0; i < assassin.length; i++){
+			        if(this.col === assassin[i]){
+			            isA = true;
+			        }
+			    }
+			    if(isA){
+			        this.role = "Assassin";
+			    } else {
+			        this.role = "Crew";
+			    } // Defines whether you are crew or impostor
+			    this.tasks = []; // Tasks array. Will hold the tasks that are assigned to beans
+			    this.venting = false;
+			    if(this.cpu) {
+			        if(this.role === "Crew") {
+			            while(this.tasks.length < TASKNUMORIGINAL) {
+			                this.randomPushTask = floor(random(0, this.taskPos[mapt].length));
+			                var a = this.taskPos[mapt][this.randomPushTask];
+			                this.tasks.push(new task(a.x, a.y, floor(random(2*60, 10*60)), a.room));
+			                this.taskPos[mapt].splice(this.randomPushTask, 1);
+			            }
+			        }
+			        else {
+			            while(this.tasks.length < ceil(TASKNUMORIGINAL/2)) {
+			                this.randomPushTask = floor(random(0, this.taskPos[mapt].length));
+			                var a = this.taskPos[mapt][this.randomPushTask];
+			                this.tasks.push(new task(a.x, a.y, floor(random(2*60, 10*60)), a.room));
+			                this.taskPos[mapt].splice(this.randomPushTask, 1);
+			            }
+			        }
+			    } // Pushes tasks into 'this.tasks'
+			    
+			    this.runLog = [8]; // Records running so the AI won't run back in the same room. Disabled
+			    this.x = x;
+			    this.y = y;
+			    
+			    this.near = null; // Are you close to someone?
+			    
+			    
+			     
+			    
+			    cols.splice(colForU, 1); // Splices chosen color
+			    
+			    if(isimpostor && !this.cpu || !this.cpu && hitman){
+			        this.role = "Assassin";
+			    }
+			    if(this.cpu && hitman){
+			        this.role = "Crew";
+			    }
+			    
+			    this.dead = false; // Dead
+			    var name4U;
+			    var memInd;
+			    memInd = floor(random(0, genNames[male].length));
+			    name4U = genNames[male][memInd];
+			    this.name = name4U;
+			    used.push(name4U);
+			    genNames[male].splice(memInd, 1);
+			    
+			    this.dir = floor(random(0, 8)); // Which direction the AI are moving
+			    this.dirTime = random(40, 100); // How long until switch directions
+			    
+			    this.inSameRoom = 0; // =\
+			    this.currentScale = 1; // So it zooms out when you are dead
+			    this.cooldown = 0; // Kill cooldown
+			    this.knife = false; // Holding the knife?
+			    
+			    this.sus = ""; // Who is sus?
+			    this.readyForMurder = false; // Is the impostor ready to murder?
+			    
+			    this.voted = false; // Have you voted?
+			    this.voteX = vX; // X Position for the block in voting
+			    this.voteY = vY; // Y Position for the block in voting
+			    this.votes = 0; // How many votes do you have?
+			    this.highlight = false; // Is your block highlighted?
+			    
+			    this.reported = false; // Have you been reported?
+			    this.called = false; // Have you called a meeting?
+			    
+			    this.justKilled = false; // Did you just kill?
+			    this.killCool = 60; // Timer so you don't report a body when you kill it
+			    this.killCoolR = this.killCool; // Reset timer
+			    
+			    this.legs = 1; // Which position are your legs in? (1, 2, 3)
+			    this.legTime = 6; // Timer for switching leg position
+			    this.legR = this.legTime; // Reset timer
+			    this.legSpeed = 1; // Which direction are your legs going? (The legs go (1, 2, 3, 2, 1, 2, 3, 2, 1) instead of (1, 2, 3, 1, 2, 3))
+			    
+			    this.running = false; // Running from murder scene. Pathfinding
+			    this.runningAway = 0; // Pathfinding
+			    this.runDest = null; // Pathfinding
+			    this.runStart = null; // Pathfinding
+			    this.beenIn = []; // Log of rooms
+			    this.margin = 20; // =/
+			    this.lastSeen = null; // Who you're seeing (AI)
+			    this.roomTime = 300; // How long you're in a room (AI)
+			    this.inRoomToLong = false; // For AI spreading around the ship
+			    this.runDir = 1; // For AI moving at things
+			    this.inRoom = 8; // What room are you in
+			    this.findTaskResult = null; // Which task is in this room?
+			    this.sure = false; // Are you sure that the sus guy is 'it'?
+			    this.believable = []; // Who you tend to believe
+			    this.movingLegs = true; // So you move the legs
+			    this.voteTime = -3; // How long it takes the AI to vote.
+			    this.whokilled = "";
+			};
+			dude.prototype.deadCollide = function(){
+			    var s = 4;
+			    var okay = false;
+			    for(var i = 0; i < floors[mapt].length; i++){
+			        if(floors[mapt][i].limitBean(this.x, this.y)){
+			            okay = true;
+			        }
+			    }
+			    if(!okay){
+			        switch(this.dir){
+			            case 0:
+			                this.x += s;
+			            break;
+			            case 1:
+			                this.x += s;
+			                this.y += s;
+			            break;
+			            case 2:
+			                this.y += s;
+			            break;
+			            case 3:
+			                this.x -= s;
+			                this.y += s;
+			            break;
+			            case 4:
+			                this.x -= s;
+			            break;
+			            case 5:
+			                this.x -= s;
+			                this.y -= s;
+			            break;
+			            case 6:
+			                this.y -= s;
+			            break;
+			            case 7:
+			                this.x += s;
+			                this.y -= s;
+			            break;
+			        }
+			    }
+			}; // Your last collision
+			dude.prototype.findRooms = function(allow, name){
+			    if(allow === undefined){
+			        allow = false;
+			    }
+			    if(name === undefined){
+			        name = false;
+			    }
+			    var RoomArray = [];
+			    for(var i = 0; i < floors[mapt].length; i++){
+			        if(floors[mapt][i].limitBean(this.x, this.y)){
+			            if(!allow && !this.venting || allow){
+			                if(!name){
+			                    RoomArray.push(i);
+			                } else {
+			                    RoomArray.push(floors[mapt][i].name);
+			                }
+			            }
+			        }
+			    }
+			    return RoomArray;
+			}; // Finds the rooms you're in
+			dude.prototype.findTask = function() {
+			    for(var i = 0; i < this.tasks.length; i++) {
+			        if(round(this.findRooms()[0]) === round(this.tasks[i].room) && !this.tasks[i].done) {
+			            return i;
+			        }
+			    }
+			    return false;
+			}; // Finds a task in this room
+			dude.prototype.kill = function(){
+			    if(this.cpu && this.readyForMurder && !this.dead) {
+			        for(var i = 0; i < them.length; i += 1) {
+			            var inSame = false;
+			            for(var j = 0; j < this.findRooms().length; j++){
+			                for(var k = 0; k < them[i].findRooms().length; k++){
+			                    if(them[i].findRooms()[k] === this.findRooms()[j]){
+			                        inSame = true;
+			                    }
+			                }
+			            }
+			            if(them[i].name === this.name || !inSame) {
+			                continue;
+			            }
+			            if(dist(this.x, this.y, them[i].x, them[i].y) <= 100 && !them[i].dead && this.cooldown <= 0){
+			                this.cooldown = 11 * 60;
+			                them[i].dead = true;
+			                them[i].deadCollide();
+			                this.justKilled = true;
+			                if(dist(you.x, you.y, this.x, this.y) <= 500){
+			                    playSound(getSound("rpg/hit-splat"));
+			                }
+			                this.whokilled = them[i].name;
+			            }
+			        }
+			        var inSame = false;
+			        for(var j = 0; j < this.findRooms().length; j++){
+			            for(var k = 0; k < you.findRooms().length; k++){
+			                if(you.findRooms()[k] === this.findRooms()[j]){
+			                    inSame = true;
+			                }
+			            }
+			        }
+			        if(inSame){
+			            if(dist(this.x, this.y, you.x, you.y) <= 50 && !you.dead && this.cooldown <= 0){
+			                this.cooldown = 11 * 60;
+			                you.dead = true;
+			                this.justKilled = true;
+			                playSound(getSound("rpg/hit-splat"));
+			                this.whokilled = you.name;
+			            }
+			        }
+			    }
+			}; // KillAGuy
+			dude.prototype.reportBody = function(){
+			    for(var i = 0; i < them.length; i++){
+			        var sameRepRoom = false;
+			        for(var j = 0; j < them[i].findRooms().length; j++){
+			            for(var k = 0; k < this.findRooms().length; k++){
+			                if(this.findRooms()[k] === them[i].findRooms()[j]){
+			                    sameRepRoom = true;
+			                }
+			            }
+			        }
+			        if(dist(this.x, this.y, them[i].x, them[i].y) <= (sabotaged ? 50 : 400) && this.cpu && them[i].dead && !this.dead && sameRepRoom && this.whokilled !== them[i].name || mouseIsPressed && them[i].dead && !this.dead && dist(cam.getMouseX(), cam.getMouseY(), them[i].x, them[i].y) <= 30 && dist(this.x, this.y, them[i].x, them[i].y) <= 60 && !this.cpu){
+			            if(!them[i].reported) {
+			                emergency = true;
+			            }
+			            if(!them[i].reported) {
+			                reporter = this.name;
+			                roomKilledIn = floors[mapt][this.findRooms()[0]].name;
+			            }
+			            them[i].reported = true;
+			            if(!this.sure) {
+			                this.sus = this.lastSeen;
+			            }
+			            for(var j = 0; j < them.length; j += 1) {
+			                for(var k = 0; k < them.length; k += 1) {
+			                    if(j===k){continue;}
+			                    if(them[j].findRooms()[0] === them[k].findRooms()[0] && !sabotaged) {
+			                        them[j].believable.push(them[k].name);
+			                    }
+			                }
+			            }
+			            break;
+			        }
+			    }
+			    if((dist(this.x, this.y, you.x, you.y) <= 400 && this.cpu) && you.dead && !this.dead && this.whokilled !== you.name){
+			        reporter = this.name;
+			        roomKilledIn = floors[mapt][this.findRooms()[0]].name;
+			        if(!you.reported) {
+			            emergency = true;
+			        }
+			        you.reported = true;
+			        if(!this.sure) {
+			            this.sus = this.lastSeen;
+			        }
+			    }
+			}; // ReportAGuy
+			dude.prototype.voteButton = function(x, y){
+			    if(this.dead){
+			        fill(100);
+			    } else if(!this.highlight){
+			        fill(200);
+			    } else {
+			        fill(209, 133, 25);
+			    }
+			    stroke(100);
+			    strokeWeight(5);
+			    rect(this.voteX, this.voteY, 200, 70, 10);
+			    noStroke();
+			    fill(this.col);
+			    pushMatrix();
+			        translate(this.voteX + 30, this.voteY + 42);
+			        rect(-15, -20, 30, 45, 10, 10, 0, 0);
+			        fill(67, 216, 242);
+			        rect(2, -6, 15, 9);
+			        pushMatrix();
+			            translate(0, -20);
+			            hats[this.hat](1.2);
+			        popMatrix();
+			        fill(0);
+			        var txts = 20;
+			        textSize(txts);
+			        while(textWidth(this.name) >= 120){
+			            txts--;
+			            textSize(txts);
+			        }
+			        textAlign(LEFT, CENTER);
+			        text(this.name, 30, -7);
+			    popMatrix();
+			    if(this.dead){
+			        fill(200, 0, 0);
+			        textAlign(CENTER, CENTER);
+			        textSize(20);
+			        text("✖", this.voteX + 180, this.voteY + 20);
+			    } else if(this.voted){
+			        fill(0, 200, 0);
+			        textAlign(CENTER, CENTER);
+			        textSize(20);
+			        text("Voted", this.voteX + 160, this.voteY + 15);
+			    }
+			}; // Draw the vote button in the vote scene
+			dude.prototype.selectVote = function(){
+			    return mouseX >= this.voteX && mouseX <= this.voteX + 200 && mouseY >= this.voteY && mouseY <= this.voteY + 70;
+			}; // The hitbox for the vote button
+			dude.prototype.vent = function(){
+			    this.x = ventSet.ventPoses[mapt][ventSet.ind[mapt]].x;
+			    this.y = ventSet.ventPoses[mapt][ventSet.ind[mapt]].y;
+			};//Venting
+			dude.prototype.draw = function() {
+			    if(this.sus !== ''){
+			        for(var i = 0; i < them.length; i++){
+			            if(them[i].name === this.sus && them[i].dead){
+			                this.sus = '';
+			                break;
+			            }
+			        }
+			    }
+			    pushMatrix();
+			        translate(this.x, this.y);
+			        if(this.dir > 2 && this.dir < 6){
+			            scale(1, 1);
+			            this.currentScale = 1;
+			        } else if(this.dir < 2 || this.dir > 6){
+			            scale(-1, 1);
+			            this.currentScale = -1;
+			        } else {
+			            scale(this.currentScale, 1);
+			        }
+			        if(((mouseIsPressed) && this.role === "Assassin" && !this.cpu && !this.dead) || (this.justKilled && this.cpu && this.near !== null) && this.cooldown <= 0 && !adminCam.open){
+			            noStroke();
+			            fill(200);
+			            pushMatrix();
+			                translate(0, 5);
+			                triangle(60, 6, 30, 9, 30, 2);
+			                fill(150);
+			                triangle(60, 6, 30, 9, 30, 5.5);
+			                fill(173, 145, 31);
+			                rect(27, -2, 3, 15);
+			            popMatrix();
+			            fill(this.col);
+			            ellipse(20, 10, 12, 12);
+			            this.knife = true;
+			        } else {
+			            this.knife = false;
+			        }
+			        noStroke();
+			        fill(this.col);
+			        if(!this.dead){
+			            rect(-15, -20, 30, 45, 10, 10, 0, 0);
+			        } else {
+			            pushMatrix();
+			                translate(0, 7);
+			                rotate(90);
+			                scale(0.7);
+			                rectMode(CENTER);
+			                pushMatrix();
+			                    scale(1.05, 1.1);
+			                    fill(0);
+			                    rect(0, 0, 30, 10, 12);
+			                    ellipse(-15, -3, 10, 10);
+			                    ellipse(-15, 3, 10, 10);
+			                    ellipse(15, -3, 10, 10);
+			                    ellipse(15, 3, 10, 10);
+			                popMatrix();
+			                fill(240);
+			                rect(0, 0, 30, 10, 12);
+			                ellipse(-15, -3, 10, 10);
+			                ellipse(-15, 3, 10, 10);
+			                ellipse(15, -3, 10, 10);
+			                ellipse(15, 3, 10, 10);
+			                rectMode(CORNER);
+			            popMatrix();
+			            fill(this.col);
+			            beginShape();
+			                vertex(-15, 8);
+			                vertex(-15, 25);
+			                vertex(15, 25);
+			                vertex(15, 8);
+			                vertex(13, 5);
+			                vertex(11, 10);
+			                vertex(9, 6);
+			                vertex(7, 8);
+			                vertex(5, 4);
+			                vertex(3, 11);
+			                vertex(1, 9);
+			                vertex(-1, 7);
+			                vertex(-3, 12);
+			                vertex(-5, 8);
+			                vertex(-7, 9);
+			                vertex(-9, 6);
+			                vertex(-11, 10);
+			                vertex(-13, 5);
+			                vertex(-15, 8);
+			            endShape();
+			        }
+			        if((this.running && !this.dead || this.cpu && !this.dead) && this.movingLegs){
+			            if(this.legs === 1){
+			                pushMatrix();
+			                    translate(5, 25);
+			                    rotate(-60);
+			                    rect(0, 0, 10, 20);
+			                popMatrix();
+			                pushMatrix();
+			                    translate(-15, 15);
+			                    rotate(90);
+			                    rect(0, 0, 10, 12);
+			                popMatrix();
+			            } else if(this.legs === 0){
+			                pushMatrix();
+			                    translate(5, 25);
+			                    rotate(-45);
+			                    rect(0, 0, 10, 14);
+			                popMatrix();
+			                pushMatrix();
+			                    translate(-1, 5);
+			                    rotate(45);
+			                    rect(0, 10, 10, 22);
+			                popMatrix();
+			            } else {
+			                pushMatrix();
+			                    translate(8, 17);
+			                    rotate(45);
+			                    rect(0, 0, 10, 18);
+			                popMatrix();
+			                pushMatrix();
+			                    translate(-15, 15);
+			                    rotate(0);
+			                    rect(0, 0, 10, 20);
+			                popMatrix();
+			            }
+			        } else {
+			            rect(-15, 20, 10, 15);
+			            rect(5, 20, 10, 15);
+			        }
+			        this.legTime--;
+			        if(this.legTime <= 0){
+			            this.legTime = this.legR;
+			            if(this.legs >= 1 || this.legs <= -1){
+			                this.legSpeed *= -1;
+			            }
+			            this.legs += this.legSpeed;
+			        }
+			        if(this.role === "Assassin" && bug){
+			            fill(200, 0, 0);
+			        } else {
+			            fill(67, 216, 242);
+			        }
+			        if(!this.dead){
+			            rect(2, -6, 15, 9);
+			            pushMatrix();
+			                translate(0, -16);
+			                hats[this.hat](1.2);
+			            popMatrix();
+			        }
+			    popMatrix();
+			    textSize(20);
+			    textAlign(CENTER, CENTER);
+			    if(!this.reported && !you.dead && winner === '' || !this.reported && you.dead && this.role === "Crew" || this.dead && you.dead && !this.reported || this.role === "Crew" && winner !== '') {
+			        fill(150);
+			        text(this.name, this.x, this.y + 50);
+			    }
+			    else if(this.role !== "Assassin"){
+			        fill(200, 0, 0);
+			        text("REPORTED", this.x, this.y + 50);
+			    } else {
+			        fill(200, 0, 0);
+			        text(this.name, this.x, this.y + 50);
+			    }
+			}; // DrawAGuy
+			dude.prototype.handleCool = function(){
+			    this.cooldown--;
+			};
+			dude.prototype.doTask = function(t) {
+			    if(dist(t.x, t.y, this.x, this.y) < 50 && !t.done) {
+			        t.CPUDo();
+			        this.movingLegs = false;
+			        return t.done;
+			    }
+			    if(dist(t.x, t.y, this.x, this.y) >= 50){
+			        this.movingLegs = true;
+			    }
+			}; // DoATask
+			dude.prototype.CPUmove = function(f){
+			    var readyForSabo = 0;
+			    for(var i = 0; i < them.length; i++){
+			        if(dist(them[i].x, them[i].y, this.x, this.y) < 500 && them[i].findRooms()[0] === this.findRooms()[0]){
+			            readyForSabo++;
+			        }
+			    }
+			    if(dist(you.x, you.y, this.x, this.y) < 500 && you.findRooms()[0] === this.findRooms()[0]){
+			        readyForSabo++;
+			    }
+			    if(dist(adminCam.x, adminCam.y, this.x, this.y) <= 300 && sabotaged === false && this.role === "Assassin" && readyForSabo < 2 && this.findRooms(false, true)[0] === "Admin"){
+			        sabotaged = true;
+			    }
+			    if(this.runningAway === 0) {
+			        this.beenIn = [];
+			    }
+			    if(this.inRoom !== this.findRooms()[0]) {
+			        this.inRoom = this.findRooms()[0];
+			        this.inRoomToLong = false;
+			        this.roomTime = 300;
+			    }
+			    this.roomTime -= 1;
+			    if(this.roomTime <= 0) {
+			        if(this.inRoomToLong) {
+			            this.roomTime = 300;
+			            this.runDir += 2;
+			        }
+			        else {
+			            this.runDir = (floor(random(1, 5)) * 2) - 1;
+			        }
+			        this.inRoomToLong = true;
+			    }
+			    if(this.runDir > 7) {
+			        this.runDir -= 8;
+			    }
+			    if(this.inRoomToLong) {
+			        this.dir = this.runDir;
+			    }
+			    for(var i = 0; i < them.length; i += 1) {
+			        if(them[i].dead) {
+			            continue;
+			        }
+			        if(this.name === them[i].name) {
+			            continue;
+			        }
+			        if(this.findRooms()[0] === them[i].findRooms()[0] && !sabotaged) {
+			            this.lastSeen = them[i].name;
+			        }
+			    }
+			    if(this.findRooms()[0] === you.findRooms()[0] && !you.dead) {
+			        this.lastSeen = you.name;
+			    }
+			    var s = 4;
+			    if(this.runStart !== null){
+			        if(dist(this.x, this.y, this.runStart.x, this.runStart.y) >= 1000){
+			            this.runningAway = 0;
+			        }
+			    }
+			    this.findTaskResult = this.findTask();
+			    if(this.findTaskResult !== false) {
+			        if(this.tasks[this.findTaskResult].x < this.x - s && this.tasks[this.findTaskResult].y < this.y - s) {
+			            this.dir = 1;
+			        }
+			        else if(this.tasks[this.findTaskResult].x > this.x + s && this.tasks[this.findTaskResult].y < this.y - s) {
+			            this.dir = 3;
+			        }
+			        else if(this.tasks[this.findTaskResult].x > this.x + s && this.tasks[this.findTaskResult].y > this.y + s) {
+			            this.dir = 5;
+			        }
+			        else if(this.tasks[this.findTaskResult].x < this.x - s && this.tasks[this.findTaskResult].y > this.y + s) {
+			            this.dir = 7;
+			        }
+			        else if(this.tasks[this.findTaskResult].x < this.x - s) {
+			            this.dir = 0;
+			        }
+			        else if(this.tasks[this.findTaskResult].y < this.y - s) {
+			            this.dir = 2;
+			        }
+			        else if(this.tasks[this.findTaskResult].x > this.x + s) {
+			            this.dir = 4;
+			        }
+			        else if(this.tasks[this.findTaskResult].y > this.y + s) {
+			            this.dir = 6;
+			        }
+			        else {
+			            this.dir = -1;
+			        }
+			        if(this.doTask(this.tasks[this.findTaskResult])) {
+			            this.movingLegs = true;
+			            this.tasks.splice(this.findTaskResult, 1);
+			        }
+			    } else {
+			        this.movingLegs = true;
+			    }
+			    if(this.role === "Assassin") {
+			        this.inSameRoom = 0;
+			        for(var i = 0; i < them.length; i += 1) {
+			            if(dist(them[i].x, them[i].y, this.x, this.y) <= 50 && !them[i].dead && them[i].role !== "Assassin") {
+			                this.near = i;
+			            }
+			            else if(dist(them[i].x, them[i].y, this.x, this.y) <= (sabotaged ? 100 : 450) && !them[i].dead && them[i].role !== "Assassin") {
+			                this.near = null;
+			            }
+			            if(dist(them[i].x, them[i].y, this.x, this.y) <= (sabotaged ? 100 : 450) && !them[i].dead) {
+			                this.inSameRoom++;
+			                if(this.inSameRoom > 2) {
+			                    this.readyForMurder = false;
+			                }
+			                else {
+			                    this.readyForMurder = true;
+			                }
+			                if(this.readyForMurder && them[i].role !== "Assassin" && this.coolDown <= 0) {
+			                    if(them[i].x < this.x && them[i].y < this.y) {
+			                        this.dir = 1;
+			                    }
+			                    if(them[i].x > this.x && them[i].y < this.y) {
+			                        this.dir = 3;
+			                    }
+			                    if(them[i].y > this.y && them[i].x > this.x) {
+			                        this.dir = 5;
+			                    }
+			                    if(them[i].y > this.y && them[i].x < this.x) {
+			                        this.dir = 7;
+			                    }
+			                }
+			            }
+			        }
+			        if(dist(this.x, this.y, you.x, you.y) <= 450 && !you.dead) {
+			            this.inSameRoom++;
+			            if(this.inSameRoom > 2) {
+			                this.readyForMurder = false;
+			            }
+			            else {
+			                this.readyForMurder = true;
+			            }
+			            if(this.readyForMurder && you.role !== "Assassin" && this.coolDown <= 0) {
+			                if(you.x < this.x && you.y < this.y) {
+			                    this.dir = 1;
+			                }
+			                if(you.x > this.x && you.y < this.y) {
+			                    this.dir = 3;
+			                }
+			                if(you.y > this.y && you.x > this.x) {
+			                    this.dir = 5;
+			                }
+			                if(you.y > this.y && you.x < this.x) {
+			                    this.dir = 7;
+			                }
+			            }
+			        }
+			        
+			         /** Run away from murder (GDB) **/
+			        if (this.justKilled) {
+			            // set number of hops
+			            this.runningAway = 12;
+			            this.beenIn = [];
+			        }
+			        if (this.runningAway > 0) {
+			            // set the starting floor
+			            if (this.runStart === null) {
+			                this.runStart = floors[mapt][this.findRooms()[0]];
+			                this.beenIn.push(this.runStart);
+			            }
+			            // calculate floor to run to
+			            if (this.runDest === null) {
+			                var nextFloors = [];
+			                for (var i = 0; i < this.runStart.nextTo.length; i++) {
+			                    var curFloor = floors[mapt][this.runStart.nextTo[i]];
+			                    var skip = false;
+			                    for (var j = 0; j < this.beenIn.length; j++) {
+			                        if (this.beenIn[j] === curFloor) {
+			                            skip = true;
+			                            break;
+			                        }
+			                    }
+			                    if (skip) { continue; }
+			                    nextFloors.push(curFloor);
+			                }
+			                if (nextFloors.length > 0) {
+			                    var c = floor(random(0, nextFloors.length));
+			                    this.runDest = nextFloors[c];
+			                    //println(this.runDest.name+"  "+nextFloors.length+"  "+this.runDest.nextTo.length);
+			                }
+			                else { this.runningAway = 0; }
+			            }
+			            // calculate directions
+			            this.dir = -1;
+			            var w = min(this.margin, this.runDest.w/2);
+			            var h = min(this.margin, this.runDest.h/2);
+			            var Xless = this.x < this.runDest.x/*+this.runDest.w/2-w*/ + 10;
+			            var Xmore = this.x > this.runDest.x+this.runDest.w/*/2+w*/ - 10;
+			            var Yless = this.y < this.runDest.y/*+this.runDest.h/2-h*/ + 30;
+			            var Ymore = this.y > this.runDest.y+this.runDest.h/*/2+h*/ - 50;
+			            if (Xmore && Ymore) {
+			                this.dir = 1;
+			            }
+			            else if (Xless && Ymore) {
+			                this.dir = 3;
+			            }
+			            else if (Xless && Yless) {
+			                this.dir = 5;
+			            }
+			            else if (Xmore && Yless) {
+			                this.dir = 7;
+			            }
+			            else if (Xmore) {
+			                this.dir = 0;
+			            }
+			            else if (Ymore) {
+			                this.dir = 2;
+			            }
+			            else if(Xless) {
+			                this.dir = 4;
+			            }
+			            else if(Yless) {
+			                this.dir = 6;
+			            }
+			            
+			            // debug, highlight destination floor
+			            if(bug) {
+			                noFill();
+			                strokeWeight(3);
+			                for (var i = 0; i < this.beenTo.length; i++) {
+			                    var b = this.beenTo[i];
+			                    stroke(0, 255, 0);
+			                    rect(b.x, b.y, b.w, b.h);
+			                }
+			                stroke(255, 0, 0);
+			                rect(this.runDest.x, this.runDest.y, this.runDest.w, this.runDest.h);
+			            }
+			            
+			            // check for arrival
+			            if (this.x > this.runDest.x && this.x < this.runDest.x+this.runDest.w && this.y > this.runDest.y && this.y < this.runDest.y+this.runDest.h) {
+			                //println("arrival");
+			                // set the starting floor
+			                this.runStart = this.runDest;
+			                // push floors already passed through
+			                this.beenTo.push(this.runDest);
+			                // setting runDest to null will cause runDest to be recalculated.
+			                this.runDest = null;
+			                // decrease the number of available hops 
+			                this.runningAway--;
+			            }
+			        }
+			        else {
+			            // cleanup
+			            this.runStart = null;
+			            this.runDest = null;
+			            this.runningAway = 0;
+			            this.beenTo = [];
+			        }
+			    }
+			    
+			    switch(this.dir){
+			        case 0:
+			            this.x -= s;
+			        break;
+			        case 1:
+			            this.x -= s;
+			        break;
+			        case 3:
+			            this.x += s;
+			        break;
+			        case 4:
+			            this.x += s;
+			        break;
+			        case 5:
+			            this.x += s;
+			        break;
+			        case 7:
+			            this.x -= s;
+			        break;
+			    }
+			    var okay = false;
+			    for(var j = 0; j < floors[mapt].length; j++){
+			        if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][j].limitBean(this.x, this.y))){
+			            okay = true;
+			        }
+			    }
+			    if(!okay){
+			        switch(this.dir){
+			            case 0:
+			                this.x += s;
+			            break;
+			            case 1:
+			                this.x += s;
+			            break;
+			            case 3:
+			                this.x -= s;
+			            break;
+			            case 4:
+			                this.x -= s;
+			            break;
+			            case 5:
+			                this.x -= s;
+			            break;
+			            case 7:
+			                this.x += s;
+			            break;
+			        }
+			    }
+			    switch(this.dir){
+			        case 1:
+			            this.y -= s;
+			        break;
+			        case 2:
+			            this.y -= s;
+			        break;
+			        case 3:
+			            this.y -= s;
+			        break;
+			        case 5:
+			            this.y += s;
+			        break;
+			        case 6:
+			            this.y += s;
+			        break;
+			        case 7:
+			            this.y += s;
+			        break;
+			    }
+			    var okay = false;
+			    for(var j = 0; j < floors[mapt].length; j++){
+			        if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][j].limitBean(this.x, this.y))){
+			            okay = true;
+			        }
+			    }
+			    if(!okay){
+			        switch(this.dir){
+			            case 1:
+			                this.y += s;
+			            break;
+			            case 2:
+			                this.y += s;
+			            break;
+			            case 3:
+			                this.y += s;
+			            break;
+			            case 5:
+			                this.y -= s;
+			            break;
+			            case 6:
+			                this.y -= s;
+			            break;
+			            case 7:
+			                this.y -= s;
+			            break;
+			        }
+			    }
+			    this.dirTime--;
+			    if(this.dirTime <= 0){
+			        this.dirTime = random(20, 80);
+			        this.dir = floor(random(0, 8));
+			    }
+			}; // Move The AI
+			dude.prototype.move = function(f){
+			    var s = 4;
+			    var run = [true, true];
+			    if(!mobile){
+			        if(keys[DOWN] || keys[83]){
+			            this.y += s;
+			            var okay = false;
+			            for(var i = 0; i < floors[mapt].length; i++){
+			                if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][i].limitBean(this.x, this.y))){
+			                    okay = true;
+			                }
+			            }
+			            if(!okay){
+			                this.y -= s;
+			            }
+			            this.running = true;
+			        } else if(keys[UP] || keys[87]){
+			            this.y -= s;
+			            var okay = false;
+			            for(var i = 0; i < floors[mapt].length; i++){
+			                if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][i].limitBean(this.x, this.y))){
+			                    okay = true;
+			                }
+			            }
+			            if(!okay){
+			                this.y += s;
+			            }
+			            this.running = true;
+			        } else {
+			            run[0] = false;
+			        }
+			        if(keys[LEFT] || keys[65]){
+			            this.x -= s;
+			            this.dir = 0;
+			            var okay = false;
+			            for(var i = 0; i < floors[mapt].length; i++){
+			                if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][i].limitBean(this.x, this.y))){
+			                    okay = true;
+			                }
+			            }
+			            if(!okay){
+			                this.x += s;
+			            }
+			            this.running = true;
+			        } else if(keys[RIGHT] || keys[68]){
+			            this.x += s;
+			            this.dir = 4;
+			            var okay = false;
+			            for(var i = 0; i < floors[mapt].length; i++){
+			                if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][i].limitBean(this.x, this.y))){
+			                    okay = true;
+			                }
+			            }
+			            if(!okay){
+			                this.x -= s;
+			            }
+			            this.running = true;
+			        } else {
+			            run[1] = false;
+			        }
+			    } else {
+			        if(mouseIsPressed){
+			            var PVM = new PVector(this.x, this.y);
+			            PVM.sub(new PVector(cam.getMouseX(), cam.getMouseY()));
+			            PVM.normalize();
+			            this.x -= PVM.x * (s * 1.3);
+			            var okay = false;
+			            for(var i = 0; i < floors[mapt].length; i++){
+			                if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][i].limitBean(this.x, this.y))){
+			                    okay = true;
+			                }
+			            }
+			            if(!okay){
+			                this.x += PVM.x * (s * 1.3);
+			            }
+			            this.y -= PVM.y * (s * 1.3);
+			            var okay = false;
+			            for(var i = 0; i < floors[mapt].length; i++){
+			                if((f !== undefined ? f.limitBean(this.x, this.y) : floors[mapt][i].limitBean(this.x, this.y))){
+			                    okay = true;
+			                }
+			            }
+			            if(!okay){
+			                this.y += PVM.y * (s * 1.3);
+			            }
+			            if(cam.getMouseX() > this.x){
+			                this.dir = 4;
+			            } else {
+			                this.dir = 0;
+			            }
+			            this.running = true;
+			        } else {
+			            run = [false, false];
+			        }
+			    }
+			    if(!run[0] && !run[1]){
+			        this.running = false;
+			    }
+			}; // MoveAYou
+			dude.prototype.modelBean = function(x, y){
+			    pushMatrix();
+			        translate(x, y);
+			        fill(this.col);
+			        noStroke();
+			        rect(-15, -20, 30, 45, 10, 10, 0, 0);
+			        rect(-15, 20, 10, 15);
+			        rect(5, 20, 10, 15);
+			        fill(67, 216, 242);
+			        rect(2, -6, 15, 9);
+			    popMatrix();
+			}; // The model bean. For the execution
+			dude.prototype.deadBean = function(x, y){
+			    pushMatrix();
+			        translate(x, y);
+			        fill(this.col);
+			        noStroke();
+			        pushMatrix();
+			            translate(0, 7);
+			            rotate(90);
+			            scale(0.7);
+			            rectMode(CENTER);
+			            pushMatrix();
+			                scale(1.05, 1.1);
+			                fill(0);
+			                rect(0, 0, 30, 10, 12);
+			                ellipse(-15, -3, 10, 10);
+			                ellipse(-15, 3, 10, 10);
+			                ellipse(15, -3, 10, 10);
+			                ellipse(15, 3, 10, 10);
+			            popMatrix();
+			            fill(240);
+			            rect(0, 0, 30, 10, 12);
+			            ellipse(-15, -3, 10, 10);
+			            ellipse(-15, 3, 10, 10);
+			            ellipse(15, -3, 10, 10);
+			            ellipse(15, 3, 10, 10);
+			            rectMode(CORNER);
+			        popMatrix();
+			        fill(this.col);
+			        beginShape();
+			            vertex(-15, 8);
+			            vertex(-15, 25);
+			            vertex(15, 25);
+			            vertex(15, 8);
+			            vertex(13, 5);
+			            vertex(11, 10);
+			            vertex(9, 6);
+			            vertex(7, 8);
+			            vertex(5, 4);
+			            vertex(3, 11);
+			            vertex(1, 9);
+			            vertex(-1, 7);
+			            vertex(-3, 12);
+			            vertex(-5, 8);
+			            vertex(-7, 9);
+			            vertex(-9, 6);
+			            vertex(-11, 10);
+			            vertex(-13, 5);
+			            vertex(-15, 8);
+			        endShape();
+			        rect(-15, 20, 10, 15);
+			        rect(5, 20, 10, 15);
+			    popMatrix();
+			}; // The dead model bean. For the execution
+			
+			var you = new dude(random(100, 500), random(100, 500), 80, 50, false); // U
+			var doingTask = false; // Whatcha Think?
+			var inRoom = []; // So it doesn't draw folks in other rooms
+			them = []; // Take a guess, genius
+			var halfAndHalf = 0; // For splitting vote buttons into two columns
+			var instillVoteY1 = 0; // So the columns y's aren't continuous
+			var instillVoteY2 = 0; // So the columns y's aren't continuous
+			while(them.length < numPlayer - 1){
+			    if(halfAndHalf < ceil(numPlayer / 2) - 1){
+			        them.push(new dude(random(100, 500), random(100, 500), 80, instillVoteY1 * 100 + 150));
+			        instillVoteY1++;
+			    } else {
+			        them.push(new dude(random(100, 500), random(100, 500), 320, instillVoteY2 * 100 + 50));
+			        instillVoteY2++;
+			    }
+			    halfAndHalf++;
+			} // Make ya bois in da array
+			
+			
+			
+			var taskPosesReset = taskPoses; // Copy task positions
+			task.prototype.drawCircle = function(){
+			    noFill();
+			    stroke(230, 230, 0);
+			    strokeWeight(5);
+			    ellipse(this.x, this.y, abs(sin(frameCount * 6)) * 10 + 25, abs(sin(frameCount * 6)) * 10 + 25);
+			}; // This draw circle
+			task.prototype.drawArrow = function(){
+			    noStroke();
+			    fill(230, 230, 0);
+			    pushMatrix();
+			        translate(300, 300);
+			        rotate(atan2(this.y - you.y, this.x - you.x));
+			        var away = 250;
+			        if(dist(you.x, you.y, this.x, this.y) <= 250){
+			            away = dist(you.x, you.y, this.x, this.y);
+			        }
+			        beginShape();
+			            vertex(away - 20, 0);
+			            vertex(away - 30, 10);
+			            vertex(away, 0);
+			            vertex(away - 30, -10);
+			        endShape();
+			    popMatrix();
+			}; // This draw arrow
+			task.prototype.doTask = function(){
+			    if(!true){
+			    noStroke();
+			    fill(150);
+			    rect(150, 150, 300, 300);
+			    fill(0);
+			    textSize(40);
+			    textAlign(CENTER, TOP);
+			    text("Doing Task...", 300, 160);
+			    textAlign(CENTER, CENTER);
+			    textSize(20);
+			    text(ceil(this.time / 60) + "s", 300, 300);
+			    noFill();
+			    stroke(100);
+			    strokeWeight(7);
+			    strokeCap(SQUARE);
+			    pushMatrix();
+			        translate(300, 300);
+			        rotate(frameCount * 5);
+			        arc(0, 0, 100, 100, 0, 250);
+			    popMatrix();
+			    strokeCap(ROUND);
+			    strokeWeight(1);
+			    rect(200, 400, 200, 20);
+			    fill(0, 0, 230);
+			    rect(200, 400, 200 / this.fullTime * (this.fullTime - this.time), 20);
+			    this.time--;
+			    this.doing = true;
+			    if(this.time <= 0){
+			        this.done = true;
+			        this.doing = false;
+			    }
+			    } else {
+			        this.type = 0;
+			        noStroke();
+			        fill(150);
+			        rect(150, 150, 300, 300);
+			        switch(this.type){
+			            case 0:
+			                noFill();
+			                stroke(255, 0, 0);
+			                strokeWeight(4);
+			                ellipse(this.aimP.x, this.aimP.y, 50, 50);
+			                if(clicked && dist(mouseX, mouseY, this.aimP.x, this.aimP.y) <= 25){
+			                    this.aims--;
+			                    this.aimP = {x:random(175, 425), y:random(175, 425)};
+			                }
+			                this.doing = true;
+			                if(this.aims <= 0){
+			                    this.done = true;
+			                    this.doing = false;
+			                }
+			            break;
+			        }
+			    }
+			}; // This draw and do task thingummy
+			task.prototype.CPUDo = function(){
+			    this.time--;
+			    this.doing = true;
+			    if(this.time <= 0){
+			        this.done = true;
+			        this.doing = false;
+			    }
+			}; // This make other people do task
+			var randPos = floor(random(0, taskPoses[mapt].length)); // Random positioned task
+			var task1 = new task(taskPoses[mapt][randPos].x, taskPoses[mapt][randPos].y, floor(random(2*60, 10*60))); // Your 1st task
+			randPos = floor(random(0, taskPoses[mapt].length));
+			var task2 = new task(taskPoses[mapt][randPos].x, taskPoses[mapt][randPos].y, floor(random(2*60, 10*60))); // Your 2nd task
+			TASKNUM -= 2; // Correlate your task number with the tasks left
+			
+			var smoother = function(to, from, cushion){
+			    return (to - from) / cushion;
+			}; // So that an object will slow down as it nears its destination. Makes things look really smooth
+			
+			var button = function(x, y, w, h, lbl, onClick, lblS){
+			    this.x = x;
+			    this.y = y;
+			    this.w = w;
+			    this.h = h;
+			    this.lbl = lbl;
+			    this.onClick = onClick;
+			    this.lblS = lblS;
+			    
+			    this.hoverW = 0;
+			}; // Button
+			button.prototype.draw = function() {
+			    var buttonMask = get(this.x + 6, this.y + 6, this.w, this.h);
+			    fill(255);
+			    stroke(255);
+			    strokeWeight(4);
+			    rect(this.x, this.y, this.w, this.h);
+			    fill(0);
+			    if(this.lblS === undefined){
+			        textSize(this.w / 7);
+			    } else {
+			        textSize(this.lblS);
+			    }
+			    textAlign(CENTER, CENTER);
+			    text(this.lbl, this.x + this.w / 2, this.y + this.h / 2);
+			    image(buttonMask, this.x + this.hoverW, this.y, this.w - this.hoverW, this.h);
+			}; // Draw button
+			button.prototype.over = function(){
+			    return mouseX >= this.x && mouseX <= this.x + this.w && mouseY >= this.y && mouseY <= this.y + this.h;
+			}; // Button Hitbox
+			button.prototype.hover = function(){
+			    if(this.over()){
+			        this.hoverW += smoother(this.x + this.w, this.x + this.hoverW, 10);
+			    } else {
+			        this.hoverW += smoother(this.x, this.x + this.hoverW, 10);
+			    }
+			}; // Button hover reaction
+			button.prototype.click = function(){
+			    if(this.over()){
+			        this.onClick();
+			        this.hoverW = 0;
+			    }
+			}; // Click the button
+			button.prototype.pack = function(){
+			    this.draw();
+			    this.hover();
+			}; // Call hover and draw
+			
+			var initGame; // Will be a function later
+			var chatTime; // Will be a timer for the chat scene
+			var firstTime = true; // Is this the first time you've played the game?
+			var jo;
+			var toPlay = new button(200, 300, 200, 80, "P L A Y !", function(){
+			    if(!firstTime){
+			        initGame();
+			    }
+			    firstTime = false;
+			    scene = JOIN;
+			});
+			var sub = new button(480, 530, 100, 50, "S U B ?", function(){
+			    println("https://www.khanacademy.org/computer-programming/subify-to-hootcode/6006453480669184");
+			});
+			var talk = new button(460, 450, 100, 30, "T A L K", function(){
+			    youTalking = true;
+			});
+			var toOption = new button(200, 400, 200, 80, "O P T I O N S", function(){
+			    scene = OPTION;
+			});
+			var spect = new button(50, 155, 200, 60, "S P E C T A T E:\n" + spectate, function(){
+			    spectate = !spectate;
+			    if(!spectate && numPlayer > 5){
+			    numPlayer--;
+			    }
+			    firstTime = false;
+			}, 20);
+			var beat = new button(50, 75, 200, 60, "M U S I C:\n" + music, function(){
+			    music = !music;
+			}, 20);
+			var impostorness = new button(50, 315, 200, 60, "B E   I M P O S T O R:\n" + isimpostor, function(){
+			    isimpostor = !isimpostor;
+			    firstTime = false;
+			}, 15);
+			var numPlayOpt = new button(50, 235, 200, 60, "P L A Y E R S:" + numPlayer, function(){
+			    numPlayer++;
+			    if(numPlayer > 10){
+			    numPlayer = 5;
+			    }
+			    firstTime = false;
+			}, 20);
+			var mapChoice = new button(350, 235, 200, 60, "M A P:\n" + mapNames[mapInd], function(){
+			    mapInd++;
+			    if(mapInd === 0){
+			        randomMap = true;
+			    } else if(mapInd === 1){
+			        mapt = 0;
+			        randomMap = false;
+			    } else if(mapInd === 2){
+			        mapt = 1;
+			        randomMap = false;
+			    } else {
+			        mapInd = 0;
+			    }
+			}, 20);
+			var ventOption = new button(350, 75, 200, 60, "V E N T S:" + hasVents, function(){
+			    hasVents = !hasVents;
+			    firstTime = false;
+			}, 25);
+			var camsOption = new button(350, 155, 200, 60, "C A M S:" + hasCams, function(){
+			    hasCams = !hasCams;
+			    firstTime = false;
+			}, 25);
+			var sex = new button(350, 315, 200, 60, "N A M E   S E T:\n" + nameSet[male], function(){
+			    for(var i = 0; i < used.length; i++){
+			        genNames[male].push(used[i]);
+			    }
+			    used = [];
+			    male++;
+			    if(male >= nameSet.length){
+			        male = 0;
+			    }
+			    firstTime = false;
+			}, 20);
+			var killerFolk = new button(50, 395, 200, 60, "I M P O S T O R S:\n" + killers, function(){
+			    killers++;
+			    if(killers > 4){
+			        killers = 1;
+			    }
+			    firstTime = false;
+			}, 20);
+			var flGraph = new button(50, 475, 200, 60, "F L O O R\nG R A P H I C S: " + floorStatus, function(){
+			    floorStatus = (floorStatus === "on" ? "off" : "on");
+			}, 20);
+			var tohitM = new button(350, 395, 200, 60, "H I T M A N   M O D E:\n" + hitman, function(){
+			    hitman = !hitman;
+			    firstTime = false;
+			}, 18);
+			var toHome = new button(450, 530, 140, 60, "M E N U", function(){
+			    jo.here = [];
+			    scene = MENU;
+			}); // Back to menu
+			var toHomeFOp = new button(280, 175, 40, 200, "M\n\nE\n\nN\n\nU", function(){
+			    scene = MENU;
+			}, 20); // Back to menu
+			var closeChat = new button(20, 120, 40, 40, "✖", function(){
+			    scene = VOTE;
+			    chatTime = 30 * 60;
+			}, 30); // Close the chat
+			
+			var canKill = 60; // So you don't murder someone as soon as the game starts#ThxLiamKForVolturius
+			var winTxt = "Wins=Prevails=Triumphs=Conquers=Is Victorious".split("="); // The win words
+			var randWin; // A random win word
+			var chatter; // will be a chat
+			var Chat = function(x, s, lim){
+			    this.x = x;
+			    this.s = s;
+			    this.lim = lim;
+			    this.chats = [];
+			    this.lines = [];
+			    this.y = 150;
+			}; // Constructor for a chat
+			var winY = -50; // The winner is off the screen
+			var grav = 0.1; // The gravity for the winner is 0.1
+			var winYSpeed = 0; // The speed of the winner is 0
+			var airResist = 0.54; // So the winner doesn't keep bouncing until Infinity
+			var winX = 800; // The win word's x
+			initGame = function(){
+			    saboT = 1200;
+			    sabotaged = false;
+			    nextMan = 0;
+			    TASKNUMORIGINAL = 4;
+			    TASKNUM = TASKNUMORIGINAL;
+			    if(randomMap){
+			        mapt = floor(random(0, 2));
+			    }
+			    winner = '';
+			    if(spectate) {
+			        frameRate(100); // More frameRate
+			    } else {
+			        frameRate(60);
+			    }// Set spectate
+			    for(var i = 0; i < used.length; i++){
+			        genNames[male].push(used[i]);
+			    }
+			    used = [];
+			    cols = [
+			        color(30),
+			        color(150),
+			        color(131, 30, 199),
+			        color(255, 150, 0),
+			        color(200, 0, 0),
+			        color(0, 120, 0),
+			        color(0, 0, 200),
+			        color(255),
+			        color(44, 176, 199),
+			        color(220, 220, 0),
+			        color(77, 44, 11),
+			        color(255, 0, 255)
+			    ]; // Player colors
+			    assassin = [];
+			    var usedNums = [];
+			    for(var i = 0; i < (isimpostor ? killers - 1 : killers); i++){
+			        var a = floor(random(0, numPlayer));
+			        var b = true;
+			        while(b){
+			            b = false;
+			            for(var j = 0; j < usedNums.length; j++){
+			                if(usedNums[j] === a){
+			                    b = true;
+			                }
+			            }
+			        }
+			        assassin.push(a);
+			    }
+			    for(var i = 0; i < assassin.length; i++){
+			        assassin[i] = cols[assassin[i]];
+			    }
+			    you = new dude(random(100, 500), random(100, 500), 80, 50, false);
+			    them = [];
+			    halfAndHalf = 0;
+			    instillVoteY1 = 0;
+			    instillVoteY2 = 0;
+			    while(them.length < numPlayer - (spectate ? 0 : 1)){
+			        if(halfAndHalf < ceil(numPlayer / 2) - 1){
+			            them.push(new dude(random(100, 500), random(100, 500), 80, instillVoteY1 * 100 + 150));
+			            instillVoteY1++;
+			        } else {
+			            them.push(new dude(random(100, 500), random(100, 500), 320, instillVoteY2 * 100 + 50));
+			            instillVoteY2++;
+			        }
+			        halfAndHalf++;
+			    }
+			    taskPoses = [
+			        [
+			            {x: 300, y: 50},
+			            {x: 850, y: -50},
+			            {x: 620, y: 820},
+			            {x: 650, y: -50},
+			            {x: 1050, y: 500},
+			            {x: 1290, y: 700},
+			            {x: 650, y: 1000},
+			            {x: -450, y: 1230},
+			            {x: 0, y: 980},
+			            {x: -1200, y: 900},
+			            {x: -1300, y: 1130},
+			            {x: -1300, y: 630},
+			            {x: -1000, y: 350},
+			            {x: -300, y: 850},
+			            {x: -200, y: 550},
+			        ],
+			        [
+			            {x: 850, y: 350},
+			            {x: 620, y: 820},
+			            {x: 650, y: 150},
+			            {x: 950, y: 1000},
+			            {x: 1290, y: 700},
+			            {x: -500, y: 200},
+			            {x: -450, y: 1230},
+			            {x: 0, y: 980},
+			            {x: 500, y: 1300},
+			            {x: -300, y: 1130},
+			            {x: -300, y: 630},
+			            {x: -400, y: 350},
+			            {x: -700, y: 850},
+			            {x: -700, y: 550},
+			        ],
+			    ];
+			    var randPos = floor(random(0, taskPoses[mapt].length));
+			    task1 = new task(taskPoses[mapt][randPos].x, taskPoses[mapt][randPos].y, floor(random(2*60, 10*60)));
+			    taskPoses[mapt].splice(randPos, 1);
+			    randPos = floor(random(0, taskPoses[mapt].length));
+			    task2 = new task(taskPoses[mapt][randPos].x, taskPoses[mapt][randPos].y, floor(random(2*60, 10*60)));
+			    taskPoses[mapt].splice(randPos, 1);
+			    TASKNUM -= 2;
+			    tasksDone = 0;
+			    doingTask = false;
+			    inRoom = [];
+			    canKill = 60;
+			    randWin = floor(random(0, winTxt.length));
+			    chatTime = 30 * 60;
+			    chatter = new Chat(300, 20, 9);
+			    winY = -50;
+			    grav = 0.1;
+			    winYSpeed = 0;
+			    airResist = 0.54;
+			    winX = 800;
+			    emergency = false;
+			    emergencyCountdown = emergencyReset;
+			}; // reasets the variables so that you can play again
+			
+			var oneWayGaussian = function(valueS, chance, num, choose){
+			    if(choose === undefined){
+			        choose = 2;
+			    }
+			    while(choose >= 1){
+			        choose = random(0, chance);
+			        if(choose < 1){
+			            return num + valueS;
+			        }
+			        num++;
+			    }
+			}; // Like a half bell curve. For my logo
+			var logoTimer = 200; // How long is this logo?
+			var animV = [0, 205, 205]; // Draws the eyes and the line in my logo
+			var initialize = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]; // For custom text
+			
+			var customText = function(txt, x, y, clr, size, font, pict){
+			    pushStyle();
+			    fill(0);
+			    for(var i = 0; i < txt.length; i++){
+			        if(txt[i] === "!"){
+			            for(var j = 0; j < initialize.length; j++){
+			                if(txt[i + 1] === initialize[j]){
+			                    fill(clr[j]);
+			                    i++;
+			                }
+			            }
+			        } else if(txt[i] === "@"){
+			            for(var j = 0; j < initialize.length; j++){
+			                if(txt[i + 1] === initialize[j]){
+			                    textSize(size[j]);
+			                    i++;
+			                }
+			            }
+			        } else if(txt[i] === "#"){
+			            for(var j = 0; j < initialize.length; j++){
+			                if(txt[i + 1] === initialize[j]){
+			                    textFont(font[j]);
+			                    i++;
+			                }
+			            }
+			        } else if(txt[i] === "$"){
+			            for(var j = 0; j < initialize.length; j++){
+			                if(txt[i + 1] === initialize[j]){
+			                    pict();
+			                    i++;
+			                }
+			            }
+			        } else {
+			            text(txt[i], x, y);
+			            x += textWidth(txt[i]);
+			        }
+			    }
+			    popStyle();
+			}; // My custom text
+			
+			var A = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.rote = 0;
+			    this.lineLength = 0;
+			}; // CC custom text A
+			A.prototype.draw = function() {
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    line(this.x, this.y - this.lineLength, this.x - this.rote, this.y + this.lineLength);
+			    line(this.x, this.y - this.lineLength, this.x + this.rote, this.y + this.lineLength);
+			    if(this.lineLength < this.sze / 2) {
+			        this.lineLength += 1;
+			    }
+			    else if(this.rote < this.sze / 1.75) {
+			        this.rote += 1;
+			    }
+			}; // CC custom text A
+			var C = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.rote = 0;
+			}; // CC custom text C
+			C.prototype.draw = function() {
+			    noFill();
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    pushMatrix();
+			    translate(this.x, this.y);
+			    arc(0, 0, this.sze, this.sze, 45, 45 + this.rote);
+			    popMatrix();
+			    if(this.rote < 270) {
+			        this.rote += 6;
+			    }
+			}; // CC custom text C
+			var D = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.rote = 0;
+			    this.lineLength = 0;
+			}; // CC custom text D
+			D.prototype.draw = function() {
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    line(this.x - this.sze / 2, this.y - this.lineLength, this.x - this.sze / 2, this.y + this.lineLength);
+			    arc(this.x - this.sze / 2, this.y, this.rote, this.sze, -90, 90);
+			    if(this.lineLength < this.sze / 2) {
+			        this.lineLength += 1;
+			    }
+			    else if(this.rote < this.sze * 2) {
+			        this.rote += 1.5;
+			    }
+			}; // CC custom text D
+			var G = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.rote = 0;
+			    this.lineLength = 0;
+			}; // CC custom text G
+			G.prototype.draw = function() {
+			    noFill();
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    pushMatrix();
+			    translate(this.x, this.y);
+			    arc(0, 0, this.sze, this.sze, 45, 45 + this.rote);
+			    popMatrix();
+			    line(this.x + this.sze / 2.5, this.y, this.x + this.sze / 2.5, this.y + this.lineLength);
+			    if(this.rote < 270) {
+			        this.rote += 7;
+			    }
+			    if(this.lineLength < this.sze / 2) {
+			        this.lineLength += 0.3;
+			    }
+			}; // CC custom text G
+			var I = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.lineLength = [0, 0];
+			}; // CC custom text I
+			I.prototype.draw = function() {
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    line(this.x - this.lineLength[0], this.y - this.lineLength[1], this.x + this.lineLength[0], this.y - this.lineLength[1]);
+			    line(this.x - this.lineLength[0], this.y + this.lineLength[1], this.x + this.lineLength[0], this.y + this.lineLength[1]);
+			    line(this.x, this.y - this.lineLength[1] + 1, this.x, this.y + this.lineLength[1]);
+			    if(this.lineLength[0] < this.sze/2) {
+			        this.lineLength[0] += 1;
+			    }
+			    else if(this.lineLength[1] < this.sze/2) {
+			        this.lineLength[1] += 1;
+			    }
+			}; // CC custom text I
+			var N = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.lineLength = 0;
+			}; // CC custom text N
+			N.prototype.draw = function() {
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    line(this.x - this.sze / 2, this.y - this.lineLength, this.x - this.sze / 2, this.y + this.lineLength);
+			    line(this.x + this.sze / 2, this.y - this.lineLength, this.x + this.sze / 2, this.y + this.lineLength);
+			    line(this.x - this.lineLength, this.y - this.lineLength, this.x + this.lineLength, this.y + this.lineLength);
+			    if(this.lineLength < this.sze / 2) {
+			        this.lineLength += 0.5;
+			    }
+			}; // CC custom text N
+			var O = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.rote = 0;
+			}; // CC custom text O
+			O.prototype.draw = function() {
+			    noFill();
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    ellipse(this.x, this.y, this.rote, this.rote);
+			    if(this.rote < this.sze) {
+			        this.rote += 0.5;
+			    }
+			}; // CC custom text O
+			var P = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.rote = 0;
+			    this.lineLength = 0;
+			}; // CC custom text P
+			P.prototype.draw = function() {
+			    noFill();
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    line(this.x - this.sze / 2, this.y + this.sze / 2, this.x - this.sze / 2, this.y + this.sze / 2 - this.lineLength);
+			    arc(this.x - this.sze / 2, this.y - this.sze / 4, this.sze * 1.8, this.sze / 2, 90 - this.rote, 90);
+			    if(this.lineLength < this.sze) {
+			        this.lineLength += 1;
+			    }
+			    if(this.rote < 180) {
+			        this.rote += 5;
+			    }
+			}; // CC custom text P
+			var T = function(x, y, sze, clr) {
+			    this.x = x;
+			    this.y = y;
+			    this.sze = sze;
+			    this.clr = clr;
+			    this.rote = 0;
+			    this.lineLength = sze / 2;
+			}; // CC custom text T
+			T.prototype.draw = function() {
+			    stroke(this.clr);
+			    strokeWeight(5);
+			    strokeCap(SQUARE);
+			    pushMatrix();
+			    translate(this.x, this.y);
+			    rotate(this.rote);
+			    line(-this.sze / 2 + this.lineLength, 0, this.sze / 2 - this.lineLength, 0);
+			    popMatrix();
+			    pushMatrix();
+			    translate(this.x, this.y - this.sze / 2);
+			    rotate(this.rote - 90);
+			    line(-this.sze / 2 + this.lineLength, 0, this.sze / 2 - this.lineLength, 0);
+			    popMatrix();
+			    if(this.lineLength > 0) {
+			        this.lineLength -= 1;
+			    }
+			    else if(this.rote < 90) {
+			        this.rote += 3;
+			    }
+			}; // CC custom text T
+			
+			var words = [new C (60, 200, 75, color(0)), new A (100, 200, 30, color(0)), new P (150, 200, 30, color(0)), new T (200, 201, 30, color(0)), new A (250, 200, 30, color(0)), new I (300, 200, 30, color(0)), new N (350, 200, 30, color(0)), new C (80, 255, 20, color(0)), new O (130, 255, 20, color(0)), new D (180, 255, 20, color(0)), new I (230, 255, 20, color(0)), new N (280, 255, 20, color(0)), new G (330, 255, 20, color(0)),]; // The words in CC's logo
+			
+			var FOXcornerLogo = function(x, y, s, c) {
+			    pushMatrix();
+			    
+			    translate(x, y);
+			    scale(s);
+			    
+			    stroke(0, 0, 0);
+			    strokeWeight(5);
+			    
+			    fill(c);
+			    
+			    beginShape();
+			    
+			        vertex(60, 400);
+			        vertex(120, 390);
+			        vertex(100, 335);
+			        vertex(120, 250);
+			        vertex(200, 250);
+			        vertex(175, 235);
+			        vertex(200, 235);
+			        vertex(120, 200);
+			        vertex(110, 187);
+			        vertex(185, 185);
+			        vertex(180, 120);
+			        vertex(195, 85);
+			        vertex(160, 120);
+			        vertex(150, 130);
+			        vertex(120, 145);
+			        vertex(85, 140);
+			        vertex(50, 120);
+			        vertex(35, 215);
+			        vertex(20, 325);
+			        vertex(50, 260);
+			        vertex(40, 330);
+			        vertex(60, 400);
+			    
+			    endShape();
+			
+			    beginShape();
+			    
+			        vertex(165, 400);
+			        vertex(135, 385);
+			        vertex(130, 365);
+			        vertex(120, 350);
+			        vertex(127, 275);
+			        vertex(150, 273);
+			        vertex(213, 290);
+			        vertex(230, 313);
+			        vertex(225, 321);
+			        vertex(200, 310);
+			        vertex(150, 295);
+			        vertex(140, 355);
+			        vertex(195, 350);
+			        vertex(225, 325);
+			        vertex(215, 354);
+			        vertex(190, 380);
+			        vertex(165, 400);
+			    
+			    endShape();
+			    
+			    beginShape();
+			    
+			        vertex(220, 400);
+			        vertex(275, 324);
+			        vertex(230, 259);
+			        vertex(240, 120);
+			        vertex(260, 139);
+			        vertex(280, 125);
+			        vertex(305, 230);
+			        vertex(310, 310);
+			        vertex(335, 205);
+			        vertex(360, 235);
+			        vertex(375, 200);
+			        vertex(395, 323);
+			        vertex(345, 345);
+			        vertex(360, 400);
+			        vertex(320, 360);
+			        vertex(305, 400);
+			        vertex(220, 400);
+			    
+			    endShape();
+			    
+			    popMatrix();
+			};
+			var FoxLogo = function(x, y, s){
+			    FOXcornerLogo(x-45, y-45, s, color(0, 0, 255));
+			    FOXcornerLogo(x-40, y-40, s, color(255, 162, 0));
+			};
+			var logo = function(){
+			    scene = LOGO;
+			    background(0, 0, 100);
+			    pushMatrix();
+			    translate(-20, -100);
+			    scale(1.5);
+			    textAlign(LEFT, BASELINE);
+			    customText(
+			        
+			        "$1#2@1!2Hoot@2!3Code#1@3();", 85, 200,
+			        
+			        [color(0), color(48, 140, 68), color(50, 181, 50)],
+			        [50, 40, 45],
+			        [createFont("ani"), createFont("serif")],
+			        function(){
+			            noFill();
+			            stroke(0, 255, 0);
+			            strokeWeight(3);
+			            line(87, oneWayGaussian(203, 5, 0), 345, oneWayGaussian(203, 5, 0));
+			            strokeWeight(7);
+			            pushMatrix();
+			            translate(174, 187);
+			            rotate(animV[0]);
+			            point(0, 5);
+			            popMatrix();
+			            pushMatrix();
+			            translate(144, 187);
+			            rotate(animV[0]);
+			            point(0, -5);
+			            popMatrix();
+			            animV[0] += 10;
+			        }
+			        
+			    );
+			    popMatrix();
+			    logoTimer--;
+			    if(logoTimer < 0){
+			        scene = MENU;
+			    }
+			    pushMatrix();
+			    translate(100, 100);
+			    for(var i = 0; i < words.length; i += 1) {
+			        if(frameCount > i * 13 + 30) {
+			            words[i].draw();
+			        }
+			    }
+			    popMatrix();
+			    FoxLogo(270, 440, 0.3);
+			}; // The logo function
+			
+			var options = function(){
+			    scene = OPTION;
+			    background(0);
+			    textSize(50);
+			    textAlign(CENTER, TOP);
+			    text("OPTIONS", 300, 10);
+			    spect.lbl = "S P E C T A T E:\n" + spectate;
+			    spect.pack();
+			    beat.lbl = "M U S I C:\n" + music;
+			    numPlayOpt.lbl = "P L A Y E R S: " + numPlayer;
+			    impostorness.lbl = "B E   I M P O S T E R:\n" + isimpostor;
+			    ventOption.lbl = "V E N T S:\n" + hasVents;
+			    camsOption.lbl = "C A M S:\n" + hasCams;
+			    mapChoice.lbl = "M A P:\n" + mapNames[mapInd];
+			    sex.lbl = "N A M E   S E T:\n" + nameSet[male];
+			    killerFolk.lbl = "I M P O S T O R S:\n" + killers;
+			    tohitM.lbl = "H I T M A N   M O D E:\n" + hitman;
+			    flGraph.lbl = "F L O O R\nG R A P H I C S: " + floorStatus;
+			    beat.pack();
+			    toHomeFOp.pack();
+			    numPlayOpt.pack();
+			    impostorness.pack();
+			    ventOption.pack();
+			    camsOption.pack();
+			    mapChoice.pack();
+			    sex.pack();
+			    killerFolk.pack();
+			    tohitM.pack();
+			    flGraph.pack();
+			}; // The options menu
+			
+			var menu = function(){
+			    scene = MENU;
+			    background(0);
+			    fill(255);
+			    textSize(60);
+			    textAlign(CENTER, TOP);
+			    text("MURDER MYSTERY", 300, 10);
+			    textSize(30);
+			    text("It's a lot like \"Among Us\"", 300, 80);
+			    toPlay.pack();
+			    sub.pack();
+			    toOption.pack();
+			}; // The menu
+			
+			jo = {
+			    ww: new walkway(50, 50, 500, 500, [], ""),
+			    here: [],
+			    toPT: 300,
+			    toPTR: 300,
+			    hereP: random(80, 220),
+			};
+			jo.func = function(){
+			    scene = JOIN;
+			    background(0);
+			    cols = [
+			        color(30), // Black
+			        color(150), // Gray
+			        color(131, 30, 199), // Purple
+			        color(255, 150, 0), // Orange
+			        color(200, 0, 0), // Red
+			        color(0, 120, 0), // Green
+			        color(0, 0, 200), // Blue
+			        color(255), // White
+			        color(44, 176, 199), // Light Blue
+			        color(220, 220, 0), // Yellow
+			        color(77, 44, 11), // Brown
+			        color(255, 0, 255)
+			    ];
+			    cam.setView(you.x, you.y, 20);
+			    jo.ww.draw();
+			    you.draw();
+			    you.move(jo.ww);
+			    for(var i = 0; i < jo.here.length; i++){
+			        jo.here[i].roomTime = 100;
+			        jo.here[i].draw();
+			        jo.here[i].CPUmove(jo.ww);
+			    }
+			    fill(70, 150);
+			    stroke(0);
+			    strokeWeight(4);
+			    rect(150, 150, 70, 70);
+			    rect(240, 150, 140, 140);
+			    var cross;
+			    jo.check = function(x, y){
+			        return dist(cam.getMouseX(), cam.getMouseY(), x, y) <= 5;
+			    };
+			    jo.checkHat = function(x, y){
+			        return dist(cam.getMouseX(), cam.getMouseY(), x, y) <= 15;
+			    };
+			    for(var i = 0; i < hats.length; i++){
+			        var hatx = i * 30 + 253 - (floor(i / 4) * 120);
+			        var haty = 170 + (floor(i / 4) * 40);
+			        pushMatrix();
+			            translate(hatx, haty);
+			            hats[i](0.9);
+			        popMatrix();
+			        if(jo.checkHat(hatx, haty)){
+			            pushMatrix();
+			                translate(300, 145);
+			                hats[i](2);
+			            popMatrix();
+			            if(mouseIsPressed){
+			                you.hat = i;
+			            }
+			        }
+			    }
+			    for(var i = 0; i < cols.length; i++){
+			        noStroke();
+			        fill(cols[i]);
+			        ellipse(i * 15 + 163 - (floor(i / 4) * 60), 165 + (floor(i / 4) * 20), 10, 10);
+			        cross = false;
+			        for(var j = 0; j < jo.here.length; j++){
+			            if(jo.here[j].col === cols[i]){
+			                cross = true;
+			            }
+			        }
+			        if(you.col === cols[i]){
+			            cross = true;
+			        }
+			        if(cross){
+			            stroke(255, 0, 0);
+			            strokeWeight(2);
+			            line(i * 15 + 163 - (floor(i / 4) * 60) + 6, 165 + (floor(i / 4) * 20) - 6, i * 15 + 163 - (floor(i / 4) * 60) - 6, 165 + (floor(i / 4) * 20) + 6);
+			        }
+			        if(jo.check(i * 15 + 163 - (floor(i / 4) * 60), 165 + (floor(i / 4) * 20)) && !cross){
+			            stroke(0);
+			            strokeWeight(2);
+			            line(i * 15 + 163 - (floor(i / 4) * 60) + 6, 165 + (floor(i / 4) * 20), i * 15 + 163 - (floor(i / 4) * 60) + 13, 165 + (floor(i / 4) * 20) - 32);
+			            line(i * 15 + 163 - (floor(i / 4) * 60) - 6, 165 + (floor(i / 4) * 20), i * 15 + 163 - (floor(i / 4) * 60) - 13, 165 + (floor(i / 4) * 20) - 32);
+			            fill(cols[i]);
+			            noStroke();
+			            ellipse(i * 15 + 163 - (floor(i / 4) * 60), 165 + (floor(i / 4) * 20) - 40, 30, 30);
+			        }
+			        if(jo.check(i * 15 + 163 - (floor(i / 4) * 60), 165 + (floor(i / 4) * 20)) && !cross && mouseIsPressed){
+			            you.col = cols[i];
+			            for(var j = 0; j < them.length; j++){
+			                if(them[j].col === you.col){
+			                    for(var k = 0; k < cols.length; k++){
+			                        var okay = true;
+			                        for(var l = 0; l < them.length; l++){
+			                            if(cols[k] === them[l].col){
+			                                okay = false;
+			                            }
+			                        }
+			                        if(okay){
+			                            them[j].col = cols[k];
+			                            break;
+			                        }
+			                    }
+			                }
+			            }
+			        }
+			    }
+			    cam.endView();
+			    jo.hereP--;
+			    if(jo.hereP <= 0 && jo.here.length < them.length){
+			        var isal = 0;
+			        var thePush = floor(random(0, them.length));
+			        var okay = false;
+			        while(!okay && isal < 20){
+			            okay = true;
+			            for(var i = 0; i < jo.here.length; i++){
+			                if(them[thePush].name === jo.here[i].name){
+			                    okay = false;
+			                }
+			            }
+			            if(!okay){
+			                thePush = floor(random(0, them.length));
+			            }
+			            isal++;
+			        }
+			        if(isal < 20){
+			            jo.here.push(them[thePush]);
+			        }
+			        jo.hereP = random(80, 220);
+			    } else if(jo.here.length >= them.length){
+			        jo.toPT--;
+			        if(jo.toPT <= 0){
+			            jo.toPT = jo.toPTR;
+			            jo.here = [];
+			            jo.hereP = random(80, 220);
+			            scene = PLAY;
+			        }
+			        fill(255, 0, 0);
+			        textSize(60);
+			        textAlign(CENTER, CENTER);
+			        text("Game Starts", 300, 100);
+			        fill(255);
+			        textSize(40);
+			        textAlign(CENTER, TOP);
+			        text("In " + ceil(jo.toPT / 60), 300, 135);
+			    }
+			    toHome.pack();
+			};
+			
+			var play = function(){
+			    if(keys[74]){
+			        thumbnail = get();
+			    }
+			    var changeIt = 0;
+			    for(var i = 0; i < them.length; i++){
+			        if(them[i].role === "Assassin"){
+			            changeIt++;
+			        }
+			    }
+			    if(you.role === "Assassin"){
+			        changeIt++;
+			    }
+			    while(changeIt < (isimpostor ? killers - 1 : killers) && !hitman){
+			        var aaof = floor(random(0, them.length + 1));
+			        if(aaof === them.length){
+			            if(you.role === "Crew"){
+			                changeIt++;
+			            }
+			            you.role = "Assassin";
+			        } else {
+			            if(them[aaof].role === "Crew"){
+			                changeIt++;
+			            }
+			            them[aaof].role = "Assassin";
+			        } 
+			    }
+			    youTalked = false;
+			    youTalking = false;
+			    canKill--; // The kill timer
+			    pushMatrix();
+			        if(you.dead) {
+			            translate(290, 150);
+			            scale(0.23);
+			        }
+			        scene = PLAY;
+			        background(0);
+			        if(!you.dead) {
+			            cam.setView(you.x, you.y, 20);
+			        }
+			        for(var i = 0; i < floors[mapt].length; i++){
+			            floors[mapt][i].draw();
+			        }
+			        if(floorStatus === "on"){
+			            for(var i = 0; i < floors[mapt].length; i++){
+			                floors[mapt][i].drawOver();
+			            }
+			        }
+			        if(hasVents){
+			            ventSet.draw();
+			        }
+			        if(!spectate && !you.venting) {
+			            you.draw();
+			        }
+			        you.handleCool();
+			        if(!you.dead && !doingTask && !you.venting && !adminCam.open){
+			            you.move();
+			        }
+			        if(you.venting){
+			            if(hasVents){
+			                you.vent();
+			                ventSet.move();
+			            }
+			        }
+			        inRoom = you.findRooms(true);
+			        for(var i = 0; i < them.length; i++){
+			            them[i].reportBody();
+			            them[i].handleCool();
+			            var inSame = false;
+			            for(var j = 0; j < you.findRooms().length; j++){
+			                for(var k = 0; k < them[i].findRooms().length; k++){
+			                    if(them[i].findRooms()[k] === you.findRooms()[j]){
+			                        inSame = true;
+			                    }
+			                }
+			            }
+			            if(inSame){
+			                if(you.role === "Assassin" && you.knife){
+			                    if(dist(you.x, you.y, them[i].x, them[i].y) <= 50 && !them[i].dead && you.cooldown <= 0 && !you.dead && canKill <= 0 && !you.venting && (them[nextMan].col === them[i].col || !hitman)){
+			                        you.cooldown = 15 * 60;
+			                        them[i].dead = true;
+			                        them[i].deadCollide();
+			                        you.justKilled = true;
+			                        playSound(getSound("rpg/hit-splat"));
+			                        while(them[nextMan].dead){
+			                            nextMan++;
+			                            if(nextMan >= them.length){
+			                                break;
+			                            }
+			                        }
+			                        if(nextMan >= them.length){
+			                            nextMan = 0;
+			                        }
+			                    }
+			                }
+			            }
+			            for(var j = 0; j < inRoom.length; j++){
+			                for(var k = 0; k < them[i].findRooms().length; k++){
+			                    if(inRoom[j] === them[i].findRooms()[k] && (sabotaged !== true || you.role === "Assassin") && !doingTask || you.dead || adminCam.open && sabotaged !== true){
+			                        them[i].draw();
+			                    }
+			                }
+			            }
+			            if(!them[i].dead){
+			                them[i].CPUmove();
+			            }
+			            them[i].kill();
+			        }
+			        if(hasCams){
+			            adminCam.draw();
+			        }
+			        if(!task1.done && you.role !== "Assassin"){
+			            task1.drawCircle();
+			        }
+			        if(!task2.done && you.role !== "Assassin"){
+			            task2.drawCircle();
+			        }
+			        inRoom = [];
+			        cam.endView();
+			        if(sabotaged === true && saboT > 0){
+			            saboT--;
+			            for(var i = 0; i < 600; i += 60){
+			                strokeWeight(30);
+			                stroke(0, 0, 0, 350 - (i / 3));
+			                noFill();
+			                ellipse(300, 300, 830 - i, 830 - i);
+			            }
+			            fill(sin(frameCount * 5) * 100 + 150, 0, 0);
+			            textSize(30);
+			            textAlign(CENTER, CENTER);
+			            text("Fixing Lights in " + round(saboT / 60), 300, 300);
+			        }
+			        if(!task1.done && you.role !== "Assassin" && !you.dead){
+			            task1.drawArrow();
+			        }
+			        if(!task2.done && you.role !== "Assassin" && !you.dead){
+			            task2.drawArrow();
+			        }
+			        if(task1.doing && !you.dead){
+			            task1.doTask();
+			            doingTask = true;
+			        }
+			        if(task2.doing && !you.dead){
+			            task2.doTask();
+			            doingTask = true;
+			        }
+			        if(!task1.doing && !task2.doing){
+			            doingTask = false;
+			        }
+			        if(task1.done && taskPoses[mapt].length > 0 && TASKNUM > 0){
+			            randPos = floor(random(0, taskPoses[mapt].length));
+			            task1 = new task(taskPoses[mapt][randPos].x, taskPoses[mapt][randPos].y, floor(random(2*60, 10*60)));
+			            TASKNUM--;
+			            tasksDone++;
+			        } else if(TASKNUM <= 0 && !task1done && task1.done){
+			            tasksDone++;
+			            task1done = true;
+			        }
+			        if(task2.done && taskPoses[mapt].length > 0 && TASKNUM > 0){
+			            randPos = floor(random(0, taskPoses[mapt].length));
+			            task2 = new task(taskPoses[mapt][randPos].x, taskPoses[mapt][randPos].y, floor(random(2*60, 10*60)));
+			            TASKNUM--;
+			            tasksDone++;
+			        } else if(TASKNUM <= 0 && !task2done && task2.done){
+			            tasksDone++;
+			            task2done = true;
+			        }
+			        if(you.role === "Assassin" && you.cooldown > 0 && winner === ''){
+			            fill(255);
+			            textAlign(CENTER, CENTER);
+			            textSize(30);
+			            text("Cooldown: " + floor(you.cooldown / 60), 300, 200);
+			        }
+			        if(you.role !== "Assassin"){
+			            noStroke();
+			            fill(150);
+			            rect(20, 20, 150, 30);
+			            fill(150, 0, 0);
+			            rect(20, 20, 150 / TASKNUMORIGINAL * tasksDone, 30);
+			            fill(0);
+			            textAlign(CENTER, CENTER);
+			            textSize(20);
+			            text("Tasks", 95, 35);
+			            textAlign(RIGHT, TOP);
+			            textSize(30);
+			            fill(0, 200, 200);
+			            text("Crew", 590, 10);
+			        }
+			        else {
+			            fill(200, 0, 0);
+			            textAlign(RIGHT, TOP);
+			            textSize(30);
+			            text("Impostor", 590, 10);
+			            if(hitman){
+			                fill(them[nextMan].col);
+			                if(!them[nextMan].dead){
+			                    rect(120, 20, 150, 40);
+			                }
+			                fill(255);
+			                var t = 25;
+			                textSize(t);
+			                textAlign(LEFT, CENTER);
+			                text("Next Kill:", 5, 40);
+			                while(textWidth((them[nextMan].dead ? "Nobody" : them[nextMan].name)) >= 150){
+			                    t--;
+			                    textSize(t);
+			                }
+			                if(them[nextMan].col !== color(30) && them[nextMan].col !== color(77, 44, 11) && !them[nextMan].dead){
+			                    fill(0);
+			                } else {
+			                    fill(255);
+			                }
+			                textAlign(CENTER, CENTER);
+			                text((them[nextMan].dead ? "Nobody" : them[nextMan].name), 195, 40);
+			            }
+			        }
+			        while(hitman && them[nextMan].dead && winner === ''){
+			            nextMan++;
+			            if(nextMan >= them.length){
+			                nextMan = 0;
+			                break;
+			            }
+			        }
+			        if(keys[77] && !you.dead && !you.called){
+			            you.called = true;
+			            reporter = you.name;
+			            roomKilledIn = "There's not one";
+			            emergency = true;
+			        }
+			        if(emergency && winner === ''){
+			            fill(230, 0, 0);
+			            textSize(50);
+			            textAlign(CENTER, TOP);
+			            text("EMERGENCY MEETING", 300, 50);
+			            fill(255);
+			            textSize(30);
+			            text("In " + ceil(emergencyCountdown / 60), 300, 120);
+			            emergencyCountdown--;
+			            if(emergencyCountdown <= 0){
+			                emergency = false;
+			                emergencyCountdown = emergencyReset;
+			                scene = CHAT;
+			                chatNum = 0;
+			                dlay = 10;
+			                for(var i = 0; i < them.length; i++){
+			                    them[i].accused = false;
+			                    if(!them[i].dead){
+			                        them[i].x = floor(random(150, 450));
+			                        them[i].y = floor(random(150, 450));
+			                    }
+			                }
+			                if(!you.dead){
+			                    you.x = floor(random(150, 450));
+			                    you.y = floor(random(150, 450));
+			                }
+			                task1.doing = false;
+			                task2.doing = false;
+			            }
+			        }
+			        if(saboT <= 0){
+			            sabotaged = null;
+			        }
+			        if(you.justKilled){
+			            you.killCool--;
+			            if(you.killCool <= 0){
+			                you.killCool = you.killCoolR;
+			                you.justKilled = false;
+			            }
+			        }
+			        var okay = 0;
+			        var kLeft = (hitman ? 1 : killers);
+			        var strWin = "";
+			        for(var i = 0; i < them.length; i++){
+			            if(them[i].justKilled){
+			                them[i].killCool--;
+			                if(them[i].killCool <= 0){
+			                    them[i].killCool = them[i].killCoolR;
+			                    them[i].justKilled = false;
+			                }
+			            }
+			            if(!them[i].dead){
+			                okay++;
+			            }
+			            if(them[i].dead && them[i].role === "Assassin"){
+			                kLeft--;
+			            } else if(them[i].role === "Assassin"){
+			                if(strWin.length > 0){
+			                    strWin += " &\n";
+			                }
+			                strWin += them[i].name;
+			            }
+			        }
+			        if(!you.dead){
+			            okay++;
+			        }
+			        if(you.dead && you.role === "Assassin"){
+			            kLeft--;
+			        } else if(you.role === "Assassin"){
+			            if(strWin.length > 0){
+			                strWin += " &\n";
+			            }
+			            strWin += you.name;
+			        }
+			        var good = true;
+			        for(var i = 0; i < them.length; i++){
+			            if(them[i].tasks.length > 0 && them[i].role !== "Assassin"){
+			                good = false;
+			            }
+			        }
+			        if(TASKNUM > 0 || !task1done || !task2done){
+			            good = false;
+			        }
+			        if(kLeft <= 0 && winner === '' || good && winner === ''){
+			            winner = "Crew";
+			            scene = RESULTS;
+			        } else if(okay < 3 && winner === ''){
+			            winner = strWin;
+			            scene = RESULTS;
+			        }
+			        tooFarAway -= 5;
+			        fill(255, 0, 0, tooFarAway);
+			        textSize(30);
+			        textAlign(CENTER, CENTER);
+			        text("Too Far Away", 300, 450);
+			        toHome.pack();
+			        adminCam.drawOpen();
+			        adminCam.move();
+			    popMatrix();
+			}; // Play scene
+			
+			var vote = function(){
+			    if(scene !== CHAT) {
+			        for(var i = 0; i < them.length; i += 1) {
+			            if(them[i].voteTime <= 0 && them[i].voteTime > -1) {
+			                them[i].voteTime = -3;
+			                them[i].runningAway = 0;
+			                if(them[i].selectVote() && !you.voted && !them[i].dead && !you.dead){
+			                    you.voted = true;
+			                    them[i].votes++;
+			                    them[i].highlight = true;
+			                }
+			                if(!them[i].voted && !them[i].dead) {
+			                    if(them[i].sus !== '') {
+			                        if(them[i].sus === you.name && !you.dead) {
+			                            you.votes += 1;
+			                            them[i].voted = true;
+			                        } else if(them[i].sus === you.name){
+			                            them[i].sus = '';
+			                        }
+			                        for(var j = 0; j < them.length; j++) {
+			                            if(i===j){continue;}
+			                            if(them[j].name === them[i].sus && !them[j].dead) {
+			                                them[i].voted = true;
+			                                them[j].votes++;
+			                            } else if(them[j].name === them[i].sus){
+			                                them[i].sus = '';
+			                            }
+			                        }
+			                    }
+			                    if(!them[i].dead && !them[i].voted && them[i].sus === ''){
+			                        if(random(0, them.length) > 1) {
+			                            them[floor(random(0, them.length))].votes += 1;
+			                        }
+			                        else {
+			                            you.votes += 1;
+			                        }
+			                        them[i].voted = true;
+			                    }
+			                }
+			            }
+			            else {
+			                them[i].voteTime -= 1;
+			            }
+			        }
+			    }
+			    scene = VOTE;
+			    background(0);
+			    you.voteButton(80, 50);
+			    var okay = true;
+			    for(var i = 0; i < them.length; i++){
+			        them[i].voteButton(80, 170);
+			        if(!them[i].voted && !them[i].dead){
+			            okay = false;
+			        }
+			    }
+			    if(!you.voted && !you.dead){
+			        okay = false;
+			    }
+			    if(okay || voteTime < voteR){
+			        voteTime--;
+			        for(var i = 0; i < them.length; i++){
+			            fill(0);
+			            textSize(15);
+			            textAlign(RIGHT, BOTTOM);
+			            if(!them[i].dead){
+			                text(them[i].votes + " Votes", them[i].voteX + 190, them[i].voteY + 65);
+			            }
+			        }
+			        if(!you.dead){
+			            text(you.votes + " Votes", you.voteX + 190, you.voteY + 65);
+			        }
+			        if(voteTime <= 0){
+			            var highest = [0];
+			            var num = -5;
+			            for(var i = 0; i < them.length; i++){
+			                if(them[i].votes > highest[0]){
+			                    highest = [them[i].votes];
+			                    num = i;
+			                }
+			                if(them[i].votes === highest[0] && highest[0] !== 0 && num !== i){
+			                    highest.push(them[i].votes);
+			                    num = -5;
+			                }
+			            }
+			            if(you.votes > highest[0]){
+			                highest = [you.votes];
+			                num = -1;
+			            }
+			            if(you.votes === highest[0] && highest[0] !== 0 && num !== -1){
+			                highest.push(you.votes);
+			                num = -5;
+			            }
+			            scene = EXECUTE;
+			            if(num < -1){
+			                votee = '';
+			            } else if(num === -1){
+			                votee = you;
+			            } else {
+			                votee = them[num];
+			            }
+			            voteTime = voteR;
+			        }
+			    }
+			}; // The vote scene
+			
+			var execTime = 120; // Timer until doom for the bean!
+			var execR = execTime; // Reset timer
+			var sounded = false; // Sounded the squelch
+			var fadeIn = 1; // Fades the text in that says something like: "Ian is the impostor"
+			var backTime = execTime * 2; // Until we go back to play
+			var voteeX = 0; // So that the accused moves across the screen
+			var textAppear = 0;
+			var execution = function(){
+			    scene = EXECUTE;
+			    background(0);
+			    if(votee !== '' && !votee.dead){
+			        if(execTime > 0){
+			            pushMatrix();
+			                translate(voteeX, 300);
+			                rotate(frameCount * 4);
+			                votee.modelBean(0, -5);
+			            popMatrix();
+			        } else {
+			            pushMatrix();
+			                translate(voteeX, 300);
+			                rotate(frameCount * 4);
+			                votee.deadBean(0, -15);
+			            popMatrix();
+			            fill(255);
+			            textSize(30);
+			            textAlign(CENTER, CENTER);
+			            var kLeft = 0;
+			            for(var i = 0; i < them.length; i++){
+			                if(!them[i].dead && them[i].role === "Assassin" && them[i].name !== votee.name){
+			                    kLeft++;
+			                }
+			                if(them[i].sus === votee.name){
+			                    them[i].sus = '';
+			                    them[i].sure = false;
+			                }
+			            }
+			            if(!you.dead && you.role === "Assassin" && you.name !== votee.name){
+			                kLeft++;
+			            }
+			            var aaif = votee.name + " " + (votee.role === "Assassin" ? "is" : "is not") + " an Impostor\nThere " + (kLeft === 1 ? "is" : "are") + " " + kLeft + " Impostor" + (kLeft === 1 ? "" : "s") + " Among Us";
+			            text(aaif.substring(0, textAppear), 300, 100);
+			            textAppear += random(0.1, 0.2);
+			            backTime-=0.5;
+			        }
+			        if(voteeX < 300 || sounded){
+			            voteeX += 2.5;
+			        }
+			        execTime--;
+			        if(execTime <= 0 && !sounded){
+			            sounded = true;
+			            playSound(getSound("rpg/hit-splat"));
+			        }
+			    } else {
+			        fill(lerpColor(color(255), color(0), fadeIn));
+			        textSize(40);
+			        textAlign(CENTER, CENTER);
+			        text("Voting Skipped", 300, 300);
+			        if(fadeIn > 0){
+			            fadeIn -= 0.01;
+			        }
+			        backTime--;
+			    }
+			    if(backTime <= 0){
+			        backTime = execR * 2;
+			        textAppear = 0;
+			        fadeIn = 1;
+			        sounded = false;
+			        execTime = execR;
+			        voteeX = 0;
+			        votee.reported = true;
+			        votee.dead = true;
+			        votee = '';
+			        scene = PLAY;
+			    }
+			}; // The execution scene
+			
+			randWin = floor(random(0, winTxt.length)); // A random win word
+			var win = function(){
+			    scene = RESULTS;
+			    fill(245, 245, 59);
+			    textSize(50);
+			    textAlign(LEFT, CENTER);
+			    text(winTxt[randWin] + "!", winX, 330);
+			    textAlign(CENTER, BOTTOM);
+			    text(winner, 300, winY);
+			    winY += winYSpeed;
+			    winYSpeed += grav;
+			    if(winY >= 300 && winYSpeed > 0){
+			        winYSpeed *= -1;
+			        winYSpeed *= airResist;
+			        if(winYSpeed <= 0 && winYSpeed > -0.4){
+			            winYSpeed = 0;
+			            grav = 0;
+			        }
+			    }
+			    //310
+			    winX += smoother(250, winX, 30);
+			}; // The win scene
+			
+			Chat.prototype.draw = function() {
+			    for(var i = 0; i < this.chats.length; i++){
+			        var a = this.chats[i];
+			        fill(0);
+			        textSize(this.s);
+			        textAlign(CENTER, TOP);
+			        text(a.who + ": " + a.say, this.x, this.y + i * (this.s + 10));
+			        for(var j = 0; j < this.lines.length; j++){
+			            if(this.lines[j].y === i){
+			                stroke(200, 0, 0);
+			                strokeWeight(2);
+			                line(this.x - 50, this.y + i * (this.s + 10) - this.s / 7, this.x + 50, this.y + i * (this.s + 10) - this.s / 7);
+			            }
+			        }
+			    }
+			}; // Draw the chat
+			Chat.prototype.inputNew = function(who, say, attach){
+			    this.chats.push({who: who, say: say});
+			    if(attach !== undefined){
+			        this.lines.push({y:this.chats.length - 1});
+			    }
+			}; // Input a new element in the chat
+			Chat.prototype.overflow = function(){
+			    if(this.chats.length - 1 > this.lim){
+			        this.chats.splice(0, 1);
+			        if(this.lines[0].y === 0){
+			            this.lines.splice(0, 1);
+			        }
+			        for(var i = 0; i < this.lines.length; i++){
+			            this.lines[i].y--;
+			        }
+			    }
+			}; // Handle overflow on the chat
+			Chat.prototype.pack = function(){
+			    this.overflow();
+			    this.draw();
+			}; // Call draw and overflow
+			chatter = new Chat(300, 20, 9); // New chat
+			chatTime = 30 * 60; // Time for chatting is 30 seconds
+			var chat = function(show){
+			    if(show === undefined){
+			        scene = CHAT;
+			    }
+			    dlay -= 1;
+			    if(dlay <= 0 && chatNum < them.length) {
+			        dlay = 50;
+			        if(them[chatNum].dead){
+			            dlay = 0;
+			        }
+			        else {
+			            var whatToSay = floor(random(0, 4));
+			            if(them[chatNum].sus !== "" && !them[chatNum].accused && !them[chatNum].dead) {
+			                if(them[chatNum].sure) {
+			                    whatToSay = 4;
+			                }
+			                them[chatNum].accused = true;
+			                switch(whatToSay) {
+			                    case 0:
+			                        chatter.inputNew(them[chatNum].name, them[chatNum].sus + " sus", true);
+			                    break;
+			                    case 1:
+			                        chatter.inputNew(them[chatNum].name, them[chatNum].sus + " is the impostor", true);
+			                    break;
+			                    case 2:
+			                        chatter.inputNew(them[chatNum].name, "vote " + them[chatNum].sus, true);
+			                    break;
+			                    case 3:
+			                        chatter.inputNew(them[chatNum].name, them[chatNum].sus + " needs to die!", true);
+			                    break;
+			                    case 4:
+			                        chatter.inputNew(them[chatNum].name, them[chatNum].sus + " vented in front of me", true);
+			                    break;
+			                }
+			                for(var j = 0; j < them.length; j += 1) {
+			                    var believe = floor(random(0, belief));
+			                    var whatToSay = floor(random(0, 4));
+			                    if(chatNum===j){continue;}
+			                    if(believe < 1 && !them[j].dead) {
+			                        if(them[j].sus === "" && them[chatNum].sus !== them[j].name) {
+			                            them[j].sus = them[chatNum].sus;
+			                            switch(whatToSay) {
+			                                case 0:
+			                                    chatter.inputNew(them[j].name, "ok");
+			                                break;
+			                                case 1:
+			                                    chatter.inputNew(them[j].name, "k");
+			                                break;
+			                                case 2:
+			                                    chatter.inputNew(them[j].name, "yeah!");
+			                                break;
+			                                case 3:
+			                                    chatter.inputNew(them[j].name, "you're right");
+			                                break;
+			                                case 4:
+			                                    chatter.inputNew(them[chatNum].name, them[chatNum].sus + " murdered in front of me\nI am sure it is " + them[chatNum].sus);
+			                                break;
+			                            }
+			                        }
+			                    }
+			                    else if(!them[j].dead && them[j].sus === "") {
+			                        switch(whatToSay) {
+			                            case 0:
+			                                chatter.inputNew(them[j].name, "I'm not convinced");
+			                            break;
+			                            case 1:
+			                                chatter.inputNew(them[j].name, "I don't believe you");
+			                            break;
+			                            case 2:
+			                                chatter.inputNew(them[j].name, "Why?");
+			                            break;
+			                            case 3:
+			                                chatter.inputNew(them[j].name, "Nah");
+			                            break;
+			                            case 4:
+			                                chatter.inputNew(them[chatNum].name, them[chatNum].sus + " murdered in front of me\nI am sure it is " + them[chatNum].sus);
+			                            break;
+			                        }
+			                    }
+			                }
+			            }
+			            else if(!them[chatNum].accused && !them[chatNum].dead) {
+			                switch(whatToSay) {
+			                    case 0:
+			                        chatter.inputNew(them[chatNum].name, "What happened?", true);
+			                    break;
+			                    case 1:
+			                        chatter.inputNew(them[chatNum].name, "Where is the body?", true);
+			                        chatter.inputNew(reporter, roomKilledIn);
+			                    break;
+			                    case 2:
+			                        chatter.inputNew(them[chatNum].name, "who is sus", true);
+			                    break;
+			                    case 3:
+			                        chatter.inputNew(them[chatNum].name, "is anyone sus?", true);
+			                    break;
+			                }
+			            }
+			        }
+			        chatNum += 1;
+			    }
+			    if(show === undefined && !youTalking){
+			        fill(100);
+			        rect(0, 100, 600, 400);
+			        closeChat.pack();
+			        if(!youTalked && !you.dead) {
+			            talk.pack();
+			        }
+			    }
+			    if(show === undefined && !youTalking){
+			        chatter.pack();
+			    } else {
+			        chatter.overflow();
+			    }
+			    chatTime--;
+			    if(show !== undefined){
+			        dlay = 0;
+			    }
+			    if(chatTime <= 0){
+			        scene = VOTE;
+			        chatTime = 30 * 60;
+			    }
+			    if(show === undefined && !youTalking){
+			        fill(0);
+			        textSize(15);
+			        textAlign(LEFT, BOTTOM);
+			        text("Time: " + floor(chatTime / 60), 5, 495);
+			    }
+			    if(youTalking) {
+			        fill(255);
+			        textAlign(CENTER, BOTTOM);
+			        textSize(20);
+			        text("Click who is sus", 300, 590);
+			    }
+			}; // the chat scene
+			
+			if(bug) {
+			    for(var i = 0; i < them.length; i++) {
+			        println(them[i].name + ": " + them[i].role);
+			    }
+			} // For debugging
+			
+			draw = function() {
+			    if(spectate) {
+			        you.dead = true;
+			        you.reported = true;
+			        if(you.role === "Assassin") {
+			            them[0].role = "Assassin";
+			            you.role = null;
+			        }
+			    }
+			    //_clearLogs();
+			    //println(you.x + " " + you.y);
+			    if(!updating){
+			        switch(scene){
+			            case PLAY:
+			                play();
+			            break;
+			            case VOTE:
+			                vote();
+			                chat(false);
+			            break;
+			            case RESULTS:
+			                play();
+			                win();
+			            break;
+			            case EXECUTE:
+			                execution();
+			            break;
+			            case MENU:
+			                menu();
+			            break;
+			            case OPTION:
+			                options();
+			            break;
+			            case LOGO:
+			                logo();
+			            break;
+			            case CHAT:
+			                vote();
+			                chat();
+			            break;
+			            case JOIN:
+			                jo.func();
+			            break;
+			        }
+			        if(scene !== VOTE){
+			            you.votes = 0;
+			            you.voted = false;
+			            you.highlight = false;
+			            for(var i = 0; i < them.length; i++){
+			                them[i].voted = false;
+			                them[i].votes = 0;
+			                them[i].highlight = false;
+			            }
+			        }
+			        if(scene !== CHAT){
+			            chatTime = 30 * 60;
+			        }
+			        if(scene !== PLAY){
+			            adminCam.open = false;
+			            you.venting = false;
+			        }
+			        if(music){
+			            songFrame++;
+			            for(var i = 0; i < song.length; i++){
+			                if(songFrame === song[i].t){
+			                    var a = getSound(song[i].sound);
+			                    a.audio.volume = 1;
+			                    a.audio.play();
+			                }
+			            }
+			            if(songFrame >= 330){
+			                songFrame = 0;
+			            }
+			        }
+			        if(thumbnail !== undefined){
+			            image(thumbnail, 0, 0, width, height);
+			        }
+			        keyDone = false;
+			        fill(255);
+			        textSize(20);
+			        textAlign(LEFT, BOTTOM);
+			        //text(round(this[["__frameRate"]]) + " fps", 10, 590);
+			        clicked = false;
+			    } else {
+			        background(0);
+			        fill(255);
+			        textSize(30);
+			        textAlign(CENTER, CENTER);
+			        text("I am updating.\nGame will be ready soon.\nThank you for your patience.", 300, 300);
+			    }
+			}; // Pull it together
+			
+			mouseClicked = function(){
+			    try{
+			    clicked = true;
+			    if(scene === PLAY){
+			        toHome.click();
+			        if(dist(cam.getMouseX(), cam.getMouseY(), task1.x, task1.y) <= 15 && !task1.done && you.role !== "Assassin" && !you.dead){
+			            if(dist(you.x, you.y, task1.x, task1.y) < 50){
+			                task1.doTask();
+			            } else {
+			                tooFarAway = 255;
+			            }
+			        }
+			        if(dist(cam.getMouseX(), cam.getMouseY(), task2.x, task2.y) <= 15 &&!task2.done && you.role !== "Assassin" && !you.dead){
+			            if(dist(you.x, you.y, task2.x, task2.y) < 50){
+			                task2.doTask();
+			            } else {
+			                tooFarAway = 255;
+			            }
+			        }
+			        if(!you.justKilled){
+			            you.reportBody();
+			        }
+			        if(hasVents){
+			            ventSet.check();
+			        }
+			        if(hasCams){
+			            adminCam.click();
+			        }
+			    } else if(scene === VOTE){
+			        for(var i = 0; i < them.length; i++) {
+			            them[i].voteTime = random(0, 10) * 60;
+			            if(them[i].selectVote() && !you.voted && !you.dead && !them[i].dead) {
+			                them[i].votes += 1;
+			                them[i].highlight = true;
+			                you.voted = true;
+			            }
+			            if(them[i].dead) {
+			                them[i].votes = 0;
+			                if(them[i].tasks.length > 0 && !you.dead && you.role !== "Assassin" && them[i].role !== "Assassin"){
+			                    TASKNUM += them[i].tasks.length;
+			                    TASKNUMORIGINAL += them[i].tasks.length;
+			                    them[i].tasks = [];
+			                } else if(you.dead || you.role === "Assassin"){
+			                    var aag = floor(random(0, them.length));
+			                    var any = false;
+			                    for(var j = 0; j < them.length; j++){
+			                        if(!them[j].dead && them[j].role !== "Assassin"){
+			                            any = true;
+			                        }
+			                    }
+			                    if(any){
+			                        while(them[aag].role === "Assassin" || them[aag].dead){
+			                            aag = floor(random(0, them.length));
+			                        }
+			                        for(var j = 0; j < them[i].tasks.length; j++){
+			                            them[aag].tasks.push(them[i].tasks[j]);
+			                        }
+			                        them[i].tasks = [];
+			                    }
+			                }
+			            }
+			        }
+			        if(you.dead){
+			            you.votes = 0;
+			        }
+			        if(you.selectVote() && !you.voted && !you.dead){
+			            you.voted = true;
+			            you.highlight = true;
+			        }
+			    } else if(scene === MENU){
+			        toPlay.click();
+			        sub.click();
+			        toOption.click();
+			    } else if(scene === OPTION){
+			        spect.click();
+			        beat.click();
+			        numPlayOpt.click();
+			        impostorness.click();
+			        camsOption.click();
+			        ventOption.click();
+			        toHomeFOp.click();
+			        mapChoice.click();
+			        sex.click();
+			        killerFolk.click();
+			        tohitM.click();
+			        flGraph.click();
+			    } else if(scene === CHAT){
+			        for(var i = 0; i < them.length; i += 1) {
+			            if(them[i].selectVote() && !them[i].dead && youTalking && chatTime > 0) {
+			                youTalking = false;
+			                youTalked = true;
+			                chatter.inputNew(you.name, them[i].name + " sus", true);
+			                for(var j = 0; j < them.length; j += 1) {
+			                    var believe = floor(random(0, belief * 2));
+			                    var whatToSay = floor(random(0, 4));
+			                    if(chatNum===j){continue;}
+			                    if(believe < 1 && !them[j].dead) {
+			                        if(them[j].sus === "" && them[i].name !== them[j].name) {
+			                            them[j].sus = them[i].name;
+			                            switch(whatToSay) {
+			                                case 0:
+			                                    chatter.inputNew(them[j].name, "ok");
+			                                break;
+			                                case 1:
+			                                    chatter.inputNew(them[j].name, "k");
+			                                break;
+			                                case 2:
+			                                    chatter.inputNew(them[j].name, "yeah!");
+			                                break;
+			                                case 3:
+			                                    chatter.inputNew(them[j].name, "you're right");
+			                                break;
+			                                case 4:
+			                                    chatter.inputNew(them[chatNum].name, them[chatNum].sus + " murdered in front of me\nI am sure it is " + them[chatNum].sus);
+			                                break;
+			                            }
+			                        }
+			                    }
+			                    else if(!them[j].dead && them[j].sus === "") {
+			                        switch(whatToSay) {
+			                            case 0:
+			                                chatter.inputNew(them[j].name, "I'm not convinced");
+			                            break;
+			                            case 1:
+			                                chatter.inputNew(them[j].name, "I don't believe you");
+			                            break;
+			                            case 2:
+			                                chatter.inputNew(them[j].name, "Why?");
+			                            break;
+			                            case 3:
+			                                chatter.inputNew(them[j].name, "Nah");
+			                            break;
+			                            case 4:
+			                                chatter.inputNew(them[chatNum].name, them[chatNum].sus + " murdered in front of me\nI am sure it is " + them[chatNum].sus);
+			                            break;
+			                        }
+			                    }
+			                }
+			            } 
+			        }
+			        closeChat.click();
+			        if(!youTalked && !you.dead) {
+			            talk.click();
+			        }
+			    } else if(scene === LOGO){
+			        scene = MENU;
+			    } else if(scene === RESULTS){
+			        toHome.click();
+			    } else if(scene === JOIN){
+			        toHome.click();
+			    }
+			    }catch(e){
+			        println(e);
+			    }
+			}; // When you click
+			
+			logo(); // Call the logo
+			
+			
+			
+			
+			//throw {message: "It looks like you're missing a semicolon. But even if you weren't you couldn't play anyhow, it's a WIP you see."};
+			
+			
+			
+		}
+		
+		runPJS(program);
+		
+		// Add reload button on KA --> <script>
+		
+	</script>
+</body>
+
+</html>
